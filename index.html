@@ -48,13 +48,11 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 10px; }
         ::-webkit-scrollbar-track { background: var(--bg-base); }
         ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 5px; }
         ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
 
-        /* Custom Cursor Style */
         .cursor-glow {
             position: fixed;
             width: 400px;
@@ -93,7 +91,7 @@
         }
 
         .nav-brand img {
-            height: 45px; /* Perfect size for nuvoraq-logo.png */
+            height: 45px; 
             width: auto;
             object-fit: contain;
             filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.3));
@@ -221,7 +219,6 @@
             z-index: 1;
         }
 
-        /* Interactive Canvas Background */
         #particle-canvas {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -229,7 +226,6 @@
             opacity: 0.6;
         }
 
-        /* Ambient Glow Orbs */
         .orb {
             position: absolute;
             border-radius: 50%;
@@ -329,15 +325,11 @@
             transform: translateY(-3px);
         }
 
-        .btn-secondary i { transition: transform 0.3s; }
-        .btn-secondary:hover i { transform: translateX(5px); }
-
-        /* --- 3D Interactive Right Visual --- */
         .hero-visual {
             flex: 1;
             position: relative;
             height: 600px;
-            perspective: 1200px; /* Crucial for 3D depth */
+            perspective: 1200px; 
             display: flex;
             justify-content: center;
             align-items: center;
@@ -348,7 +340,7 @@
             width: 100%;
             height: 100%;
             transform-style: preserve-3d;
-            transition: transform 0.1s linear; /* Smooth mouse tracking */
+            transition: transform 0.1s linear; 
         }
 
         .glass-card {
@@ -383,7 +375,6 @@
         .glass-card .content h4 { font-size: 16px; color: #fff; margin-bottom: 4px; font-weight: 600; }
         .glass-card .content p { font-size: 13px; color: var(--text-muted); }
 
-        /* Specific Card Positions & Initial 3D Transforms */
         .card-pdf {
             top: 15%; left: 10%;
             transform: translateZ(80px) rotateY(15deg) rotateX(5deg);
@@ -409,46 +400,7 @@
         .card-dev .card-icon { background: rgba(139, 92, 246, 0.15); color: #a78bfa; }
 
         /* ==========================================================================
-           4. ANIMATIONS & RESPONSIVE DESIGN
-           ========================================================================== */
-        @keyframes fadeUp {
-            0% { opacity: 0; transform: translateY(40px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-30px) scale(1.05); }
-        }
-
-        @keyframes floatSlow {
-            0%, 100% { transform: translateY(0) translateZ(var(--tz, 100px)); }
-            50% { transform: translateY(-15px) translateZ(var(--tz, 100px)); }
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
-        }
-
-        @keyframes shimmer {
-            0% { background-position: -200% center; }
-            100% { background-position: 200% center; }
-        }
-
-        /* Mobile Adjustments */
-        @media (max-width: 1024px) {
-            .hero-container { flex-direction: column; text-align: center; }
-            .hero-subtitle { margin: 0 auto 40px auto; }
-            .hero-actions { justify-content: center; }
-            .hero-badge { margin: 0 auto 24px auto; }
-            .nav-menu { display: none; } /* Mobile menu toggle in future parts */
-            .hero-visual { width: 100%; height: 500px; }
-        }
-
-        /* ==========================================================================
-           5. GLOBAL SECTION STYLES
+           5. GLOBAL SECTION STYLES (Added from Part 2)
            ========================================================================== */
         .section {
             padding: 100px 6%;
@@ -475,7 +427,6 @@
             font-size: 1.1rem;
         }
 
-        /* Scroll Reveal Animation Classes */
         .reveal {
             opacity: 0;
             transform: translateY(40px);
@@ -487,7 +438,7 @@
         }
 
         /* ==========================================================================
-           6. QUICK TOOLS SECTION
+           6. QUICK TOOLS SECTION (Added from Part 2)
            ========================================================================== */
         .tools-grid {
             display: grid;
@@ -511,7 +462,6 @@
             -webkit-backdrop-filter: blur(15px);
         }
 
-        /* Glowing background on hover */
         .tool-card::before {
             content: '';
             position: absolute;
@@ -562,7 +512,7 @@
         .tool-card:hover .tool-arrow { transform: translateX(8px); }
 
         /* ==========================================================================
-           7. EXPLORE BY CATEGORY
+           7. EXPLORE BY CATEGORY (Added from Part 2)
            ========================================================================== */
         .category-grid {
             display: grid;
@@ -628,6 +578,43 @@
             background: rgba(255,255,255,0.1);
             color: #fff;
         }
+
+        /* Animations */
+        @keyframes fadeUp {
+            0% { opacity: 0; transform: translateY(40px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-30px) scale(1.05); }
+        }
+
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0) translateZ(var(--tz, 100px)); }
+            50% { transform: translateY(-15px) translateZ(var(--tz, 100px)); }
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 1024px) {
+            .hero-container { flex-direction: column; text-align: center; }
+            .hero-subtitle { margin: 0 auto 40px auto; }
+            .hero-actions { justify-content: center; }
+            .hero-badge { margin: 0 auto 24px auto; }
+            .nav-menu { display: none; } 
+            .hero-visual { width: 100%; height: 500px; }
+        }
     </style>
 </head>
 <body>
@@ -642,12 +629,11 @@
     <!-- ================= PREMIUM NAVBAR ================= -->
     <nav class="navbar" id="navbar">
         <a href="#" class="nav-brand">
-            <!-- LOGO INTEGRATION HERE -->
             <img src="nuvoraq-logo.png" alt="Nuvoraq Logo">
         </a>
         
         <div class="nav-menu">
-            <a href="#tools" class="nav-link">Tools</a>
+            <a href="#quick-tools" class="nav-link">Tools</a>
             <a href="#categories" class="nav-link">Categories</a>
             <a href="#ai" class="nav-link">AI Tools <span class="nav-badge">Soon</span></a>
             <a href="#resources" class="nav-link">Resources</a>
@@ -662,11 +648,9 @@
 
     <!-- ================= HERO SECTION ================= -->
     <header class="hero" id="hero">
-        <!-- Canvas for Interactive Network Nodes -->
         <canvas id="particle-canvas"></canvas>
 
         <div class="hero-container">
-            <!-- Left Text Content -->
             <div class="hero-content">
                 <div class="hero-badge">
                     <span class="dot"></span> Nuvoraq Workspace v1.0
@@ -679,18 +663,15 @@
                     Process PDFs, compress images, extract text, and utilize developer utilities — blazingly fast, free, and beautifully simple directly within your browser.
                 </p>
                 <div class="hero-actions">
-                    <a href="#all-tools" class="btn-primary" style="padding: 16px 32px; font-size: 16px;">Start Exploring</a>
-                    <a href="#try" class="btn-secondary">
+                    <a href="#quick-tools" class="btn-primary" style="padding: 16px 32px; font-size: 16px;">Start Exploring</a>
+                    <a href="#categories" class="btn-secondary">
                         <i class="fa-solid fa-bolt" style="color: #fbbf24;"></i> Quick Try
                     </a>
                 </div>
             </div>
 
-            <!-- Right 3D Visual Content -->
             <div class="hero-visual" id="scene">
                 <div class="scene-3d" id="scene-3d">
-                    
-                    <!-- Card 1: PDF -->
                     <div class="glass-card card-pdf" style="--tz: 80px;">
                         <div class="card-icon"><i class="fa-solid fa-file-pdf"></i></div>
                         <div class="content">
@@ -698,8 +679,6 @@
                             <p>Combine files instantly</p>
                         </div>
                     </div>
-
-                    <!-- Card 2: Developer -->
                     <div class="glass-card card-dev" style="--tz: 150px;">
                         <div class="card-icon"><i class="fa-solid fa-code"></i></div>
                         <div class="content">
@@ -707,8 +686,6 @@
                             <p>Beautify & validate data</p>
                         </div>
                     </div>
-
-                    <!-- Card 3: Image -->
                     <div class="glass-card card-img" style="--tz: 120px;">
                         <div class="card-icon"><i class="fa-solid fa-image"></i></div>
                         <div class="content">
@@ -716,11 +693,12 @@
                             <p>Reduce size by 85%</p>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
-        <!-- ================= QUICK TOOLS SECTION ================= -->
+    </header>
+
+    <!-- ================= QUICK TOOLS SECTION ================= -->
     <section id="quick-tools" class="section">
         <div class="section-header reveal">
             <h2 class="section-title">What do you need to do?</h2>
@@ -728,7 +706,6 @@
         </div>
         
         <div class="tools-grid">
-            <!-- Tool 1 -->
             <a href="#" class="tool-card reveal" style="transition-delay: 0.1s;">
                 <div class="tool-icon"><i class="fa-solid fa-file-pdf"></i></div>
                 <h3 class="tool-title">Merge PDF</h3>
@@ -736,7 +713,6 @@
                 <i class="fa-solid fa-arrow-right tool-arrow"></i>
             </a>
             
-            <!-- Tool 2 -->
             <a href="#" class="tool-card reveal" style="transition-delay: 0.2s;">
                 <div class="tool-icon" style="color: #10b981; background: rgba(16,185,129,0.1);"><i class="fa-solid fa-compress"></i></div>
                 <h3 class="tool-title">Compress PDF</h3>
@@ -744,7 +720,6 @@
                 <i class="fa-solid fa-arrow-right tool-arrow"></i>
             </a>
             
-            <!-- Tool 3 -->
             <a href="#" class="tool-card reveal" style="transition-delay: 0.3s;">
                 <div class="tool-icon" style="color: #f59e0b; background: rgba(245,158,11,0.1);"><i class="fa-solid fa-image"></i></div>
                 <h3 class="tool-title">Compress Image</h3>
@@ -752,7 +727,6 @@
                 <i class="fa-solid fa-arrow-right tool-arrow"></i>
             </a>
             
-            <!-- Tool 4 -->
             <a href="#" class="tool-card reveal" style="transition-delay: 0.4s;">
                 <div class="tool-icon" style="color: #ec4899; background: rgba(236,72,153,0.1);"><i class="fa-solid fa-code"></i></div>
                 <h3 class="tool-title">JSON Formatter</h3>
@@ -762,7 +736,7 @@
         </div>
 
         <div class="reveal" style="text-align: center; margin-top: 50px;">
-            <a href="#explore" class="btn-secondary">View All Quick Tools <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i></a>
+            <a href="#categories" class="btn-secondary">View All Quick Tools <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i></a>
         </div>
     </section>
 
@@ -774,7 +748,6 @@
         </div>
         
         <div class="category-grid">
-            <!-- Category: PDF -->
             <div class="cat-card reveal" style="transition-delay: 0.1s;">
                 <div class="cat-icon-wrapper" style="color: #ef4444;"><i class="fa-solid fa-file-pdf"></i></div>
                 <h3 class="cat-title">PDF Tools</h3>
@@ -783,7 +756,6 @@
                 </div>
             </div>
             
-            <!-- Category: Image -->
             <div class="cat-card reveal" style="transition-delay: 0.2s;">
                 <div class="cat-icon-wrapper" style="color: #3b82f6;"><i class="fa-solid fa-images"></i></div>
                 <h3 class="cat-title">Image Tools</h3>
@@ -792,7 +764,6 @@
                 </div>
             </div>
             
-            <!-- Category: Text -->
             <div class="cat-card reveal" style="transition-delay: 0.3s;">
                 <div class="cat-icon-wrapper" style="color: #8b5cf6;"><i class="fa-solid fa-align-left"></i></div>
                 <h3 class="cat-title">Text Tools</h3>
@@ -801,7 +772,6 @@
                 </div>
             </div>
             
-            <!-- Category: Developer -->
             <div class="cat-card reveal" style="transition-delay: 0.4s;">
                 <div class="cat-icon-wrapper" style="color: #10b981;"><i class="fa-solid fa-terminal"></i></div>
                 <h3 class="cat-title">Developer Tools</h3>
@@ -810,16 +780,14 @@
                 </div>
             </div>
             
-            <!-- Category: Calculators -->
             <div class="cat-card reveal" style="transition-delay: 0.5s;">
                 <div class="cat-icon-wrapper" style="color: #f59e0b;"><i class="fa-solid fa-calculator"></i></div>
                 <h3 class="cat-title">Calculators</h3>
                 <div class="cat-tags">
-                    <span class="tag">Percentage</span><span class="tag">Finance</span><span class="tag">Age Calculator</span>
+                    <span class="tag">Percentage</span><span class="tag">Finance</span><span class="tag">Age</span>
                 </div>
             </div>
 
-            <!-- Category: AI Tools (Future Facing) -->
             <div class="cat-card reveal" style="transition-delay: 0.6s; border: 1px dashed rgba(139, 92, 246, 0.4);">
                 <div class="cat-icon-wrapper" style="color: #c084fc;"><i class="fa-solid fa-brain"></i></div>
                 <h3 class="cat-title">AI Tools</h3>
@@ -829,73 +797,54 @@
             </div>
         </div>
     </section>
-    </header>
 
     <!-- ================= JAVASCRIPT ================= -->
     <script>
-        // 1. Sticky Navbar & Blur Effect
+        // 1. Sticky Navbar
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 20) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
+            if (window.scrollY > 20) navbar.classList.add('scrolled');
+            else navbar.classList.remove('scrolled');
         });
 
-        // 2. Custom Cursor Glow Tracking
+        // 2. Custom Cursor Glow
         const cursorGlow = document.getElementById('cursor-glow');
         document.addEventListener('mousemove', (e) => {
             cursorGlow.style.left = e.clientX + 'px';
             cursorGlow.style.top = e.clientY + 'px';
         });
 
-        // 3. 3D Tilt Effect for Hero Scene (Advanced Mouse Tracking)
+        // 3. 3D Tilt Effect
         const sceneContainer = document.getElementById('scene');
         const scene3D = document.getElementById('scene-3d');
-
         sceneContainer.addEventListener('mousemove', (e) => {
             const rect = sceneContainer.getBoundingClientRect();
-            const x = e.clientX - rect.left; // x position within the element
-            const y = e.clientY - rect.top;  // y position within the element
-            
+            const x = e.clientX - rect.left; 
+            const y = e.clientY - rect.top;  
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
-            
-            // Calculate rotation based on mouse position
-            const rotateX = ((y - centerY) / centerY) * -15; // Max 15 deg tilt
+            const rotateX = ((y - centerY) / centerY) * -15; 
             const rotateY = ((x - centerX) / centerX) * 15;
-
             scene3D.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
         });
-
         sceneContainer.addEventListener('mouseleave', () => {
             scene3D.style.transform = `rotateX(0deg) rotateY(0deg)`;
-            scene3D.style.transition = 'transform 0.5s ease'; // Smooth reset
-            
-            setTimeout(() => {
-                scene3D.style.transition = 'transform 0.1s linear'; // Back to fast tracking
-            }, 500);
+            scene3D.style.transition = 'transform 0.5s ease'; 
+            setTimeout(() => { scene3D.style.transition = 'transform 0.1s linear'; }, 500);
         });
 
-        // 4. Advanced Interactive Particle Network (Canvas)
+        // 4. Interactive Canvas Background
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         let width, height;
         let particles = [];
         const mouse = { x: null, y: null, radius: 150 };
-
-        window.addEventListener('mousemove', (e) => {
-            mouse.x = e.x;
-            mouse.y = e.y;
-        });
-
+        window.addEventListener('mousemove', (e) => { mouse.x = e.x; mouse.y = e.y; });
         function initCanvas() {
             width = canvas.width = window.innerWidth;
             height = canvas.height = window.innerHeight;
             particles = [];
-            let particleCount = (width * height) / 15000; // Responsive amount
-            
+            let particleCount = (width * height) / 15000; 
             for (let i = 0; i < particleCount; i++) {
                 let size = Math.random() * 2 + 0.5;
                 let x = Math.random() * innerWidth;
@@ -905,48 +854,29 @@
                 particles.push(new Particle(x, y, directionX, directionY, size));
             }
         }
-
         class Particle {
             constructor(x, y, directionX, directionY, size) {
-                this.x = x;
-                this.y = y;
-                this.directionX = directionX;
-                this.directionY = directionY;
-                this.size = size;
-                this.baseX = this.x;
-                this.baseY = this.y;
+                this.x = x; this.y = y; this.directionX = directionX; this.directionY = directionY; this.size = size;
             }
             draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-                ctx.fillStyle = 'rgba(139, 92, 246, 0.4)'; // Violet color
-                ctx.fill();
+                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                ctx.fillStyle = 'rgba(139, 92, 246, 0.4)'; ctx.fill();
             }
             update() {
-                // Check edge collision
                 if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
                 if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
-                
-                // Mouse interaction physics
-                let dx = mouse.x - this.x;
-                let dy = mouse.y - this.y;
+                let dx = mouse.x - this.x; let dy = mouse.y - this.y;
                 let distance = Math.sqrt(dx * dx + dy * dy);
-                
                 if (distance < mouse.radius) {
-                    const forceDirectionX = dx / distance;
-                    const forceDirectionY = dy / distance;
+                    const forceDirectionX = dx / distance; const forceDirectionY = dy / distance;
                     const force = (mouse.radius - distance) / mouse.radius;
-                    this.x -= forceDirectionX * force * 2;
-                    this.y -= forceDirectionY * force * 2;
+                    this.x -= forceDirectionX * force * 2; this.y -= forceDirectionY * force * 2;
                 } else {
-                    // Slowly return to natural movement
-                    this.x += this.directionX;
-                    this.y += this.directionY;
+                    this.x += this.directionX; this.y += this.directionY;
                 }
                 this.draw();
             }
         }
-
         function connectParticles() {
             for (let a = 0; a < particles.length; a++) {
                 for (let b = a; b < particles.length; b++) {
@@ -955,48 +885,34 @@
                     if (distance < (canvas.width / 10) * (canvas.height / 10)) {
                         let opacity = 1 - (distance / 20000);
                         ctx.strokeStyle = `rgba(99, 102, 241, ${opacity * 0.3})`;
-                        ctx.lineWidth = 1;
-                        ctx.beginPath();
-                        ctx.moveTo(particles[a].x, particles[a].y);
-                        ctx.lineTo(particles[b].x, particles[b].y);
-                        ctx.stroke();
+                        ctx.lineWidth = 1; ctx.beginPath();
+                        ctx.moveTo(particles[a].x, particles[a].y); ctx.lineTo(particles[b].x, particles[b].y); ctx.stroke();
                     }
                 }
             }
         }
-
         function animateCanvas() {
             requestAnimationFrame(animateCanvas);
             ctx.clearRect(0, 0, innerWidth, innerHeight);
-            
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
-            }
+            for (let i = 0; i < particles.length; i++) { particles[i].update(); }
             connectParticles();
         }
-
         window.addEventListener('resize', initCanvas);
-        initCanvas();
-        animateCanvas();
+        initCanvas(); animateCanvas();
 
-        // 5. Scroll Reveal Elements Animation
+        // 5. Scroll Reveal Animation (Part 2)
         function revealElements() {
             const reveals = document.querySelectorAll('.reveal');
             for (let i = 0; i < reveals.length; i++) {
                 const windowHeight = window.innerHeight;
                 const elementTop = reveals[i].getBoundingClientRect().top;
-                const elementVisible = 100; // Trigger point
-                
+                const elementVisible = 100; 
                 if (elementTop < windowHeight - elementVisible) {
                     reveals[i].classList.add('active');
                 }
             }
         }
-        
-        // Listen to scroll events
         window.addEventListener('scroll', revealElements);
-        
-        // Trigger once on page load just in case elements are already in view
         revealElements();
     </script>
 </body>
