@@ -1385,6 +1385,94 @@
                 }
             });
         });
+
+        // 7. Live Search Functionality (Real-time filtering)
+        const searchInput = document.querySelector('.search-box input');
+        const toolCards = document.querySelectorAll('.tool-card, .featured-card');
+
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            
+            toolCards.forEach(card => {
+                const title = card.querySelector('h3').innerText.toLowerCase();
+                const desc = card.querySelector('p').innerText.toLowerCase();
+                
+                // Agar title ya description mein search keyword match kare
+                if (title.includes(searchTerm) || desc.includes(searchTerm)) {
+                    card.style.display = 'flex'; // Card show karo
+                    card.style.animation = 'fadeUp 0.4s ease forwards';
+                } else {
+                    card.style.display = 'none'; // Card hide karo
+                }
+            });
+        });
+
+        // 8. Category Filter Buttons UX
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all
+                filterBtns.forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                btn.classList.add('active');
+                
+                // UX Reset: Search bar clear kar dein jab filter change ho
+                searchInput.value = '';
+                toolCards.forEach(card => {
+                    card.style.display = 'flex';
+                    card.style.animation = 'fadeUp 0.4s ease forwards';
+                });
+            });
+        });
+
+        // 9. Workspace File Upload Simulator (Real File Picker)
+        const selectFileBtn = document.querySelector('.mockup-body .btn-secondary');
+        if(selectFileBtn) {
+            // Ek hidden file input create kar rahe hain
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.multiple = true; // Multiple files allow
+            fileInput.style.display = 'none';
+            document.body.appendChild(fileInput);
+
+            // Jab mock button click ho, to actual hidden file input click ho jaye
+            selectFileBtn.addEventListener('click', () => {
+                fileInput.click();
+            });
+
+            // Jab user file select kar le
+            fileInput.addEventListener('change', (e) => {
+                if(e.target.files.length > 0) {
+                    const fileName = e.target.files[0].name;
+                    const fileCount = e.target.files.length;
+                    const textDisplay = selectFileBtn.previousElementSibling;
+                    
+                    // UI Update: Success message aur file ka naam dikhayein
+                    textDisplay.innerHTML = `<span style="color:#10b981; font-weight:600;"><i class="fa-solid fa-check-circle"></i> ${fileCount} file(s) ready: ${fileName}</span>`;
+                    
+                    // Button ko "Process" mode mein change karein
+                    selectFileBtn.innerText = "Merge Files Now";
+                    selectFileBtn.style.background = "linear-gradient(135deg, #10b981, #059669)";
+                    selectFileBtn.style.color = "white";
+                    selectFileBtn.style.border = "none";
+                    selectFileBtn.style.boxShadow = "0 10px 25px rgba(16, 185, 129, 0.4)";
+                }
+            });
+        }
+
+        // 10. Empty Links & Theme Toggle Feedback
+        const themeToggleBtn = document.querySelector('.fa-moon').parentElement;
+        themeToggleBtn.addEventListener('click', () => {
+            alert("Light Mode is under development for Nuvoraq v2.0! 🌞");
+        });
+
+        const aiEarlyAccessBtn = document.querySelector('.ai-content .btn-primary');
+        if(aiEarlyAccessBtn) {
+            aiEarlyAccessBtn.addEventListener('click', () => {
+                aiEarlyAccessBtn.innerText = "✓ Added to Waitlist";
+                aiEarlyAccessBtn.style.background = "#10b981";
+            });
+        }
     </script>
 </body>
 </html>
