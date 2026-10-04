@@ -446,6 +446,188 @@
             .nav-menu { display: none; } /* Mobile menu toggle in future parts */
             .hero-visual { width: 100%; height: 500px; }
         }
+
+        /* ==========================================================================
+           5. GLOBAL SECTION STYLES
+           ========================================================================== */
+        .section {
+            padding: 100px 6%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: 700;
+            margin-bottom: 15px;
+            background: linear-gradient(to right, #fff, #cbd5e1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Scroll Reveal Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ==========================================================================
+           6. QUICK TOOLS SECTION
+           ========================================================================== */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .tool-card {
+            background: rgba(20, 22, 35, 0.4);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition-smooth);
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+        }
+
+        /* Glowing background on hover */
+        .tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at top right, rgba(99, 102, 241, 0.15), transparent 60%);
+            opacity: 0;
+            transition: var(--transition-smooth);
+            z-index: 0;
+        }
+
+        .tool-card > * { z-index: 1; position: relative; }
+
+        .tool-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(99, 102, 241, 0.5);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 20px rgba(99, 102, 241, 0.15);
+        }
+        .tool-card:hover::before { opacity: 1; }
+        
+        .tool-icon {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: var(--brand-primary);
+            background: rgba(59, 130, 246, 0.1);
+            width: 60px; height: 60px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 12px;
+            transition: var(--transition-smooth);
+        }
+
+        .tool-card:hover .tool-icon {
+            transform: scale(1.1) rotate(5deg);
+            color: #fff;
+            background: var(--brand-primary);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        .tool-title { font-size: 1.2rem; color: #fff; margin-bottom: 10px; font-weight: 600; }
+        .tool-desc { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 25px; flex-grow: 1; }
+        
+        .tool-arrow {
+            color: var(--brand-accent);
+            font-size: 1.1rem;
+            transition: transform 0.3s ease;
+            align-self: flex-end;
+            margin-top: auto;
+        }
+        .tool-card:hover .tool-arrow { transform: translateX(8px); }
+
+        /* ==========================================================================
+           7. EXPLORE BY CATEGORY
+           ========================================================================== */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .cat-card {
+            background: linear-gradient(145deg, rgba(30, 32, 45, 0.5), rgba(15, 17, 26, 0.8));
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: var(--transition-smooth);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .cat-card:hover {
+            border-color: var(--brand-primary);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .cat-icon-wrapper {
+            width: 80px; height: 80px;
+            margin: 0 auto 20px auto;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 32px;
+            position: relative;
+            transition: var(--transition-smooth);
+        }
+
+        .cat-icon-wrapper::after {
+            content: ''; position: absolute;
+            width: 100%; height: 100%; border-radius: 50%;
+            box-shadow: 0 0 30px var(--brand-glow);
+            opacity: 0; transition: var(--transition-smooth);
+        }
+
+        .cat-card:hover .cat-icon-wrapper {
+            border-color: rgba(255,255,255,0.2);
+            transform: scale(1.05);
+        }
+        .cat-card:hover .cat-icon-wrapper::after { opacity: 1; }
+
+        .cat-title { font-size: 1.4rem; color: #fff; margin-bottom: 16px; font-weight: 600; }
+        
+        .cat-tags {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;
+        }
+        .tag {
+            font-size: 0.8rem; font-weight: 500;
+            color: var(--text-muted);
+            background: rgba(255,255,255,0.05);
+            padding: 6px 12px; border-radius: 20px;
+            transition: var(--transition-smooth);
+        }
+        .cat-card:hover .tag {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+        }
     </style>
 </head>
 <body>
@@ -538,6 +720,115 @@
                 </div>
             </div>
         </div>
+        <!-- ================= QUICK TOOLS SECTION ================= -->
+    <section id="quick-tools" class="section">
+        <div class="section-header reveal">
+            <h2 class="section-title">What do you need to do?</h2>
+            <p class="section-subtitle">Jump straight into action with our most popular utilities.</p>
+        </div>
+        
+        <div class="tools-grid">
+            <!-- Tool 1 -->
+            <a href="#" class="tool-card reveal" style="transition-delay: 0.1s;">
+                <div class="tool-icon"><i class="fa-solid fa-file-pdf"></i></div>
+                <h3 class="tool-title">Merge PDF</h3>
+                <p class="tool-desc">Combine multiple PDFs into a single document instantly without losing quality.</p>
+                <i class="fa-solid fa-arrow-right tool-arrow"></i>
+            </a>
+            
+            <!-- Tool 2 -->
+            <a href="#" class="tool-card reveal" style="transition-delay: 0.2s;">
+                <div class="tool-icon" style="color: #10b981; background: rgba(16,185,129,0.1);"><i class="fa-solid fa-compress"></i></div>
+                <h3 class="tool-title">Compress PDF</h3>
+                <p class="tool-desc">Reduce your PDF file size drastically while maintaining perfect text and image readability.</p>
+                <i class="fa-solid fa-arrow-right tool-arrow"></i>
+            </a>
+            
+            <!-- Tool 3 -->
+            <a href="#" class="tool-card reveal" style="transition-delay: 0.3s;">
+                <div class="tool-icon" style="color: #f59e0b; background: rgba(245,158,11,0.1);"><i class="fa-solid fa-image"></i></div>
+                <h3 class="tool-title">Compress Image</h3>
+                <p class="tool-desc">Smart compression for JPG, PNG, and WebP images to save storage and bandwidth.</p>
+                <i class="fa-solid fa-arrow-right tool-arrow"></i>
+            </a>
+            
+            <!-- Tool 4 -->
+            <a href="#" class="tool-card reveal" style="transition-delay: 0.4s;">
+                <div class="tool-icon" style="color: #ec4899; background: rgba(236,72,153,0.1);"><i class="fa-solid fa-code"></i></div>
+                <h3 class="tool-title">JSON Formatter</h3>
+                <p class="tool-desc">Format, validate, and beautify your raw JSON data directly in the browser.</p>
+                <i class="fa-solid fa-arrow-right tool-arrow"></i>
+            </a>
+        </div>
+
+        <div class="reveal" style="text-align: center; margin-top: 50px;">
+            <a href="#explore" class="btn-secondary">View All Quick Tools <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i></a>
+        </div>
+    </section>
+
+    <!-- ================= EXPLORE BY CATEGORY ================= -->
+    <section id="categories" class="section">
+        <div class="section-header reveal">
+            <h2 class="section-title">Explore by Category</h2>
+            <p class="section-subtitle">Browse through our structured tool directory.</p>
+        </div>
+        
+        <div class="category-grid">
+            <!-- Category: PDF -->
+            <div class="cat-card reveal" style="transition-delay: 0.1s;">
+                <div class="cat-icon-wrapper" style="color: #ef4444;"><i class="fa-solid fa-file-pdf"></i></div>
+                <h3 class="cat-title">PDF Tools</h3>
+                <div class="cat-tags">
+                    <span class="tag">Merge</span><span class="tag">Split</span><span class="tag">Compress</span><span class="tag">Convert</span>
+                </div>
+            </div>
+            
+            <!-- Category: Image -->
+            <div class="cat-card reveal" style="transition-delay: 0.2s;">
+                <div class="cat-icon-wrapper" style="color: #3b82f6;"><i class="fa-solid fa-images"></i></div>
+                <h3 class="cat-title">Image Tools</h3>
+                <div class="cat-tags">
+                    <span class="tag">Resize</span><span class="tag">Crop</span><span class="tag">JPG to PDF</span><span class="tag">Filters</span>
+                </div>
+            </div>
+            
+            <!-- Category: Text -->
+            <div class="cat-card reveal" style="transition-delay: 0.3s;">
+                <div class="cat-icon-wrapper" style="color: #8b5cf6;"><i class="fa-solid fa-align-left"></i></div>
+                <h3 class="cat-title">Text Tools</h3>
+                <div class="cat-tags">
+                    <span class="tag">Word Counter</span><span class="tag">Case Converter</span><span class="tag">Lorem Ipsum</span>
+                </div>
+            </div>
+            
+            <!-- Category: Developer -->
+            <div class="cat-card reveal" style="transition-delay: 0.4s;">
+                <div class="cat-icon-wrapper" style="color: #10b981;"><i class="fa-solid fa-terminal"></i></div>
+                <h3 class="cat-title">Developer Tools</h3>
+                <div class="cat-tags">
+                    <span class="tag">JSON</span><span class="tag">Base64</span><span class="tag">Regex</span><span class="tag">URL Encode</span>
+                </div>
+            </div>
+            
+            <!-- Category: Calculators -->
+            <div class="cat-card reveal" style="transition-delay: 0.5s;">
+                <div class="cat-icon-wrapper" style="color: #f59e0b;"><i class="fa-solid fa-calculator"></i></div>
+                <h3 class="cat-title">Calculators</h3>
+                <div class="cat-tags">
+                    <span class="tag">Percentage</span><span class="tag">Finance</span><span class="tag">Age Calculator</span>
+                </div>
+            </div>
+
+            <!-- Category: AI Tools (Future Facing) -->
+            <div class="cat-card reveal" style="transition-delay: 0.6s; border: 1px dashed rgba(139, 92, 246, 0.4);">
+                <div class="cat-icon-wrapper" style="color: #c084fc;"><i class="fa-solid fa-brain"></i></div>
+                <h3 class="cat-title">AI Tools</h3>
+                <div class="cat-tags">
+                    <span class="tag" style="background: rgba(139,92,246,0.15); color: #c084fc; border: 1px solid rgba(139,92,246,0.3);">Gradually Rolling Out</span>
+                </div>
+            </div>
+        </div>
+    </section>
     </header>
 
     <!-- ================= JAVASCRIPT ================= -->
@@ -687,6 +978,26 @@
         window.addEventListener('resize', initCanvas);
         initCanvas();
         animateCanvas();
+
+        // 5. Scroll Reveal Elements Animation
+        function revealElements() {
+            const reveals = document.querySelectorAll('.reveal');
+            for (let i = 0; i < reveals.length; i++) {
+                const windowHeight = window.innerHeight;
+                const elementTop = reveals[i].getBoundingClientRect().top;
+                const elementVisible = 100; // Trigger point
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add('active');
+                }
+            }
+        }
+        
+        // Listen to scroll events
+        window.addEventListener('scroll', revealElements);
+        
+        // Trigger once on page load just in case elements are already in view
+        revealElements();
     </script>
 </body>
 </html>
