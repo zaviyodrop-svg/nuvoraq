@@ -762,6 +762,94 @@
             .featured-card { flex-direction: column; text-align: center; padding: 30px 20px; }
             .search-container h2 { font-size: 2rem; }
         }
+        /* ==========================================================================
+           11. AI FUTURE SECTION (Part 4)
+           ========================================================================== */
+        .ai-section { text-align: center; padding: 120px 5%; position: relative; }
+        .ai-glow { 
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+            width: 400px; height: 400px; 
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.2) 0%, transparent 70%); 
+            filter: blur(50px); z-index: 0; 
+        }
+        .ai-content { 
+            position: relative; z-index: 1; 
+            border: 1px solid rgba(139, 92, 246, 0.4); 
+            background: rgba(20, 22, 35, 0.6); backdrop-filter: blur(20px); 
+            border-radius: 24px; padding: 60px 40px; max-width: 900px; margin: 0 auto; 
+            box-shadow: 0 0 50px rgba(139, 92, 246, 0.15); 
+        }
+        .ai-content h2 { 
+            font-size: 2.5rem; margin-bottom: 20px;
+            background: linear-gradient(to right, #c4b5fd, #8b5cf6); 
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+        }
+        .ai-content p { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 30px; }
+        
+        /* ==========================================================================
+           12. WORKSPACE PREVIEW (Part 4)
+           ========================================================================== */
+        .workspace-preview { padding: 100px 5%; text-align: center; }
+        .mockup-window { 
+            max-width: 900px; margin: 40px auto 0; background: #0f111a; 
+            border: 1px solid var(--border-light); border-radius: 16px; 
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6); overflow: hidden; text-align: left; 
+        }
+        .mockup-header { background: #1a1d2d; padding: 12px 20px; display: flex; gap: 8px; border-bottom: 1px solid var(--border-light); }
+        .mockup-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .mockup-dot.red { background: #ff5f56; } .mockup-dot.yellow { background: #ffbd2e; } .mockup-dot.green { background: #27c93f; }
+        .mockup-body { 
+            padding: 60px 40px; display: flex; flex-direction: column; align-items: center; justify-content: center; 
+            border: 2px dashed rgba(255,255,255,0.1); margin: 30px; border-radius: 12px; background: rgba(255,255,255,0.02); 
+            transition: var(--transition-smooth); cursor: pointer;
+        }
+        .mockup-body:hover { background: rgba(59, 130, 246, 0.05); border-color: var(--brand-primary); }
+        .mockup-body i { font-size: 40px; color: var(--brand-primary); margin-bottom: 20px; }
+
+        /* ==========================================================================
+           13. STATS & FAQ (Part 4)
+           ========================================================================== */
+        .stats-grid { display: flex; justify-content: center; gap: 60px; flex-wrap: wrap; margin: 80px 0; }
+        .stat-item h3 { font-size: 3.5rem; color: #fff; font-weight: 800; margin-bottom: 5px; }
+        .stat-item p { color: var(--text-muted); font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        .faq-section { max-width: 800px; margin: 0 auto; padding: 50px 5%; }
+        .faq-item { border-bottom: 1px solid var(--border-light); padding: 20px 0; }
+        .faq-question { 
+            display: flex; justify-content: space-between; align-items: center; width: 100%; 
+            background: none; border: none; color: #fff; font-size: 1.2rem; cursor: pointer; 
+            text-align: left; font-weight: 600; font-family: inherit; 
+        }
+        .faq-question i { transition: transform 0.4s ease; color: var(--brand-primary); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; color: var(--text-muted); line-height: 1.6; }
+        .faq-item.active .faq-answer { max-height: 200px; margin-top: 15px; }
+        .faq-item.active .faq-question i { transform: rotate(180deg); }
+
+        /* ==========================================================================
+           14. CTA & FOOTER (Part 4)
+           ========================================================================== */
+        .final-cta { 
+            text-align: center; padding: 120px 5%; 
+            background: linear-gradient(180deg, var(--bg-base) 0%, rgba(59, 130, 246, 0.05) 100%); 
+            border-top: 1px solid var(--border-light); 
+        }
+        .final-cta h2 { font-size: 3rem; font-weight: 800; margin-bottom: 30px; }
+        
+        .footer { background: #05050A; border-top: 1px solid var(--border-light); padding: 80px 6% 30px 6%; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 60px; }
+        .footer-brand img { height: 40px; margin-bottom: 20px; filter: drop-shadow(0 0 10px rgba(255,255,255,0.2)); }
+        .footer-brand p { color: var(--text-muted); font-size: 0.95rem; max-width: 300px; line-height: 1.6; }
+        .footer-links h4 { color: #fff; margin-bottom: 20px; font-size: 1.1rem; }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; transition: 0.3s; }
+        .footer-links a:hover { color: var(--brand-primary); padding-left: 5px; }
+        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid var(--border-light); color: var(--text-dark); font-size: 0.9rem; }
+        
+        @media (max-width: 768px) {
+            .footer-grid { grid-template-columns: 1fr; }
+            .stats-grid { gap: 40px; flex-direction: column; text-align: center; }
+        }
     </style>
 </head>
 <body>
@@ -1044,6 +1132,126 @@
         </div>
     </section>
 
+    <!-- ================= AI FUTURE ================= -->
+    <section id="ai" class="ai-section section">
+        <div class="ai-glow"></div>
+        <div class="ai-content reveal">
+            <i class="fa-solid fa-brain" style="font-size: 40px; color: #a855f7; margin-bottom: 20px; text-shadow: 0 0 20px #a855f7;"></i>
+            <h2>AI is coming to Nuvoraq.</h2>
+            <p>We are building a new generation of intelligent utilities. From document summarization to smart image generation, our AI workspace is rolling out soon.</p>
+            <button class="btn-primary" style="background: linear-gradient(135deg, #8b5cf6, #d946ef);">Get Early Access</button>
+        </div>
+    </section>
+
+    <!-- ================= WORKSPACE PREVIEW ================= -->
+    <section id="workspace" class="workspace-preview section">
+        <div class="section-header reveal">
+            <h2 class="section-title">Tools designed to just work.</h2>
+            <p class="section-subtitle">No complicated menus. Select your tool, drop your files, and you're done.</p>
+        </div>
+        <div class="mockup-window reveal">
+            <div class="mockup-header">
+                <div class="mockup-dot red"></div>
+                <div class="mockup-dot yellow"></div>
+                <div class="mockup-dot green"></div>
+            </div>
+            <div class="mockup-body">
+                <i class="fa-solid fa-file-pdf"></i>
+                <h3 style="color: #fff; margin-bottom: 10px;">Merge PDF Files</h3>
+                <p style="color: var(--text-muted); margin-bottom: 20px;">Drag and drop your PDF files here, or click to browse</p>
+                <button class="btn-secondary">Select Files</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= STATS LIBRARY ================= -->
+    <section class="section reveal">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h3>12+</h3>
+                <p>Core Utilities</p>
+            </div>
+            <div class="stat-item">
+                <h3>8</h3>
+                <p>Categories</p>
+            </div>
+            <div class="stat-item">
+                <h3>$0</h3>
+                <p>Free to Use</p>
+            </div>
+            <div class="stat-item">
+                <h3>0</h3>
+                <p>Account Signups</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FAQ SECTION ================= -->
+    <section id="faq" class="faq-section section reveal">
+        <h2 class="section-title" style="text-align: center; margin-bottom: 40px;">Frequently Asked Questions</h2>
+        
+        <div class="faq-item">
+            <button class="faq-question">Is Nuvoraq really free? <i class="fa-solid fa-chevron-down"></i></button>
+            <div class="faq-answer"><p>Yes, all basic tools on Nuvoraq are completely free to use without any hidden charges or restrictive paywalls.</p></div>
+        </div>
+        
+        <div class="faq-item">
+            <button class="faq-question">Do I need to create an account? <i class="fa-solid fa-chevron-down"></i></button>
+            <div class="faq-answer"><p>No account is required to access our core utilities. You can start processing your files instantly upon visiting the site.</p></div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">Are my files secure and private? <i class="fa-solid fa-chevron-down"></i></button>
+            <div class="faq-answer"><p>Absolutely. Where technically possible, we process files directly in your browser. Any files processed on our servers are encrypted and automatically deleted immediately after processing.</p></div>
+        </div>
+    </section>
+
+    <!-- ================= FINAL CTA ================= -->
+    <section class="final-cta reveal">
+        <h2>Your next task starts here.</h2>
+        <a href="#quick-tools" class="btn-primary" style="padding: 18px 40px; font-size: 1.2rem;">Explore Workspace</a>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <img src="nuvoraq-logo.png" alt="Nuvoraq">
+                <p>Powerful tools. One simple workspace. Fast, free, and beautifully simple developer and everyday utilities.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Product</h4>
+                <ul>
+                    <li><a href="#">All Tools</a></li>
+                    <li><a href="#">PDF Tools</a></li>
+                    <li><a href="#">Image Tools</a></li>
+                    <li><a href="#">Developer Tools</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">Help & Support</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Updates</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Nuvoraq Workspace. All rights reserved.
+        </div>
+    </footer>
+
     <!-- ================= JAVASCRIPT ================= -->
     <script>
         // 1. Sticky Navbar
@@ -1160,6 +1368,23 @@
         }
         window.addEventListener('scroll', revealElements);
         revealElements();
+
+        // 6. FAQ Accordion Logic
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                
+                // Close all other FAQs
+                faqItems.forEach(faq => faq.classList.remove('active'));
+                
+                // If the clicked one wasn't active, open it
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
     </script>
 </body>
 </html>
