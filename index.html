@@ -615,6 +615,153 @@
             .nav-menu { display: none; } 
             .hero-visual { width: 100%; height: 500px; }
         }
+        /* ==========================================================================
+           8. FEATURED TOOLS (Part 3)
+           ========================================================================== */
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 30px;
+        }
+
+        .featured-card {
+            background: linear-gradient(to right, rgba(30, 32, 45, 0.4), rgba(20, 22, 35, 0.8));
+            border: 1px solid var(--border-light);
+            border-radius: 20px;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            transition: var(--transition-smooth);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .featured-card::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; width: 4px; height: 100%;
+            background: var(--brand-primary);
+            opacity: 0;
+            transition: var(--transition-smooth);
+        }
+
+        .featured-card:hover {
+            transform: scale(1.02);
+            border-color: rgba(99, 102, 241, 0.4);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+        .featured-card:hover::before { opacity: 1; }
+
+        .featured-icon {
+            font-size: 36px;
+            color: #fff;
+            background: linear-gradient(135deg, var(--brand-primary), var(--brand-accent));
+            width: 80px; height: 80px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px var(--brand-glow);
+            flex-shrink: 0;
+        }
+
+        .featured-content h3 { font-size: 1.5rem; color: #fff; margin-bottom: 8px; }
+        .featured-content p { color: var(--text-muted); font-size: 1rem; line-height: 1.5; }
+
+        /* ==========================================================================
+           9. SEARCH SECTION (Part 3)
+           ========================================================================== */
+        .search-section {
+            background: linear-gradient(180deg, rgba(15, 17, 26, 0.2) 0%, rgba(30, 32, 45, 0.5) 100%);
+            border-top: 1px solid var(--border-light);
+            border-bottom: 1px solid var(--border-light);
+            text-align: center;
+            padding: 100px 5%;
+        }
+
+        .search-container { max-width: 800px; margin: 0 auto; }
+        .search-container h2 { font-size: 2.5rem; margin-bottom: 30px; font-weight: 700; color: #fff; }
+
+        .search-box {
+            position: relative;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 25px; top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+            color: var(--text-muted);
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 24px 24px 24px 60px;
+            border-radius: 16px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid var(--border-light);
+            color: #fff;
+            font-size: 1.2rem;
+            backdrop-filter: blur(10px);
+            transition: var(--transition-smooth);
+            outline: none;
+        }
+
+        .search-box input:focus {
+            border-color: var(--brand-primary);
+            box-shadow: 0 0 30px var(--brand-glow);
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .search-filters { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        .filter-btn {
+            padding: 8px 20px;
+            border-radius: 100px;
+            background: rgba(255,255,255,0.05);
+            color: var(--text-muted);
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: var(--transition-smooth);
+        }
+        .filter-btn:hover { background: rgba(255,255,255,0.1); color: #fff; }
+        .filter-btn.active { background: rgba(59, 130, 246, 0.2); color: var(--brand-primary); border-color: var(--brand-primary); }
+
+        /* ==========================================================================
+           10. WHY NUVORAQ (Part 3)
+           ========================================================================== */
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 30px;
+        }
+
+        .why-card {
+            text-align: left;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.03);
+            transition: var(--transition-smooth);
+        }
+        .why-card:hover { background: rgba(255, 255, 255, 0.05); transform: translateY(-5px); }
+
+        .why-icon {
+            font-size: 24px; color: var(--text-main); margin-bottom: 20px;
+            background: rgba(255,255,255,0.1);
+            width: 50px; height: 50px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 12px;
+        }
+        .why-card h4 { font-size: 1.2rem; color: #fff; margin-bottom: 10px; }
+        .why-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
+
+        @media (max-width: 768px) {
+            .featured-grid { grid-template-columns: 1fr; }
+            .featured-card { flex-direction: column; text-align: center; padding: 30px 20px; }
+            .search-container h2 { font-size: 2rem; }
+        }
     </style>
 </head>
 <body>
@@ -794,6 +941,105 @@
                 <div class="cat-tags">
                     <span class="tag" style="background: rgba(139,92,246,0.15); color: #c084fc; border: 1px solid rgba(139,92,246,0.3);">Gradually Rolling Out</span>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FEATURED TOOLS ================= -->
+    <section id="featured" class="section">
+        <div class="section-header reveal">
+            <h2 class="section-title">Featured Tools</h2>
+            <p class="section-subtitle">Our most powerful and highly optimized utilities.</p>
+        </div>
+        
+        <div class="featured-grid">
+            <!-- Featured Card 1 -->
+            <a href="#" class="featured-card reveal">
+                <div class="featured-icon"><i class="fa-solid fa-layer-group"></i></div>
+                <div class="featured-content">
+                    <h3>Merge PDF Pro</h3>
+                    <p>Combine multiple PDFs instantly. Arrange files easily with drag-and-drop before merging.</p>
+                </div>
+            </a>
+
+            <!-- Featured Card 2 -->
+            <a href="#" class="featured-card reveal" style="transition-delay: 0.2s;">
+                <div class="featured-icon" style="background: linear-gradient(135deg, #10b981, #059669);"><i class="fa-solid fa-file-image"></i></div>
+                <div class="featured-content">
+                    <h3>JPG to PDF</h3>
+                    <p>Convert your images into a single, highly optimized PDF document in seconds.</p>
+                </div>
+            </a>
+            
+            <!-- Featured Card 3 -->
+            <a href="#" class="featured-card reveal" style="transition-delay: 0.3s;">
+                <div class="featured-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706);"><i class="fa-solid fa-minimize"></i></div>
+                <div class="featured-content">
+                    <h3>Smart Image Compressor</h3>
+                    <p>Reduce image sizes drastically without losing visual quality. Perfect for web developers.</p>
+                </div>
+            </a>
+
+            <!-- Featured Card 4 -->
+            <a href="#" class="featured-card reveal" style="transition-delay: 0.4s;">
+                <div class="featured-icon" style="background: linear-gradient(135deg, #ec4899, #be185d);"><i class="fa-solid fa-code"></i></div>
+                <div class="featured-content">
+                    <h3>JSON Formatter & Validator</h3>
+                    <p>Instantly beautify, clean, and validate raw JSON data right inside your browser.</p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- ================= FIND THE RIGHT TOOL (Search) ================= -->
+    <section id="search-section" class="search-section">
+        <div class="search-container reveal">
+            <h2>What are you trying to do?</h2>
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Search 'compress PDF', 'word counter'...">
+            </div>
+            <div class="search-filters">
+                <span class="filter-btn active">All</span>
+                <span class="filter-btn">PDF</span>
+                <span class="filter-btn">Images</span>
+                <span class="filter-btn">Text</span>
+                <span class="filter-btn">Developer</span>
+                <span class="filter-btn">Calculators</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= WHY NUVORAQ ================= -->
+    <section id="why-nuvoraq" class="section">
+        <div class="section-header reveal">
+            <h2 class="section-title">Why choose Nuvoraq?</h2>
+            <p class="section-subtitle">Designed to be your daily driver for digital tasks.</p>
+        </div>
+
+        <div class="why-grid">
+            <div class="why-card reveal" style="transition-delay: 0.1s;">
+                <div class="why-icon"><i class="fa-solid fa-bolt"></i></div>
+                <h4>Lightning Fast</h4>
+                <p>Optimized processing and responsive interactions. No waiting in queues or unnecessary loading screens.</p>
+            </div>
+
+            <div class="why-card reveal" style="transition-delay: 0.2s;">
+                <div class="why-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                <h4>Private by Design</h4>
+                <p>Where technically possible, files are processed directly in your browser. Your data stays yours.</p>
+            </div>
+
+            <div class="why-card reveal" style="transition-delay: 0.3s;">
+                <div class="why-icon"><i class="fa-solid fa-user-slash"></i></div>
+                <h4>No Account Needed</h4>
+                <p>Start working immediately. We don't force you to sign up or create an account for basic essential tools.</p>
+            </div>
+
+            <div class="why-card reveal" style="transition-delay: 0.4s;">
+                <div class="why-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                <h4>Beautifully Simple</h4>
+                <p>No complicated workflows or cluttered interfaces. Just clean design focused on getting the job done.</p>
             </div>
         </div>
     </section>
