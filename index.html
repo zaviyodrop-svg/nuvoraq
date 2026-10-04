@@ -5,27 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nuvoraq — Powerful Tools. One Workspace.</title>
     
-    <!-- Google Fonts: Plus Jakarta Sans for premium tech look -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- FontAwesome for Icons -->
+    <!-- Premium Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* =========================================
-           1. GLOBAL DESIGN SYSTEM & VARIABLES
-           ========================================= */
+        /* ==========================================================================
+           1. ROOT VARIABLES & DESIGN SYSTEM (Premium Dark Theme)
+           ========================================================================== */
         :root {
-            --bg-dark: #070913;
-            --surface: rgba(255, 255, 255, 0.03);
-            --surface-hover: rgba(255, 255, 255, 0.08);
-            --border: rgba(255, 255, 255, 0.08);
-            --text-main: #f8fafc;
+            --bg-base: #05050A;
+            --bg-surface: rgba(15, 17, 26, 0.6);
+            --bg-glass: rgba(20, 22, 35, 0.4);
+            
+            --brand-primary: #3b82f6;   /* Electric Blue */
+            --brand-accent: #8b5cf6;    /* Deep Violet */
+            --brand-glow: rgba(99, 102, 241, 0.4);
+            
+            --text-main: #ffffff;
             --text-muted: #94a3b8;
-            --primary: #4f46e5;      /* Indigo */
-            --primary-glow: rgba(79, 70, 229, 0.5);
-            --accent: #8b5cf6;       /* Violet */
-            --glass-blur: blur(16px);
+            --text-dark: #64748b;
+            
+            --border-light: rgba(255, 255, 255, 0.08);
+            --border-glow: rgba(139, 92, 246, 0.3);
+            
+            --glass-blur: blur(20px);
+            --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         * {
@@ -36,85 +42,113 @@
         }
 
         body {
-            background-color: var(--bg-dark);
+            background-color: var(--bg-base);
             color: var(--text-main);
             overflow-x: hidden;
-            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Ambient Background Glows */
-        .ambient-glow {
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, var(--primary-glow) 0%, transparent 60%);
-            border-radius: 50%;
-            filter: blur(80px);
-            z-index: -1;
-            opacity: 0.4;
-            animation: pulseGlow 8s infinite alternate;
-        }
-        .glow-top-left { top: -200px; left: -200px; }
-        .glow-center-right { top: 20%; right: -200px; background: radial-gradient(circle, rgba(139, 92, 246, 0.3) 0%, transparent 60%); }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--bg-base); }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
 
-        @keyframes pulseGlow {
-            0% { transform: scale(1); opacity: 0.3; }
-            100% { transform: scale(1.2); opacity: 0.5; }
-        }
-
-        /* =========================================
-           2. PREMIUM NAVBAR
-           ========================================= */
-        nav {
+        /* Custom Cursor Style */
+        .cursor-glow {
             position: fixed;
-            top: 0; width: 100%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--brand-glow) 0%, transparent 60%);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            opacity: 0.5;
+            transition: opacity 0.3s ease;
+        }
+
+        /* ==========================================================================
+           2. PREMIUM STICKY NAVBAR
+           ========================================================================== */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 5%;
+            padding: 24px 6%;
             z-index: 1000;
-            transition: all 0.4s ease;
+            transition: var(--transition-smooth);
             border-bottom: 1px solid transparent;
         }
 
-        nav.scrolled {
-            background: rgba(7, 9, 19, 0.7);
+        .navbar.scrolled {
+            padding: 16px 6%;
+            background: rgba(5, 5, 10, 0.7);
             backdrop-filter: var(--glass-blur);
             -webkit-backdrop-filter: var(--glass-blur);
-            border-bottom: 1px solid var(--border);
-            padding: 15px 5%;
+            border-bottom: 1px solid var(--border-light);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
-        .logo-container {
+        .nav-brand img {
+            height: 45px; /* Perfect size for nuvoraq-logo.png */
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.3));
+            transition: var(--transition-smooth);
+        }
+
+        .nav-brand:hover img {
+            filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.6));
+            transform: scale(1.02);
+        }
+
+        .nav-menu {
             display: flex;
+            gap: 35px;
             align-items: center;
-            gap: 10px;
-            font-size: 24px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            color: white;
-            text-decoration: none;
         }
 
-        .logo-container img {
-            height: 35px; /* Adjust according to your logo */
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-
-        .nav-links a {
+        .nav-link {
             color: var(--text-muted);
             text-decoration: none;
             font-size: 15px;
             font-weight: 500;
-            transition: color 0.3s ease;
+            position: relative;
+            transition: var(--transition-smooth);
         }
 
-        .nav-links a:hover {
+        .nav-link:hover {
             color: var(--text-main);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--brand-primary), var(--brand-accent));
+            transition: var(--transition-smooth);
+            border-radius: 2px;
+        }
+
+        .nav-link:hover::after { width: 100%; }
+
+        .nav-badge {
+            background: linear-gradient(135deg, var(--brand-primary), var(--brand-accent));
+            color: white;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 10px;
+            margin-left: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 0 10px var(--brand-glow);
         }
 
         .nav-actions {
@@ -123,315 +157,536 @@
             gap: 20px;
         }
 
-        .icon-btn {
-            background: none;
-            border: none;
+        .btn-icon {
+            background: transparent;
+            border: 1px solid var(--border-light);
             color: var(--text-muted);
-            font-size: 18px;
+            width: 40px; height: 40px;
+            border-radius: 50%;
             cursor: pointer;
-            transition: 0.3s;
+            transition: var(--transition-smooth);
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        .icon-btn:hover { color: white; }
+
+        .btn-icon:hover {
+            background: var(--bg-surface);
+            color: var(--text-main);
+            border-color: var(--brand-accent);
+            transform: translateY(-2px);
+        }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--accent));
+            position: relative;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
             color: white;
-            padding: 10px 24px;
-            border-radius: 8px;
+            padding: 12px 28px;
+            border-radius: 12px;
             text-decoration: none;
             font-weight: 600;
             font-size: 14px;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255,255,255,0.1);
-            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+            overflow: hidden;
+            transition: var(--transition-smooth);
+            border: 1px solid rgba(255,255,255,0.2);
+            z-index: 1;
         }
 
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            z-index: -1;
+            transition: opacity 0.4s ease;
+            opacity: 0;
+        }
+
+        .btn-primary:hover::before { opacity: 1; }
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(79, 70, 229, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(124, 58, 237, 0.4);
         }
 
-        /* =========================================
-           3. HERO SECTION (With Canvas & 3D Cards)
-           ========================================= */
-        #hero {
+        /* ==========================================================================
+           3. HERO SECTION (Immersive Workspace)
+           ========================================================================== */
+        .hero {
             position: relative;
             min-height: 100vh;
             display: flex;
             align-items: center;
-            padding: 100px 5% 0 5%;
+            padding: 120px 6% 40px 6%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        /* Interactive Canvas Background */
+        #particle-canvas {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        /* Ambient Glow Orbs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: -1;
+            animation: float 10s infinite ease-in-out;
+        }
+        .orb-1 { width: 500px; height: 500px; background: rgba(59, 130, 246, 0.15); top: -100px; left: -100px; }
+        .orb-2 { width: 600px; height: 600px; background: rgba(139, 92, 246, 0.15); bottom: -200px; right: -100px; animation-delay: -5s; }
+
+        .hero-container {
+            display: flex;
+            width: 100%;
+            gap: 50px;
+            align-items: center;
         }
 
         .hero-content {
-            flex: 1;
-            z-index: 10;
-            animation: slideUpFade 1s ease forwards;
+            flex: 1.2;
+            animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            transform: translateY(40px);
         }
 
-        .hero-content h1 {
-            font-size: 64px;
-            font-weight: 700;
-            line-height: 1.1;
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-light);
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-muted);
             margin-bottom: 24px;
-            background: linear-gradient(to right, #fff, #94a3b8);
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-badge .dot {
+            width: 8px; height: 8px;
+            background: var(--brand-primary);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--brand-primary);
+            animation: pulse 2s infinite;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 5vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -1px;
+            margin-bottom: 24px;
+        }
+
+        .text-gradient {
+            background: linear-gradient(to right, #ffffff, #a5b4fc, #c4b5fd);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: shimmer 5s linear infinite;
         }
 
-        .hero-content p {
-            font-size: 18px;
+        .hero-subtitle {
+            font-size: 1.125rem;
             color: var(--text-muted);
-            max-width: 500px;
-            line-height: 1.6;
+            line-height: 1.7;
+            max-width: 540px;
             margin-bottom: 40px;
         }
 
-        .hero-btns {
+        .hero-actions {
             display: flex;
-            gap: 15px;
+            gap: 20px;
+            align-items: center;
         }
 
         .btn-secondary {
-            background: var(--surface);
-            color: white;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
             padding: 12px 28px;
-            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-light);
+            color: var(--text-main);
+            border-radius: 12px;
             text-decoration: none;
             font-weight: 600;
+            font-size: 14px;
             backdrop-filter: blur(10px);
-            border: 1px solid var(--border);
-            transition: 0.3s;
+            transition: var(--transition-smooth);
         }
 
         .btn-secondary:hover {
-            background: var(--surface-hover);
-        }
-        
-        .btn-primary.large {
-            padding: 12px 28px;
-            font-size: 16px;
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
         }
 
-        /* Hero Right Visuals - 3D Floating Elements */
+        .btn-secondary i { transition: transform 0.3s; }
+        .btn-secondary:hover i { transform: translateX(5px); }
+
+        /* --- 3D Interactive Right Visual --- */
         .hero-visual {
             flex: 1;
             position: relative;
-            height: 500px;
+            height: 600px;
+            perspective: 1200px; /* Crucial for 3D depth */
             display: flex;
             justify-content: center;
             align-items: center;
-            perspective: 1000px; /* For 3D depth */
         }
 
-        /* Canvas for background moving particles/gradient */
-        #hero-canvas {
+        .scene-3d {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.1s linear; /* Smooth mouse tracking */
+        }
+
+        .glass-card {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 0;
+            background: linear-gradient(135deg, rgba(30, 32, 45, 0.7), rgba(15, 17, 26, 0.8));
+            border: 1px solid var(--border-light);
             border-radius: 20px;
-            mask-image: radial-gradient(circle, black 40%, transparent 80%);
-            -webkit-mask-image: radial-gradient(circle, black 40%, transparent 80%);
-        }
-
-        .floating-card {
-            position: absolute;
-            background: rgba(20, 25, 40, 0.6);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 16px;
-            padding: 20px;
+            padding: 24px;
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255,255,255,0.05);
             display: flex;
             align-items: center;
-            gap: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-            z-index: 2;
-            animation: floatUpDown 6s ease-in-out infinite;
-            transform-style: preserve-3d;
+            gap: 20px;
+            transition: border-color 0.4s ease, box-shadow 0.4s ease;
         }
 
-        .card-1 { top: 10%; right: 10%; animation-delay: 0s; transform: translateZ(50px) rotateY(-10deg); }
-        .card-2 { bottom: 15%; left: 10%; animation-delay: 2s; transform: translateZ(80px) rotateY(15deg); }
-        .card-3 { top: 40%; right: 40%; animation-delay: 4s; transform: translateZ(100px); background: linear-gradient(135deg, rgba(79,70,229,0.2), rgba(139,92,246,0.2)); border: 1px solid rgba(139,92,246,0.3);}
+        .glass-card:hover {
+            border-color: var(--brand-accent);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(139, 92, 246, 0.2);
+        }
 
-        .floating-card i {
-            font-size: 24px;
-            color: var(--accent);
-            background: rgba(139, 92, 246, 0.1);
-            padding: 12px;
+        .card-icon {
+            width: 50px; height: 50px;
             border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
         }
-        
-        .floating-card .text h4 { font-size: 14px; margin-bottom: 4px; color: white; }
-        .floating-card .text p { font-size: 12px; color: var(--text-muted); }
 
-        /* Animations */
-        @keyframes slideUpFade {
-            0% { opacity: 0; transform: translateY(30px); }
+        .glass-card .content h4 { font-size: 16px; color: #fff; margin-bottom: 4px; font-weight: 600; }
+        .glass-card .content p { font-size: 13px; color: var(--text-muted); }
+
+        /* Specific Card Positions & Initial 3D Transforms */
+        .card-pdf {
+            top: 15%; left: 10%;
+            transform: translateZ(80px) rotateY(15deg) rotateX(5deg);
+            animation: floatSlow 6s ease-in-out infinite;
+        }
+        .card-pdf .card-icon { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
+
+        .card-img {
+            bottom: 20%; right: 10%;
+            transform: translateZ(120px) rotateY(-20deg) rotateX(-5deg);
+            animation: floatSlow 7s ease-in-out infinite reverse;
+        }
+        .card-img .card-icon { background: rgba(59, 130, 246, 0.1); color: #3b82f6; }
+
+        .card-dev {
+            top: 45%; left: 30%;
+            transform: translateZ(150px);
+            background: linear-gradient(135deg, rgba(40, 42, 60, 0.8), rgba(20, 22, 35, 0.9));
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            animation: floatSlow 5s ease-in-out infinite 1s;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6), 0 0 40px rgba(139, 92, 246, 0.15);
+        }
+        .card-dev .card-icon { background: rgba(139, 92, 246, 0.15); color: #a78bfa; }
+
+        /* ==========================================================================
+           4. ANIMATIONS & RESPONSIVE DESIGN
+           ========================================================================== */
+        @keyframes fadeUp {
+            0% { opacity: 0; transform: translateY(40px); }
             100% { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes floatUpDown {
-            0%, 100% { transform: translateY(0) translateZ(50px); }
-            50% { transform: translateY(-20px) translateZ(60px); }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-30px) scale(1.05); }
         }
 
-        /* Mobile Responsive */
-        @media (max-width: 992px) {
-            #hero { flex-direction: column; text-align: center; padding-top: 120px; }
-            .hero-content h1 { font-size: 48px; }
-            .hero-content p { margin: 0 auto 30px auto; }
-            .hero-btns { justify-content: center; }
-            .nav-links { display: none; } /* Mobile menu banayenge baad me */
-            .hero-visual { width: 100%; margin-top: 50px; }
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0) translateZ(var(--tz, 100px)); }
+            50% { transform: translateY(-15px) translateZ(var(--tz, 100px)); }
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 1024px) {
+            .hero-container { flex-direction: column; text-align: center; }
+            .hero-subtitle { margin: 0 auto 40px auto; }
+            .hero-actions { justify-content: center; }
+            .hero-badge { margin: 0 auto 24px auto; }
+            .nav-menu { display: none; } /* Mobile menu toggle in future parts */
+            .hero-visual { width: 100%; height: 500px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Ambient Background Glows -->
-    <div class="ambient-glow glow-top-left"></div>
-    <div class="ambient-glow glow-center-right"></div>
+    <!-- Mouse Follow Glow -->
+    <div class="cursor-glow" id="cursor-glow"></div>
 
-    <!-- ================= NAVBAR ================= -->
-    <nav id="navbar">
-        <div class="nav-left">
-            <a href="#" class="logo-container">
-                <!-- YAHAN APNA LOGO LAGAYEIN -->
-                <!-- <img src="logo.png" alt="Nuvoraq"> -->
-                <i class="fa-solid fa-cube" style="color: var(--accent)"></i> NUVORAQ
-            </a>
-        </div>
+    <!-- Ambient Orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <!-- ================= PREMIUM NAVBAR ================= -->
+    <nav class="navbar" id="navbar">
+        <a href="#" class="nav-brand">
+            <!-- LOGO INTEGRATION HERE -->
+            <img src="nuvoraq-logo.png" alt="Nuvoraq Logo">
+        </a>
         
-        <div class="nav-links">
-            <a href="#tools">Tools</a>
-            <a href="#categories">Categories</a>
-            <a href="#ai">AI Tools <span style="font-size:10px; background:var(--primary); padding:2px 6px; border-radius:4px; margin-left:4px; color:white;">New</span></a>
-            <a href="#resources">Resources</a>
+        <div class="nav-menu">
+            <a href="#tools" class="nav-link">Tools</a>
+            <a href="#categories" class="nav-link">Categories</a>
+            <a href="#ai" class="nav-link">AI Tools <span class="nav-badge">Soon</span></a>
+            <a href="#resources" class="nav-link">Resources</a>
         </div>
 
         <div class="nav-actions">
-            <button class="icon-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
-            <button class="icon-btn"><i class="fa-solid fa-moon"></i></button>
-            <a href="#explore" class="btn-primary">Explore Tools</a>
+            <button class="btn-icon" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <button class="btn-icon" aria-label="Theme Toggle"><i class="fa-solid fa-moon"></i></button>
+            <a href="#explore" class="btn-primary">Explore Workspace</a>
         </div>
     </nav>
 
     <!-- ================= HERO SECTION ================= -->
-    <header id="hero">
-        <div class="hero-content">
-            <h1>Powerful tools.<br>One simple workspace.</h1>
-            <p>PDFs, images, files, text, developer utilities and more — fast, free and beautifully simple directly in your browser.</p>
-            <div class="hero-btns">
-                <a href="#all-tools" class="btn-primary large">Explore All Tools</a>
-                <a href="#try" class="btn-secondary">Try a Tool <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i></a>
-            </div>
-        </div>
+    <header class="hero" id="hero">
+        <!-- Canvas for Interactive Network Nodes -->
+        <canvas id="particle-canvas"></canvas>
 
-        <div class="hero-visual">
-            <!-- Dynamic 3D Canvas Background -->
-            <canvas id="hero-canvas"></canvas>
-
-            <!-- Floating 3D Cards -->
-            <div class="floating-card card-1">
-                <i class="fa-solid fa-file-pdf" style="color: #ef4444; background: rgba(239,68,68,0.1);"></i>
-                <div class="text">
-                    <h4>Merge PDF</h4>
-                    <p>Combine instantly</p>
+        <div class="hero-container">
+            <!-- Left Text Content -->
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="dot"></span> Nuvoraq Workspace v1.0
+                </div>
+                <h1 class="hero-title">
+                    Powerful tools.<br>
+                    <span class="text-gradient">One simple workspace.</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Process PDFs, compress images, extract text, and utilize developer utilities — blazingly fast, free, and beautifully simple directly within your browser.
+                </p>
+                <div class="hero-actions">
+                    <a href="#all-tools" class="btn-primary" style="padding: 16px 32px; font-size: 16px;">Start Exploring</a>
+                    <a href="#try" class="btn-secondary">
+                        <i class="fa-solid fa-bolt" style="color: #fbbf24;"></i> Quick Try
+                    </a>
                 </div>
             </div>
 
-            <div class="floating-card card-2">
-                <i class="fa-solid fa-image" style="color: #3b82f6; background: rgba(59,130,246,0.1);"></i>
-                <div class="text">
-                    <h4>Compress Image</h4>
-                    <p>-85% smaller size</p>
-                </div>
-            </div>
+            <!-- Right 3D Visual Content -->
+            <div class="hero-visual" id="scene">
+                <div class="scene-3d" id="scene-3d">
+                    
+                    <!-- Card 1: PDF -->
+                    <div class="glass-card card-pdf" style="--tz: 80px;">
+                        <div class="card-icon"><i class="fa-solid fa-file-pdf"></i></div>
+                        <div class="content">
+                            <h4>Merge PDF</h4>
+                            <p>Combine files instantly</p>
+                        </div>
+                    </div>
 
-            <div class="floating-card card-3">
-                <i class="fa-solid fa-code" style="color: #10b981; background: rgba(16,185,129,0.1);"></i>
-                <div class="text">
-                    <h4>JSON Formatter</h4>
-                    <p>Beautify data</p>
+                    <!-- Card 2: Developer -->
+                    <div class="glass-card card-dev" style="--tz: 150px;">
+                        <div class="card-icon"><i class="fa-solid fa-code"></i></div>
+                        <div class="content">
+                            <h4>JSON Formatter</h4>
+                            <p>Beautify & validate data</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Image -->
+                    <div class="glass-card card-img" style="--tz: 120px;">
+                        <div class="card-icon"><i class="fa-solid fa-image"></i></div>
+                        <div class="content">
+                            <h4>Compress Image</h4>
+                            <p>Reduce size by 85%</p>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- ================= SCRIPTS ================= -->
+    <!-- ================= JAVASCRIPT ================= -->
     <script>
-        // 1. Sticky Navbar Effect with Glassmorphism
+        // 1. Sticky Navbar & Blur Effect
+        const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                nav.classList.add('scrolled');
+            if (window.scrollY > 20) {
+                navbar.classList.add('scrolled');
             } else {
-                nav.classList.remove('scrolled');
+                navbar.classList.remove('scrolled');
             }
         });
 
-        // 2. Interactive Canvas Animation for Hero Visual (Smooth Particles/Lines)
-        const canvas = document.getElementById('hero-canvas');
+        // 2. Custom Cursor Glow Tracking
+        const cursorGlow = document.getElementById('cursor-glow');
+        document.addEventListener('mousemove', (e) => {
+            cursorGlow.style.left = e.clientX + 'px';
+            cursorGlow.style.top = e.clientY + 'px';
+        });
+
+        // 3. 3D Tilt Effect for Hero Scene (Advanced Mouse Tracking)
+        const sceneContainer = document.getElementById('scene');
+        const scene3D = document.getElementById('scene-3d');
+
+        sceneContainer.addEventListener('mousemove', (e) => {
+            const rect = sceneContainer.getBoundingClientRect();
+            const x = e.clientX - rect.left; // x position within the element
+            const y = e.clientY - rect.top;  // y position within the element
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            // Calculate rotation based on mouse position
+            const rotateX = ((y - centerY) / centerY) * -15; // Max 15 deg tilt
+            const rotateY = ((x - centerX) / centerX) * 15;
+
+            scene3D.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+
+        sceneContainer.addEventListener('mouseleave', () => {
+            scene3D.style.transform = `rotateX(0deg) rotateY(0deg)`;
+            scene3D.style.transition = 'transform 0.5s ease'; // Smooth reset
+            
+            setTimeout(() => {
+                scene3D.style.transition = 'transform 0.1s linear'; // Back to fast tracking
+            }, 500);
+        });
+
+        // 4. Advanced Interactive Particle Network (Canvas)
+        const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         let width, height;
+        let particles = [];
+        const mouse = { x: null, y: null, radius: 150 };
 
-        function resize() {
-            width = canvas.width = canvas.parentElement.clientWidth;
-            height = canvas.height = canvas.parentElement.clientHeight;
-        }
-        window.addEventListener('resize', resize);
-        resize();
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.x;
+            mouse.y = e.y;
+        });
 
-        // Particle System for Premium Background Motion
-        const particles = [];
-        for(let i=0; i<40; i++) {
-            particles.push({
-                x: Math.random() * width,
-                y: Math.random() * height,
-                vx: (Math.random() - 0.5) * 0.5,
-                vy: (Math.random() - 0.5) * 0.5,
-                size: Math.random() * 2 + 1
-            });
-        }
-
-        function draw() {
-            ctx.clearRect(0, 0, width, height);
+        function initCanvas() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            particles = [];
+            let particleCount = (width * height) / 15000; // Responsive amount
             
-            // Draw lines between close particles
-            for(let i=0; i<particles.length; i++) {
-                let p = particles[i];
-                p.x += p.vx; p.y += p.vy;
+            for (let i = 0; i < particleCount; i++) {
+                let size = Math.random() * 2 + 0.5;
+                let x = Math.random() * innerWidth;
+                let y = Math.random() * innerHeight;
+                let directionX = (Math.random() - 0.5) * 1;
+                let directionY = (Math.random() - 0.5) * 1;
+                particles.push(new Particle(x, y, directionX, directionY, size));
+            }
+        }
+
+        class Particle {
+            constructor(x, y, directionX, directionY, size) {
+                this.x = x;
+                this.y = y;
+                this.directionX = directionX;
+                this.directionY = directionY;
+                this.size = size;
+                this.baseX = this.x;
+                this.baseY = this.y;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                ctx.fillStyle = 'rgba(139, 92, 246, 0.4)'; // Violet color
+                ctx.fill();
+            }
+            update() {
+                // Check edge collision
+                if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
+                if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
                 
-                // Bounce off edges
-                if(p.x < 0 || p.x > width) p.vx *= -1;
-                if(p.y < 0 || p.y > height) p.vy *= -1;
+                // Mouse interaction physics
+                let dx = mouse.x - this.x;
+                let dy = mouse.y - this.y;
+                let distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < mouse.radius) {
+                    const forceDirectionX = dx / distance;
+                    const forceDirectionY = dy / distance;
+                    const force = (mouse.radius - distance) / mouse.radius;
+                    this.x -= forceDirectionX * force * 2;
+                    this.y -= forceDirectionY * force * 2;
+                } else {
+                    // Slowly return to natural movement
+                    this.x += this.directionX;
+                    this.y += this.directionY;
+                }
+                this.draw();
+            }
+        }
 
-                for(let j=i+1; j<particles.length; j++) {
-                    let p2 = particles[j];
-                    let dx = p.x - p2.x;
-                    let dy = p.y - p2.y;
-                    let dist = Math.sqrt(dx*dx + dy*dy);
-
-                    if(dist < 100) {
+        function connectParticles() {
+            for (let a = 0; a < particles.length; a++) {
+                for (let b = a; b < particles.length; b++) {
+                    let distance = ((particles[a].x - particles[b].x) * (particles[a].x - particles[b].x)) + 
+                                   ((particles[a].y - particles[b].y) * (particles[a].y - particles[b].y));
+                    if (distance < (canvas.width / 10) * (canvas.height / 10)) {
+                        let opacity = 1 - (distance / 20000);
+                        ctx.strokeStyle = `rgba(99, 102, 241, ${opacity * 0.3})`;
+                        ctx.lineWidth = 1;
                         ctx.beginPath();
-                        ctx.strokeStyle = `rgba(139, 92, 246, ${1 - dist/100})`; // Violet lines
-                        ctx.lineWidth = 0.5;
-                        ctx.moveTo(p.x, p.y);
-                        ctx.lineTo(p2.x, p2.y);
+                        ctx.moveTo(particles[a].x, particles[a].y);
+                        ctx.lineTo(particles[b].x, particles[b].y);
                         ctx.stroke();
                     }
                 }
-
-                // Draw Particle
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                ctx.fillStyle = "rgba(99, 102, 241, 0.5)";
-                ctx.fill();
             }
-            requestAnimationFrame(draw);
         }
-        draw();
+
+        function animateCanvas() {
+            requestAnimationFrame(animateCanvas);
+            ctx.clearRect(0, 0, innerWidth, innerHeight);
+            
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+            }
+            connectParticles();
+        }
+
+        window.addEventListener('resize', initCanvas);
+        initCanvas();
+        animateCanvas();
     </script>
 </body>
 </html>
