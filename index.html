@@ -1,5297 +1,2467 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+  <meta charset="UTF-8">
 
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-<meta
-  name="description"
-  content="Nuvoraq — powerful free online tools with a premium, frictionless experience."
->
+  <meta
+    name="description"
+    content="Nuvoraq — powerful free online tools for PDF, images, files, text, developers and more."
+  >
 
-<meta name="theme-color" content="#080a12">
+  <meta
+    name="theme-color"
+    content="#050816"
+  >
 
-<title>Nuvoraq — Powerful Tools. Zero Friction.</title>
+  <title>Nuvoraq — Powerful Tools. One Simple Workspace.</title>
 
-<!-- PDF ENGINE -->
-<script
-  src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"
-></script>
+  <!-- =========================================================
+       NUVORAQ — GLOBAL FOUNDATION
+       PART 1
+       ========================================================= -->
 
-<style>
+  <style>
 
-/* =========================================================
-   NUVORAQ — PREMIUM DESIGN SYSTEM
-   ========================================================= */
+    /* =========================================================
+       01. DESIGN TOKENS
+       ========================================================= */
 
-:root {
+    :root {
 
-  --bg:
-    #070910;
+      /* ---------- Core colors ---------- */
 
-  --bg-soft:
-    #0b0e18;
+      --nq-bg:
+        #050816;
 
-  --surface:
-    rgba(255,255,255,0.055);
+      --nq-bg-deep:
+        #02030a;
 
-  --surface-strong:
-    rgba(255,255,255,0.085);
+      --nq-surface:
+        rgba(12, 18, 38, 0.68);
 
-  --surface-hover:
-    rgba(255,255,255,0.105);
+      --nq-surface-solid:
+        #0b1022;
 
-  --line:
-    rgba(255,255,255,0.10);
+      --nq-surface-soft:
+        rgba(255, 255, 255, 0.035);
 
-  --line-bright:
-    rgba(255,255,255,0.17);
+      --nq-border:
+        rgba(255, 255, 255, 0.085);
 
-  --text:
-    #f7f8ff;
+      --nq-border-strong:
+        rgba(255, 255, 255, 0.14);
 
-  --text-soft:
-    #c4c8d9;
+      /* ---------- Brand ---------- */
 
-  --muted:
-    #858ca3;
+      --nq-blue:
+        #2457ff;
 
-  --violet:
-    #7657ff;
+      --nq-blue-bright:
+        #3674ff;
 
-  --violet-bright:
-    #9a83ff;
+      --nq-indigo:
+        #4f46e5;
 
-  --cyan:
-    #32d8ff;
+      --nq-violet:
+        #8b5cf6;
 
-  --cyan-soft:
-    #73e7ff;
+      --nq-purple:
+        #a855f7;
 
-  --green:
-    #42df9a;
+      --nq-cyan:
+        #38bdf8;
 
-  --red:
-    #ff607e;
+      /* ---------- Text ---------- */
 
-  --yellow:
-    #ffd166;
+      --nq-text:
+        #f7f9ff;
 
-  --radius-sm:
-    12px;
+      --nq-text-soft:
+        #c4cbe0;
 
-  --radius-md:
-    18px;
+      --nq-text-muted:
+        #8992ab;
 
-  --radius-lg:
-    26px;
+      --nq-text-dim:
+        #626b84;
 
-  --radius-xl:
-    34px;
+      /* ---------- Effects ---------- */
 
-  --shadow:
-    0 30px 100px rgba(0,0,0,0.38);
+      --nq-glow-blue:
+        rgba(36, 87, 255, 0.30);
 
-  --shadow-soft:
-    0 15px 50px rgba(0,0,0,0.22);
+      --nq-glow-violet:
+        rgba(139, 92, 246, 0.24);
 
-  --max:
-    1240px;
+      --nq-glow-cyan:
+        rgba(56, 189, 248, 0.16);
 
-  --ease:
-    cubic-bezier(.2,.8,.2,1);
-}
-
-
-/* =========================================================
-   RESET
-   ========================================================= */
+      /* ---------- Layout ---------- */
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+      --nq-container:
+        1240px;
 
-html {
-  scroll-behavior: smooth;
-}
+      --nq-navbar-height:
+        78px;
 
-body {
-  margin: 0;
-  min-height: 100vh;
+      --nq-radius-sm:
+        10px;
 
-  color: var(--text);
+      --nq-radius-md:
+        16px;
 
-  background:
-    radial-gradient(
-      circle at 10% 0%,
-      rgba(118,87,255,.16),
-      transparent 30%
-    ),
+      --nq-radius-lg:
+        24px;
 
-    radial-gradient(
-      circle at 90% 10%,
-      rgba(50,216,255,.11),
-      transparent 28%
-    ),
+      --nq-radius-xl:
+        32px;
 
-    radial-gradient(
-      circle at 50% 70%,
-      rgba(118,87,255,.07),
-      transparent 35%
-    ),
+      /* ---------- Motion ---------- */
 
-    var(--bg);
+      --nq-ease:
+        cubic-bezier(0.22, 1, 0.36, 1);
 
-  font-family:
-    Inter,
-    ui-sans-serif,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
+      --nq-ease-soft:
+        cubic-bezier(0.16, 1, 0.3, 1);
 
-  overflow-x: hidden;
-}
+      --nq-transition:
+        260ms var(--nq-ease);
 
-button,
-input {
-  font: inherit;
-}
+      /* ---------- Typography ---------- */
 
-button {
-  border: 0;
-}
+      --nq-font:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
 
-button:focus-visible,
-input:focus-visible {
-  outline:
-    2px solid var(--cyan);
+      --nq-font-display:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
 
-  outline-offset:
-    3px;
-}
+    }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
 
-::selection {
-  color: white;
-  background: rgba(118,87,255,.55);
-}
+    /* =========================================================
+       02. LIGHT THEME TOKENS
+       ========================================================= */
 
+    html[data-theme="light"] {
 
-/* =========================================================
-   GLOBAL BACKGROUND EFFECTS
-   ========================================================= */
+      --nq-bg:
+        #f5f7ff;
 
-.site-background {
-  position: fixed;
-  inset: 0;
+      --nq-bg-deep:
+        #edf1fb;
 
-  pointer-events: none;
-  overflow: hidden;
+      --nq-surface:
+        rgba(255, 255, 255, 0.74);
 
-  z-index: -5;
-}
+      --nq-surface-solid:
+        #ffffff;
 
-.ambient {
-  position: absolute;
+      --nq-surface-soft:
+        rgba(15, 23, 42, 0.035);
 
-  border-radius: 50%;
+      --nq-border:
+        rgba(15, 23, 42, 0.09);
 
-  filter: blur(90px);
+      --nq-border-strong:
+        rgba(15, 23, 42, 0.15);
 
-  opacity: .22;
+      --nq-text:
+        #10152a;
 
-  will-change: transform;
-}
+      --nq-text-soft:
+        #3d4660;
 
-.ambient.one {
-  width: 420px;
-  height: 420px;
+      --nq-text-muted:
+        #65708b;
 
-  left: -180px;
-  top: 180px;
+      --nq-text-dim:
+        #8992aa;
 
-  background: var(--violet);
+      --nq-glow-blue:
+        rgba(36, 87, 255, 0.15);
 
-  animation:
-    ambientOne 14s ease-in-out infinite alternate;
-}
+      --nq-glow-violet:
+        rgba(139, 92, 246, 0.12);
 
-.ambient.two {
-  width: 360px;
-  height: 360px;
+      --nq-glow-cyan:
+        rgba(56, 189, 248, 0.10);
+    }
 
-  right: -130px;
-  top: 500px;
 
-  background: var(--cyan);
+    /* =========================================================
+       03. RESET
+       ========================================================= */
 
-  animation:
-    ambientTwo 17s ease-in-out infinite alternate;
-}
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
 
-.ambient.three {
-  width: 280px;
-  height: 280px;
 
-  left: 45%;
-  top: 80%;
+    html {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      scroll-behavior: smooth;
+      background: var(--nq-bg);
+    }
 
-  background: #563cff;
 
-  opacity: .11;
+    body {
+      margin: 0;
+      min-height: 100vh;
 
-  animation:
-    ambientThree 20s ease-in-out infinite alternate;
-}
+      font-family: var(--nq-font);
 
-@keyframes ambientOne {
+      color: var(--nq-text);
+      background:
+        radial-gradient(
+          circle at 10% 0%,
+          rgba(36, 87, 255, 0.10),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 88% 8%,
+          rgba(139, 92, 246, 0.08),
+          transparent 26%
+        ),
+        var(--nq-bg);
 
-  from {
-    transform:
-      translate3d(0,0,0)
-      scale(1);
-  }
+      overflow-x: hidden;
 
-  to {
-    transform:
-      translate3d(120px,-80px,0)
-      scale(1.18);
-  }
-}
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
 
-@keyframes ambientTwo {
+      transition:
+        background-color 400ms var(--nq-ease),
+        color 400ms var(--nq-ease);
+    }
 
-  from {
-    transform:
-      translate3d(0,0,0)
-      scale(1);
-  }
 
-  to {
-    transform:
-      translate3d(-100px,100px,0)
-      scale(1.22);
-  }
-}
+    body.menu-open {
+      overflow: hidden;
+    }
 
-@keyframes ambientThree {
 
-  from {
-    transform:
-      translate3d(0,0,0)
-      scale(.9);
-  }
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
 
-  to {
-    transform:
-      translate3d(80px,-100px,0)
-      scale(1.15);
-  }
-}
 
+    button {
+      border: 0;
+    }
 
-/* =========================================================
-   CONTAINER
-   ========================================================= */
 
-.container {
-  width:
-    min(
-      var(--max),
-      calc(100% - 48px)
-    );
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-  margin-inline:
-    auto;
-}
 
+    img {
+      max-width: 100%;
+      display: block;
+    }
 
-/* =========================================================
-   NAVBAR
-   ========================================================= */
 
-.navbar {
-  position: fixed;
+    ::selection {
+      color: #ffffff;
+      background: rgba(79, 70, 229, 0.75);
+    }
 
-  top: 0;
-  left: 0;
-  right: 0;
 
-  z-index: 100;
+    /* =========================================================
+       04. ACCESSIBILITY
+       ========================================================= */
 
-  padding:
-    14px 0;
-}
+    :focus-visible {
+      outline: 2px solid var(--nq-blue-bright);
+      outline-offset: 4px;
+    }
 
-.navbar-inner {
 
-  height: 66px;
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
 
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 
-  padding:
-    0 10px 0 18px;
+    /* =========================================================
+       05. BACKGROUND ATMOSPHERE
+       ========================================================= */
 
-  border:
-    1px solid rgba(255,255,255,.09);
+    .nq-background {
+      position: fixed;
+      inset: 0;
 
-  border-radius:
-    22px;
+      z-index: -10;
 
-  background:
-    rgba(7,9,16,.66);
+      pointer-events: none;
 
-  backdrop-filter:
-    blur(24px)
-    saturate(150%);
+      overflow: hidden;
 
-  box-shadow:
-    0 18px 60px rgba(0,0,0,.18);
+      background:
+        linear-gradient(
+          180deg,
+          rgba(255,255,255,0.012),
+          transparent 30%
+        );
+    }
 
-  transition:
-    .35s var(--ease);
-}
 
-.navbar.scrolled .navbar-inner {
+    .nq-background::before {
+      content: "";
 
-  background:
-    rgba(7,9,16,.88);
+      position: absolute;
 
-  border-color:
-    rgba(255,255,255,.13);
+      width: 620px;
+      height: 620px;
 
-  box-shadow:
-    0 20px 80px rgba(0,0,0,.3);
-}
+      top: -320px;
+      left: -220px;
 
+      border-radius: 50%;
 
-/* BRAND */
+      background:
+        radial-gradient(
+          circle,
+          var(--nq-glow-blue),
+          transparent 68%
+        );
 
-.brand {
+      filter: blur(30px);
 
-  display: flex;
-  align-items: center;
-  gap: 11px;
+      animation:
+        nqAmbientOne 14s ease-in-out infinite alternate;
+    }
 
-  font-weight: 800;
 
-  letter-spacing:
-    -.04em;
+    .nq-background::after {
+      content: "";
 
-  font-size:
-    18px;
-}
+      position: absolute;
 
-.brand-mark {
+      width: 600px;
+      height: 600px;
 
-  position: relative;
+      top: -260px;
+      right: -240px;
 
-  width: 38px;
-  height: 38px;
+      border-radius: 50%;
 
-  border-radius:
-    13px;
+      background:
+        radial-gradient(
+          circle,
+          var(--nq-glow-violet),
+          transparent 68%
+        );
 
-  background:
-    linear-gradient(
-      135deg,
-      #8a6cff,
-      #6250ff 45%,
-      #27d8ff
-    );
+      filter: blur(35px);
 
-  box-shadow:
-    0 0 30px rgba(118,87,255,.34);
+      animation:
+        nqAmbientTwo 17s ease-in-out infinite alternate;
+    }
 
-  overflow: hidden;
-}
 
-.brand-mark::before {
+    @keyframes nqAmbientOne {
 
-  content: "";
+      0% {
+        transform:
+          translate3d(0, 0, 0)
+          scale(1);
+      }
 
-  position: absolute;
+      100% {
+        transform:
+          translate3d(80px, 60px, 0)
+          scale(1.12);
+      }
 
-  width: 17px;
-  height: 17px;
+    }
 
-  border-radius: 6px;
 
-  left: 8px;
-  top: 9px;
+    @keyframes nqAmbientTwo {
 
-  background:
-    rgba(255,255,255,.92);
+      0% {
+        transform:
+          translate3d(0, 0, 0)
+          scale(1);
+      }
 
-  transform:
-    rotate(45deg);
-}
+      100% {
+        transform:
+          translate3d(-70px, 80px, 0)
+          scale(1.10);
+      }
 
-.brand-mark::after {
+    }
 
-  content: "";
 
-  position: absolute;
+    /* =========================================================
+       06. GLOBAL GRID TEXTURE
+       ========================================================= */
 
-  width: 8px;
-  height: 8px;
+    .nq-grid {
+      position: fixed;
+      inset: 0;
 
-  border-radius: 50%;
+      z-index: -9;
 
-  right: 6px;
-  top: 6px;
+      pointer-events: none;
 
-  background:
-    #fff;
+      opacity: 0.18;
 
-  opacity: .9;
+      background-image:
+        linear-gradient(
+          rgba(255,255,255,0.025) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(255,255,255,0.025) 1px,
+          transparent 1px
+        );
 
-  box-shadow:
-    0 0 15px rgba(255,255,255,.8);
-}
+      background-size:
+        80px 80px;
 
+      mask-image:
+        linear-gradient(
+          to bottom,
+          black,
+          transparent 80%
+        );
 
-/* NAV LINKS */
+      -webkit-mask-image:
+        linear-gradient(
+          to bottom,
+          black,
+          transparent 80%
+        );
+    }
 
-.nav-links {
 
-  display: flex;
-  align-items: center;
+    html[data-theme="light"] .nq-grid {
+      opacity: 0.35;
 
-  gap: 6px;
+      background-image:
+        linear-gradient(
+          rgba(15,23,42,0.035) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(15,23,42,0.035) 1px,
+          transparent 1px
+        );
+    }
 
-  margin-left: auto;
-  margin-right: 16px;
-}
 
-.nav-link {
+    /* =========================================================
+       07. MAIN CONTAINER SYSTEM
+       ========================================================= */
 
-  position: relative;
-
-  padding:
-    10px 13px;
-
-  border-radius:
-    11px;
-
-  color:
-    var(--muted);
-
-  font-size:
-    13px;
-
-  font-weight:
-    600;
-
-  transition:
-    .25s var(--ease);
-}
-
-.nav-link:hover {
-
-  color:
-    var(--text);
-
-  background:
-    rgba(255,255,255,.055);
-}
-
-
-/* NAV ACTIONS */
-
-.nav-actions {
-
-  display: flex;
-  align-items: center;
-
-  gap: 8px;
-}
-
-.icon-button {
-
-  width: 40px;
-  height: 40px;
-
-  display: grid;
-  place-items: center;
-
-  border:
-    1px solid var(--line);
-
-  border-radius:
-    12px;
-
-  color:
-    var(--text-soft);
-
-  background:
-    rgba(255,255,255,.04);
-
-  cursor: pointer;
-
-  transition:
-    .25s var(--ease);
-}
-
-.icon-button:hover {
-
-  color:
-    white;
-
-  border-color:
-    var(--line-bright);
-
-  background:
-    rgba(255,255,255,.08);
-
-  transform:
-    translateY(-2px);
-}
-
-
-/* =========================================================
-   HERO
-   ========================================================= */
-
-.hero {
-
-  position: relative;
-
-  min-height:
-    850px;
-
-  padding-top:
-    170px;
-
-  display: flex;
-  align-items: center;
-
-  overflow: hidden;
-}
-
-
-/* GRID */
-
-.hero-grid {
-
-  position: absolute;
-
-  inset: 0;
-
-  opacity: .24;
-
-  background-image:
-    linear-gradient(
-      rgba(255,255,255,.045) 1px,
-      transparent 1px
-    ),
-
-    linear-gradient(
-      90deg,
-      rgba(255,255,255,.045) 1px,
-      transparent 1px
-    );
-
-  background-size:
-    70px 70px;
-
-  mask-image:
-    linear-gradient(
-      to bottom,
-      black,
-      transparent 85%
-    );
-}
-
-
-/* HERO CONTENT */
-
-.hero-content {
-
-  position: relative;
-
-  z-index: 4;
-
-  width: 53%;
-}
-
-.eyebrow {
-
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-
-  padding:
-    8px 12px;
-
-  border:
-    1px solid rgba(118,87,255,.28);
-
-  border-radius:
-    999px;
-
-  background:
-    rgba(118,87,255,.075);
-
-  color:
-    #cfc6ff;
-
-  font-size:
-    12px;
-
-  font-weight:
-    700;
-
-  letter-spacing:
-    .02em;
-
-  box-shadow:
-    inset 0 0 25px rgba(118,87,255,.04);
-}
-
-.eyebrow-dot {
-
-  width: 7px;
-  height: 7px;
-
-  border-radius: 50%;
-
-  background:
-    var(--green);
-
-  box-shadow:
-    0 0 15px rgba(66,223,154,.8);
-
-  animation:
-    pulseDot 2s ease-in-out infinite;
-}
-
-@keyframes pulseDot {
-
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-
-  50% {
-    transform: scale(.65);
-    opacity: .65;
-  }
-}
-
-
-.hero-title {
-
-  margin:
-    24px 0 22px;
-
-  max-width:
-    780px;
-
-  font-size:
-    clamp(
-      50px,
-      6.2vw,
-      86px
-    );
-
-  line-height:
-    .94;
-
-  letter-spacing:
-    -.065em;
-
-  font-weight:
-    850;
-}
-
-.hero-title .gradient {
-
-  background:
-    linear-gradient(
-      100deg,
-      #ffffff 5%,
-      #c2b5ff 38%,
-      #9b83ff 62%,
-      #5ce5ff 100%
-    );
-
-  -webkit-background-clip:
-    text;
-
-  background-clip:
-    text;
-
-  color:
-    transparent;
-}
-
-
-.hero-description {
-
-  max-width:
-    590px;
-
-  color:
-    var(--muted);
-
-  font-size:
-    17px;
-
-  line-height:
-    1.75;
-
-  margin:
-    0 0 32px;
-}
-
-
-/* HERO CTA */
-
-.hero-actions {
-
-  display: flex;
-  align-items: center;
-
-  gap: 12px;
-
-  flex-wrap: wrap;
-}
-
-.primary-button {
-
-  position: relative;
-
-  min-height:
-    48px;
-
-  padding:
-    0 20px;
-
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  gap: 9px;
-
-  border-radius:
-    14px;
-
-  color:
-    white;
-
-  background:
-    linear-gradient(
-      135deg,
-      #8062ff,
-      #624cff
-    );
-
-  box-shadow:
-    0 12px 35px rgba(118,87,255,.27);
-
-  font-size:
-    13px;
-
-  font-weight:
-    750;
-
-  cursor:
-    pointer;
-
-  overflow:
-    hidden;
-
-  transition:
-    .3s var(--ease);
-}
-
-.primary-button::before {
-
-  content: "";
-
-  position: absolute;
-
-  top: 0;
-  left: -120%;
-
-  width: 80%;
-  height: 100%;
-
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      rgba(255,255,255,.24),
-      transparent
-    );
-
-  transform:
-    skewX(-20deg);
-
-  transition:
-    left .7s var(--ease);
-}
-
-.primary-button:hover::before {
-  left: 140%;
-}
-
-.primary-button:hover {
-
-  transform:
-    translateY(-3px);
-
-  box-shadow:
-    0 18px 48px rgba(118,87,255,.38);
-}
-
-.primary-button:active {
-  transform:
-    translateY(-1px)
-    scale(.985);
-}
-
-
-.secondary-button {
-
-  min-height:
-    48px;
-
-  padding:
-    0 18px;
-
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  gap: 8px;
-
-  border:
-    1px solid var(--line);
-
-  border-radius:
-    14px;
-
-  color:
-    var(--text-soft);
-
-  background:
-    rgba(255,255,255,.035);
-
-  font-size:
-    13px;
-
-  font-weight:
-    700;
-
-  cursor:
-    pointer;
-
-  transition:
-    .3s var(--ease);
-}
-
-.secondary-button:hover {
-
-  color:
-    white;
-
-  border-color:
-    var(--line-bright);
-
-  background:
-    rgba(255,255,255,.075);
-
-  transform:
-    translateY(-2px);
-}
-
-
-/* =========================================================
-   3D HERO VISUAL
-   ========================================================= */
-
-.hero-visual {
-
-  position: absolute;
-
-  right:
-    -30px;
-
-  top:
-    145px;
-
-  width:
-    52%;
-
-  height:
-    610px;
-
-  perspective:
-    1200px;
-
-  pointer-events:
-    none;
-}
-
-.orbit {
-
-  position: absolute;
-
-  left: 50%;
-  top: 50%;
-
-  border:
-    1px solid rgba(142,120,255,.19);
-
-  border-radius:
-    50%;
-
-  transform:
-    translate(-50%,-50%)
-    rotateX(64deg)
-    rotateZ(-15deg);
-
-  animation:
-    orbitSpin 20s linear infinite;
-}
-
-.orbit.one {
-
-  width:
-    480px;
-
-  height:
-    480px;
-}
-
-.orbit.two {
-
-  width:
-    360px;
-
-  height:
-    360px;
-
-  transform:
-    translate(-50%,-50%)
-    rotateX(64deg)
-    rotateZ(28deg);
-
-  animation-duration:
-    15s;
-
-  animation-direction:
-    reverse;
-}
-
-.orbit.three {
-
-  width:
-    590px;
-
-  height:
-    590px;
-
-  border-color:
-    rgba(50,216,255,.10);
-
-  animation-duration:
-    28s;
-}
-
-@keyframes orbitSpin {
-
-  from {
-    transform:
-      translate(-50%,-50%)
-      rotateX(64deg)
-      rotateZ(0deg);
-  }
-
-  to {
-    transform:
-      translate(-50%,-50%)
-      rotateX(64deg)
-      rotateZ(360deg);
-  }
-}
-
-
-/* CENTRAL OBJECT */
-
-.core {
-
-  position: absolute;
-
-  left: 50%;
-  top: 50%;
-
-  width:
-    255px;
-
-  height:
-    315px;
-
-  transform:
-    translate(-50%,-50%)
-    rotateX(12deg)
-    rotateY(-17deg)
-    rotateZ(2deg);
-
-  transform-style:
-    preserve-3d;
-
-  animation:
-    coreFloat 5.5s ease-in-out infinite;
-
-  filter:
-    drop-shadow(
-      0 40px 60px rgba(0,0,0,.45)
-    );
-}
-
-@keyframes coreFloat {
-
-  0%,
-  100% {
-    transform:
-      translate(-50%,-50%)
-      rotateX(12deg)
-      rotateY(-17deg)
-      rotateZ(2deg)
-      translateY(0);
-  }
-
-  50% {
-    transform:
-      translate(-50%,-50%)
-      rotateX(16deg)
-      rotateY(-11deg)
-      rotateZ(-1deg)
-      translateY(-18px);
-  }
-}
-
-
-.core-face {
-
-  position: absolute;
-
-  inset: 0;
-
-  border:
-    1px solid rgba(255,255,255,.18);
-
-  border-radius:
-    34px;
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.14),
-      rgba(255,255,255,.045)
-    );
-
-  backdrop-filter:
-    blur(25px);
-
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.12),
-    0 30px 80px rgba(0,0,0,.35);
-
-  overflow:
-    hidden;
-}
-
-.core-face::before {
-
-  content: "";
-
-  position: absolute;
-
-  inset: 1px;
-
-  border-radius:
-    33px;
-
-  background:
-    radial-gradient(
-      circle at 20% 10%,
-      rgba(154,131,255,.25),
-      transparent 34%
-    ),
-
-    radial-gradient(
-      circle at 90% 80%,
-      rgba(50,216,255,.15),
-      transparent 35%
-    );
-}
-
-.core-light {
-
-  position: absolute;
-
-  width:
-    120px;
-
-  height:
-    120px;
-
-  right:
-    -30px;
-
-  top:
-    -30px;
-
-  border-radius:
-    50%;
-
-  background:
-    rgba(50,216,255,.24);
-
-  filter:
-    blur(35px);
-}
-
-.core-logo {
-
-  position: absolute;
-
-  left: 50%;
-  top: 36%;
-
-  width:
-    76px;
-
-  height:
-    76px;
-
-  transform:
-    translate(-50%,-50%);
-
-  border-radius:
-    24px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #8e72ff,
-      #6251ff 52%,
-      #39dcff
-    );
-
-  box-shadow:
-    0 0 50px rgba(118,87,255,.4);
-
-  display:
-    grid;
-
-  place-items:
-    center;
-
-  font-size:
-    30px;
-
-  font-weight:
-    900;
-
-  color:
-    white;
-}
-
-.core-title {
-
-  position: absolute;
-
-  left: 0;
-  right: 0;
-
-  top: 51%;
-
-  text-align:
-    center;
-
-  font-size:
-    17px;
-
-  font-weight:
-    800;
-
-  letter-spacing:
-    -.02em;
-}
-
-.core-sub {
-
-  position: absolute;
-
-  left: 0;
-  right: 0;
-
-  top: 59%;
-
-  text-align:
-    center;
-
-  font-size:
-    11px;
-
-  color:
-    var(--muted);
-
-  letter-spacing:
-    .04em;
-}
-
-
-/* FLOATING CARDS */
-
-.float-card {
-
-  position: absolute;
-
-  padding:
-    12px 14px;
-
-  display:
-    flex;
-
-  align-items:
-    center;
-
-  gap:
-    10px;
-
-  min-width:
-    145px;
-
-  border:
-    1px solid rgba(255,255,255,.13);
-
-  border-radius:
-    16px;
-
-  background:
-    rgba(13,16,28,.68);
-
-  backdrop-filter:
-    blur(18px);
-
-  box-shadow:
-    0 20px 50px rgba(0,0,0,.28);
-
-  color:
-    var(--text-soft);
-
-  font-size:
-    11px;
-
-  font-weight:
-    700;
-}
-
-.float-icon {
-
-  width:
-    34px;
-
-  height:
-    34px;
-
-  border-radius:
-    11px;
-
-  display:
-    grid;
-
-  place-items:
-    center;
-
-  background:
-    rgba(118,87,255,.13);
-
-  color:
-    #bcaeff;
-
-  font-size:
-    14px;
-}
-
-.float-card.one {
-
-  left:
-    2%;
-
-  top:
-    28%;
-
-  animation:
-    floatingOne 5s ease-in-out infinite;
-}
-
-.float-card.two {
-
-  right:
-    2%;
-
-  top:
-    22%;
-
-  animation:
-    floatingTwo 6s ease-in-out infinite;
-}
-
-.float-card.three {
-
-  right:
-    7%;
-
-  bottom:
-    19%;
-
-  animation:
-    floatingThree 5.7s ease-in-out infinite;
-}
-
-@keyframes floatingOne {
-
-  0%,
-  100% {
-    transform:
-      translate3d(0,0,0)
-      rotate(-3deg);
-  }
-
-  50% {
-    transform:
-      translate3d(12px,-18px,0)
-      rotate(1deg);
-  }
-}
-
-@keyframes floatingTwo {
-
-  0%,
-  100% {
-    transform:
-      translate3d(0,0,0)
-      rotate(3deg);
-  }
-
-  50% {
-    transform:
-      translate3d(-15px,-13px,0)
-      rotate(-1deg);
-  }
-}
-
-@keyframes floatingThree {
-
-  0%,
-  100% {
-    transform:
-      translate3d(0,0,0)
-      rotate(2deg);
-  }
-
-  50% {
-    transform:
-      translate3d(-10px,16px,0)
-      rotate(-2deg);
-  }
-}
-
-
-/* =========================================================
-   TOOL DISCOVERY
-   ========================================================= */
-
-.tool-section {
-
-  position: relative;
-
-  padding:
-    80px 0 120px;
-}
-
-.section-heading {
-
-  display:
-    flex;
-
-  justify-content:
-    space-between;
-
-  align-items:
-    flex-end;
-
-  gap:
-    25px;
-
-  margin-bottom:
-    30px;
-}
-
-.section-kicker {
-
-  color:
-    #a99aff;
-
-  font-size:
-    11px;
-
-  font-weight:
-    800;
-
-  letter-spacing:
-    .13em;
-
-  text-transform:
-    uppercase;
-
-  margin-bottom:
-    10px;
-}
-
-.section-heading h2 {
-
-  margin:
-    0;
-
-  font-size:
-    clamp(30px,4vw,46px);
-
-  letter-spacing:
-    -.05em;
-}
-
-.section-heading p {
-
-  max-width:
-    430px;
-
-  margin:
-    0;
-
-  color:
-    var(--muted);
-
-  font-size:
-    14px;
-
-  line-height:
-    1.7;
-}
-
-
-/* SEARCH */
-
-.tool-search {
-
-  position:
-    relative;
-
-  margin-bottom:
-    18px;
-}
-
-.tool-search input {
-
-  width:
-    100%;
-
-  height:
-    58px;
-
-  padding:
-    0 20px 0 50px;
-
-  color:
-    white;
-
-  background:
-    rgba(255,255,255,.045);
-
-  border:
-    1px solid var(--line);
-
-  border-radius:
-    17px;
-
-  outline:
-    none;
-
-  transition:
-    .25s var(--ease);
-}
-
-.tool-search input::placeholder {
-  color:
-    #70778c;
-}
-
-.tool-search input:focus {
-
-  border-color:
-    rgba(118,87,255,.55);
-
-  background:
-    rgba(255,255,255,.065);
-
-  box-shadow:
-    0 0 0 4px rgba(118,87,255,.07);
-}
-
-.search-symbol {
-
-  position:
-    absolute;
-
-  left:
-    19px;
-
-  top:
-    50%;
-
-  transform:
-    translateY(-50%);
-
-  color:
-    #7d8499;
-}
-
-
-/* CATEGORY FILTERS */
-
-.categories {
-
-  display:
-    flex;
-
-  gap:
-    7px;
-
-  flex-wrap:
-    wrap;
-
-  margin-bottom:
-    24px;
-}
-
-.category {
-
-  padding:
-    9px 13px;
-
-  border:
-    1px solid var(--line);
-
-  border-radius:
-    999px;
-
-  background:
-    rgba(255,255,255,.035);
-
-  color:
-    var(--muted);
-
-  font-size:
-    12px;
-
-  font-weight:
-    700;
-
-  cursor:
-    pointer;
-
-  transition:
-    .25s var(--ease);
-}
-
-.category:hover {
-
-  color:
-    white;
-
-  border-color:
-    var(--line-bright);
-}
-
-.category.active {
-
-  color:
-    white;
-
-  border-color:
-    rgba(118,87,255,.5);
-
-  background:
-    rgba(118,87,255,.13);
-
-  box-shadow:
-    inset 0 0 20px rgba(118,87,255,.06);
-}
-
-
-/* =========================================================
-   TOOL CARDS
-   ========================================================= */
-
-.tool-grid {
-
-  display:
-    grid;
-
-  grid-template-columns:
-    repeat(4,1fr);
-
-  gap:
-    15px;
-}
-
-.tool-card {
-
-  position:
-    relative;
-
-  min-height:
-    225px;
-
-  padding:
-    22px;
-
-  border:
-    1px solid var(--line);
-
-  border-radius:
-    22px;
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.07),
-      rgba(255,255,255,.025)
-    );
-
-  overflow:
-    hidden;
-
-  cursor:
-    pointer;
-
-  transition:
-    transform .35s var(--ease),
-    border-color .35s var(--ease),
-    box-shadow .35s var(--ease);
-}
-
-.tool-card::before {
-
-  content: "";
-
-  position:
-    absolute;
-
-  width:
-    150px;
-
-  height:
-    150px;
-
-  right:
-    -70px;
-
-  top:
-    -80px;
-
-  border-radius:
-    50%;
-
-  background:
-    rgba(118,87,255,.16);
-
-  filter:
-    blur(35px);
-
-  opacity:
-    0;
-
-  transition:
-    .4s var(--ease);
-}
-
-.tool-card:hover {
-
-  transform:
-    translateY(-7px);
-
-  border-color:
-    rgba(118,87,255,.38);
-
-  box-shadow:
-    0 24px 65px rgba(0,0,0,.26);
-}
-
-.tool-card:hover::before {
-  opacity:
-    1;
-}
-
-.tool-card-icon {
-
-  width:
-    48px;
-
-  height:
-    48px;
-
-  display:
-    grid;
-
-  place-items:
-    center;
-
-  border:
-    1px solid rgba(255,255,255,.08);
-
-  border-radius:
-    14px;
-
-  background:
-    rgba(118,87,255,.10);
-
-  color:
-    #bdb0ff;
-
-  font-size:
-    18px;
-
-  margin-bottom:
-    22px;
-
-  transition:
-    .35s var(--ease);
-}
-
-.tool-card:hover .tool-card-icon {
-
-  transform:
-    translateY(-2px)
-    rotate(-3deg);
-
-  background:
-    rgba(118,87,255,.17);
-
-  box-shadow:
-    0 10px 30px rgba(118,87,255,.15);
-}
-
-.tool-card h3 {
-
-  margin:
-    0 0 8px;
-
-  font-size:
-    16px;
-
-  letter-spacing:
-    -.02em;
-}
-
-.tool-card p {
-
-  margin:
-    0;
-
-  color:
-    var(--muted);
-
-  font-size:
-    12px;
-
-  line-height:
-    1.65;
-}
-
-.tool-card-arrow {
-
-  position:
-    absolute;
-
-  right:
-    20px;
-
-  bottom:
-    20px;
-
-  width:
-    31px;
-
-  height:
-    31px;
-
-  display:
-    grid;
-
-  place-items:
-    center;
-
-  border:
-    1px solid var(--line);
-
-  border-radius:
-    10px;
-
-  color:
-    #7f879b;
-
-  transition:
-    .3s var(--ease);
-}
-
-.tool-card:hover .tool-card-arrow {
-
-  color:
-    white;
-
-  border-color:
-    rgba(118,87,255,.4);
-
-  transform:
-    translateX(3px);
-}
-
-
-/* =========================================================
-   PREMIUM TOOL WORKSPACE
-   ========================================================= */
-
-.workspace-overlay {
-
-  position:
-    fixed;
-
-  inset:
-    0;
-
-  z-index:
-    300;
-
-  display:
-    none;
-
-  align-items:
-    center;
-
-  justify-content:
-    center;
-
-  padding:
-    24px;
-
-  background:
-    rgba(3,5,10,.78);
-
-  backdrop-filter:
-    blur(20px);
-
-  opacity:
-    0;
-
-  transition:
-    opacity .35s var(--ease);
-}
-
-.workspace-overlay.open {
-
-  display:
-    flex;
-
-  opacity:
-    1;
-}
-
-.workspace {
-
-  width:
-    min(1120px,100%);
-
-  max-height:
-    calc(100vh - 48px);
-
-  overflow:
-    auto;
-
-  border:
-    1px solid rgba(255,255,255,.12);
-
-  border-radius:
-    30px;
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(20,24,39,.97),
-      rgba(9,12,21,.98)
-    );
-
-  box-shadow:
-    0 50px 150px rgba(0,0,0,.58);
-
-  transform:
-    translateY(18px)
-    scale(.985);
-
-  transition:
-    .4s var(--ease);
-}
-
-.workspace-overlay.open .workspace {
-
-  transform:
-    translateY(0)
-    scale(1);
-}
-
-
-/* WORKSPACE HEADER */
-
-.workspace-header {
-
-  min-height:
-    82px;
-
-  display:
-    flex;
-
-  align-items:
-    center;
-
-  justify-content:
-    space-between;
-
-  gap:
-    20px;
-
-  padding:
-    18px 22px;
-
-  border-bottom:
-    1px solid var(--line);
-
-  background:
-    rgba(255,255,255,.025);
-
-  position:
-    sticky;
-
-  top:
-    0;
-
-  z-index:
-    5;
-
-  backdrop-filter:
-    blur(18px);
-}
-
-.workspace-title {
-
-  display:
-    flex;
-
-  align-items:
-    center;
-
-  gap:
-    13px;
-}
-
-.workspace-title-icon {
-
-  width:
-    44px;
-
-  height:
-    44px;
-
-  display:
-    grid;
-
-  place-items:
-    center;
-
-  border:
-    1px solid rgba(118,87,255,.25);
-
-  border-radius:
-    14px;
-
-  background:
-    rgba(118,87,255,.11);
-
-  color:
-    #b7a9ff;
-}
-
-.workspace-title h2 {
-
-  margin:
-    0;
-
-  font-size:
-    16px;
-
-  letter-spacing:
-    -.025em;
-}
-
-.workspace-title p {
-
-  margin:
-    4px 0 0;
-
-  color:
-    var(--muted);
-
-  font-size:
-    11px;
-}
-
-.workspace-close {
-
-  width:
-    40px;
-
-  height:
-    40px;
-
-  display:
-    grid;
-
-  place-items:
-    center;
-
-  border:
-    1px solid var(--line);
-
-  border-radius:
-    12px;
-
-  background:
-    rgba(255,255,255,.04);
-
-  color:
-    var(--text-soft);
-
-  cursor:
-    pointer;
-
-  transition:
-    .25s var(--ease);
-}
-
-.workspace-close:hover {
-
-  color:
-    white;
-
-  background:
-    rgba(255,255,255,.08);
-
-  transform:
-    rotate(4deg);
-}
-
-
-/* WORKSPACE BODY */
-
-.workspace-body {
-
-  padding:
-    25px;
-}
-
-
-/* DROPZONE */
-
-.dropzone {
-
-  position:
-    relative;
-
-  min-height:
-    360px;
-
-  display:
-    flex;
-
-  flex-direction:
-    column;
-
-  align-items:
-    center;
-
-  justify-content:
-    center;
-
-  text-align:
-    center;
-
-  padding:
-    35px;
-
-  border:
-    1px dashed rgba(139,116,255,.45);
-
-  border-radius:
-    24px;
-
-  background:
-    radial-gradient(
-      circle at center,
-      rgba(118,87,255,.085),
-      rgba(255,255,255,.018)
-    );
-
-  overflow:
-    hidden;
-
-  transition:
-    .35s var(--ease);
-}
-
-.dropzone::before {
-
-  content: "";
-
-  position:
-    absolute;
-
-  inset:
-    0;
-
-  background:
-    linear-gradient(
-      120deg,
-      transparent,
-      rgba(118,87,255,.08),
-      transparent
-    );
-
-  transform:
-    translateX(-100%);
-
-  transition:
-    transform .8s var(--ease);
-}
-
-.dropzone:hover::before {
-  transform:
-    translateX(100%);
-}
-
-.dropzone.dragging {
-
-  border-color:
-    var(--cyan);
-
-  background:
-    radial-gradient(
-      circle at center,
-      rgba(50,216,255,.12),
-      rgba(118,87,255,.04)
-    );
-
-  transform:
-    scale(1.008);
-}
-
-.upload-orb {
-
-  position:
-    relative;
-
-  width:
-    76px;
-
-  height:
-    76px;
-
-  display:
-    grid;
-
-  place-items:
-    center;
-
-  border:
-    1px solid rgba(255,255,255,.12);
-
-  border-radius:
-    25px;
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(118,87,255,.22),
-      rgba(50,216,255,.08)
-    );
-
-  color:
-    #c8bdff;
-
-  font-size:
-    28px;
-
-  margin-bottom:
-    22px;
-
-  box-shadow:
-    0 20px 55px rgba(118,87,255,.16);
-
-  animation:
-    uploadFloat 4s ease-in-out infinite;
-}
-
-.upload-orb::after {
-
-  content: "";
-
-  position:
-    absolute;
-
-  inset:
-    -8px;
-
-  border:
-    1px solid rgba(118,87,255,.15);
-
-  border-radius:
-    29px;
-
-  animation:
-    uploadPulse 2.8s ease-out infinite;
-}
-
-@keyframes uploadFloat {
-
-  0%,
-  100% {
-    transform:
-      translateY(0);
-  }
-
-  50% {
-    transform:
-      translateY(-8px);
-  }
-}
-
-@keyframes uploadPulse {
-
-  0% {
-    transform:
-      scale(.9);
-
-    opacity:
-      .8;
-  }
-
-  100% {
-    transform:
-      scale(1.22);
-
-    opacity:
-      0;
-  }
-}
-
-.dropzone h3 {
-
-  margin:
-    0 0 9px;
-
-  font-size:
-    20px;
-
-  letter-spacing:
-    -.03em;
-}
-
-.dropzone p {
-
-  max-width:
-    430px;
-
-  margin:
-    0 0 21px;
-
-  color:
-    var(--muted);
-
-  font-size:
-    13px;
-
-  line-height:
-    1.6;
-}
-
-.hidden-input {
-  display:
-    none;
-}
-
-
-/* =========================================================
-   FILE LIST
-   ========================================================= */
-
-.files-panel {
-
-  margin-top:
-    18px;
-
-  display:
-    none;
-}
-
-.files-panel.visible {
-  display:
-    block;
-}
-
-.files-header {
-
-  display:
-    flex;
-
-  align-items:
-    center;
-
-  justify-content:
-    space-between;
-
-  margin-bottom:
-    11px;
-}
-
-.files-header strong {
-
-  font-size:
-    13px;
-}
-
-.files-header span {
-
-  color:
-    var(--muted);
-
-  font-size:
-    11px;
-}
-
-.file-list {
-
-  display:
-    grid;
-
-  gap:
-    9px;
-}
-
-.file-item {
-
-  display:
-    grid;
-
-  grid-template-columns:
-    32px 42px 1fr auto;
-
-  align-items:
-    center;
-
-  gap:
-    10px;
-
-  min-height:
-    64px;
-
-  padding:
-    9px 11px;
-
-  border:
-    1px solid var(--line);
-
-  border-radius:
-    15px;
-
-  background:
-    rgba(255,255,255,.035);
-
-  transition:
-    .25s var(--ease);
-}
-
-.file-item:hover {
-
-  border-color:
-    rgba(255,255,255,.16);
-
-  background:
-    rgba(255,255,255,.055);
-}
-
-.file-item.dragging {
-
-  opacity:
-    .45;
-
-  border-color:
-    rgba(118,87,255,.6);
-}
-
-.drag-handle {
-
-  display:
-    grid;
-
-  place-items:
-    center;
-
-  width:
-    30px;
-
-  height:
-    30px;
-
-  color:
-    #626a80;
-
-  cursor:
-    grab;
-
-  font-size:
-    17px;
-}
-
-.file-icon {
-
-  width:
-    42px;
-
-  height:
-    42px;
-
-  display:
-    grid;
-
-  place-items:
-    center;
-
-  border-radius:
-    12px;
-
-  background:
-    rgba(255,84,115,.08);
-
-  color:
-    #ff7d97;
-
-  font-size:
-    15px;
-
-  font-weight:
-    800;
-}
-
-.file-meta {
-  min-width:
-    0;
-}
-
-.file-name {
-
-  overflow:
-    hidden;
-
-  text-overflow:
-    ellipsis;
-
-  white-space:
-    nowrap;
-
-  font-size:
-    12px;
-
-  font-weight:
-    700;
-}
-
-.file-size {
-
-  margin-top:
-    4px;
-
-  color:
-    var(--muted);
-
-  font-size:
-    10px;
-}
-
-.file-remove {
-
-  width:
-    34px;
-
-  height:
-    34px;
-
-  display:
-    grid;
-
-  place-items:
-    center;
-
-  border:
-    1px solid rgba(255,96,126,.15);
-
-  border-radius:
-    10px;
-
-  background:
-    rgba(255,96,126,.055);
-
-  color:
-    #ff7992;
-
-  cursor:
-    pointer;
-
-  transition:
-    .25s var(--ease);
-}
-
-.file-remove:hover {
-
-  color:
-    white;
-
-  background:
-    rgba(255,96,126,.14);
-
-  transform:
-    scale(1.05);
-}
-
-
-/* =========================================================
-   PROCESSING / STATUS
-   ========================================================= */
-
-.processing {
-
-  display:
-    none;
-
-  align-items:
-    center;
-
-  gap:
-    11px;
-
-  margin-top:
-    16px;
-
-  padding:
-    13px 15px;
-
-  border:
-    1px solid rgba(118,87,255,.16);
-
-  border-radius:
-    14px;
-
-  background:
-    rgba(118,87,255,.055);
-
-  color:
-    var(--text-soft);
-
-  font-size:
-    12px;
-}
-
-.processing.visible {
-  display:
-    flex;
-}
-
-.spinner {
-
-  width:
-    17px;
-
-  height:
-    17px;
-
-  border:
-    2px solid rgba(255,255,255,.12);
-
-  border-top-color:
-    var(--violet-bright);
-
-  border-radius:
-    50%;
-
-  animation:
-    spin .8s linear infinite;
-}
-
-@keyframes spin {
-
-  to {
-    transform:
-      rotate(360deg);
-  }
-}
-
-
-/* SUCCESS */
-
-.success-panel {
-
-  display:
-    none;
-
-  margin-top:
-    18px;
-
-  padding:
-    22px;
-
-  border:
-    1px solid rgba(66,223,154,.18);
-
-  border-radius:
-    18px;
-
-  background:
-    rgba(66,223,154,.045);
-
-  text-align:
-    center;
-}
-
-.success-panel.visible {
-  display:
-    block;
-
-  animation:
-    successIn .45s var(--ease);
-}
-
-@keyframes successIn {
-
-  from {
-    opacity:
-      0;
-
-    transform:
-      translateY(10px);
-  }
-
-  to {
-    opacity:
-      1;
-
-    transform:
-      translateY(0);
-  }
-}
-
-.success-icon {
-
-  width:
-    50px;
-
-  height:
-    50px;
-
-  margin:
-    0 auto 12px;
-
-  display:
-    grid;
-
-  place-items:
-    center;
-
-  border-radius:
-    16px;
-
-  background:
-    rgba(66,223,154,.12);
-
-  color:
-    var(--green);
-
-  font-size:
-    22px;
-}
-
-.success-panel h3 {
-
-  margin:
-    0 0 6px;
-
-  font-size:
-    16px;
-}
-
-.success-panel p {
-
-  margin:
-    0;
-
-  color:
-    var(--muted);
-
-  font-size:
-    11px;
-}
-
-
-/* ERROR */
-
-.error-panel {
-
-  display:
-    none;
-
-  margin-top:
-    15px;
-
-  padding:
-    13px 15px;
-
-  border:
-    1px solid rgba(255,96,126,.18);
-
-  border-radius:
-    14px;
-
-  background:
-    rgba(255,96,126,.045);
-
-  color:
-    #ff9aac;
-
-  font-size:
-    12px;
-}
-
-.error-panel.visible {
-  display:
-    block;
-}
-
-
-/* ACTION BAR */
-
-.workspace-actions {
-
-  display:
-    flex;
-
-  justify-content:
-    space-between;
-
-  align-items:
-    center;
-
-  gap:
-    15px;
-
-  margin-top:
-    20px;
-
-  padding-top:
-    20px;
-
-  border-top:
-    1px solid var(--line);
-}
-
-.workspace-note {
-
-  color:
-    var(--muted);
-
-  font-size:
-    10px;
-
-  line-height:
-    1.5;
-}
-
-.action-group {
-
-  display:
-    flex;
-
-  gap:
-    9px;
-}
-
-.small-button {
-
-  min-height:
-    42px;
-
-  padding:
-    0 15px;
-
-  border:
-    1px solid var(--line);
-
-  border-radius:
-    12px;
-
-  background:
-    rgba(255,255,255,.035);
-
-  color:
-    var(--text-soft);
-
-  font-size:
-    11px;
-
-  font-weight:
-    700;
-
-  cursor:
-    pointer;
-
-  transition:
-    .25s var(--ease);
-}
-
-.small-button:hover {
-
-  color:
-    white;
-
-  background:
-    rgba(255,255,255,.075);
-}
-
-.small-button.primary {
-
-  border-color:
-    transparent;
-
-  color:
-    white;
-
-  background:
-    linear-gradient(
-      135deg,
-      #8062ff,
-      #6250ff
-    );
-
-  box-shadow:
-    0 9px 25px rgba(118,87,255,.2);
-}
-
-.small-button.primary:hover {
-
-  transform:
-    translateY(-2px);
-
-  box-shadow:
-    0 13px 32px rgba(118,87,255,.3);
-}
-
-.small-button:disabled {
-
-  cursor:
-    not-allowed;
-
-  opacity:
-    .38;
-
-  transform:
-    none !important;
-
-  box-shadow:
-    none !important;
-}
-
-
-/* =========================================================
-   TRUST STRIP
-   ========================================================= */
-
-.trust-strip {
-
-  display:
-    grid;
-
-  grid-template-columns:
-    repeat(3,1fr);
-
-  gap:
-    12px;
-
-  margin-top:
-    18px;
-}
-
-.trust-item {
-
-  padding:
-    17px;
-
-  border:
-    1px solid var(--line);
-
-  border-radius:
-    17px;
-
-  background:
-    rgba(255,255,255,.025);
-}
-
-.trust-item strong {
-
-  display:
-    block;
-
-  margin-bottom:
-    5px;
-
-  font-size:
-    12px;
-}
-
-.trust-item span {
-
-  color:
-    var(--muted);
-
-  font-size:
-    10px;
-
-  line-height:
-    1.5;
-}
-
-
-/* =========================================================
-   FOOTER
-   ========================================================= */
-
-.footer {
-
-  border-top:
-    1px solid var(--line);
-
-  padding:
-    30px 0 35px;
-
-  color:
-    var(--muted);
-
-  font-size:
-    11px;
-}
-
-.footer-inner {
-
-  display:
-    flex;
-
-  justify-content:
-    space-between;
-
-  gap:
-    20px;
-
-  align-items:
-    center;
-}
-
-.footer-brand {
-
-  display:
-    flex;
-
-  align-items:
-    center;
-
-  gap:
-    8px;
-
-  color:
-    var(--text-soft);
-
-  font-weight:
-    750;
-}
-
-.footer-dot {
-
-  width:
-    6px;
-
-  height:
-    6px;
-
-  border-radius:
-    50%;
-
-  background:
-    var(--violet);
-}
-
-
-/* =========================================================
-   REVEAL ANIMATIONS
-   ========================================================= */
-
-.reveal {
-
-  opacity:
-    0;
-
-  transform:
-    translateY(25px);
-
-  transition:
-    opacity .8s var(--ease),
-    transform .8s var(--ease);
-}
-
-.reveal.visible {
-
-  opacity:
-    1;
-
-  transform:
-    translateY(0);
-}
-
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 1050px) {
-
-  .hero-content {
-    width:
-      58%;
-  }
-
-  .hero-visual {
-    right:
-      -160px;
-
-    width:
-      58%;
-
-    opacity:
-      .82;
-  }
-
-  .tool-grid {
-    grid-template-columns:
-      repeat(3,1fr);
-  }
-}
-
-
-@media (max-width: 820px) {
-
-  .container {
-    width:
-      min(
-        var(--max),
-        calc(100% - 30px)
-      );
-  }
-
-  .nav-links {
-    display:
-      none;
-  }
-
-  .hero {
-
-    min-height:
-      auto;
-
-    padding:
-      145px 0 90px;
-  }
-
-  .hero-content {
-    width:
-      100%;
-
-    text-align:
-      center;
-  }
-
-  .hero-description {
-    margin-inline:
-      auto;
-  }
-
-  .hero-actions {
-    justify-content:
-      center;
-  }
-
-  .hero-visual {
-
-    position:
-      relative;
-
-    right:
-      auto;
-
-    top:
-      auto;
-
-    width:
-      100%;
-
-    height:
-      500px;
-
-    margin-top:
-      20px;
-
-    opacity:
-      .82;
-  }
-
-  .tool-grid {
-    grid-template-columns:
-      repeat(2,1fr);
-  }
-
-  .section-heading {
-    align-items:
-      flex-start;
-
-    flex-direction:
-      column;
-  }
-}
-
-
-@media (max-width: 560px) {
-
-  .navbar {
-    padding:
-      8px 0;
-  }
-
-  .navbar-inner {
-    height:
-      58px;
-
-    border-radius:
-      18px;
-  }
-
-  .brand {
-    font-size:
-      16px;
-  }
-
-  .brand-mark {
-    width:
-      34px;
-
-    height:
-      34px;
-
-    border-radius:
-      11px;
-  }
-
-  .hero-title {
-
-    font-size:
-      clamp(
-        45px,
-        13vw,
-        64px
+    .nq-container {
+      width: min(
+        calc(100% - 40px),
+        var(--nq-container)
       );
 
-    letter-spacing:
-      -.065em;
-  }
-
-  .hero-description {
-    font-size:
-      14px;
-  }
-
-  .hero-visual {
-    height:
-      420px;
-  }
-
-  .core {
-
-    width:
-      205px;
-
-    height:
-      255px;
-  }
-
-  .orbit.one {
-    width:
-      350px;
-
-    height:
-      350px;
-  }
-
-  .orbit.two {
-    width:
-      260px;
-
-    height:
-      260px;
-  }
-
-  .orbit.three {
-    width:
-      430px;
-
-    height:
-      430px;
-  }
-
-  .float-card {
-    min-width:
-      125px;
-
-    padding:
-      9px;
-
-    font-size:
-      9px;
-  }
-
-  .float-card.one {
-    left:
-      -4%;
-  }
-
-  .float-card.two {
-    right:
-      -4%;
-  }
-
-  .float-card.three {
-    right:
-      0;
-  }
-
-  .tool-grid {
-    grid-template-columns:
-      1fr;
-  }
-
-  .workspace-overlay {
-    padding:
-      8px;
-  }
-
-  .workspace {
-
-    max-height:
-      calc(100vh - 16px);
-
-    border-radius:
-      22px;
-  }
-
-  .workspace-body {
-    padding:
-      16px;
-  }
-
-  .dropzone {
-    min-height:
-      300px;
-
-    padding:
-      25px 18px;
-  }
-
-  .workspace-actions {
-    align-items:
-      stretch;
-
-    flex-direction:
-      column;
-  }
-
-  .action-group {
-    width:
-      100%;
-  }
-
-  .action-group .small-button {
-    flex:
-      1;
-  }
-
-  .trust-strip {
-    grid-template-columns:
-      1fr;
-  }
-
-  .footer-inner {
-    align-items:
-      flex-start;
-
-    flex-direction:
-      column;
-  }
-}
+      margin-inline: auto;
+    }
 
 
-/* =========================================================
-   REDUCED MOTION
-   ========================================================= */
+    /* =========================================================
+       08. NAVBAR SHELL
+       ========================================================= */
 
-@media (prefers-reduced-motion: reduce) {
+    .nq-navbar-wrap {
 
-  html {
-    scroll-behavior:
-      auto;
-  }
+      position: fixed;
 
-  *,
-  *::before,
-  *::after {
+      top: 0;
+      left: 0;
+      right: 0;
 
-    animation-duration:
-      .01ms !important;
+      z-index: 1000;
 
-    animation-iteration-count:
-      1 !important;
+      padding:
+        14px 20px;
 
-    transition-duration:
-      .01ms !important;
-  }
+      pointer-events: none;
+    }
 
-  .reveal {
 
-    opacity:
-      1;
+    .nq-navbar {
 
-    transform:
-      none;
-  }
-}
+      width: min(
+        calc(100% - 0px),
+        1240px
+      );
 
-</style>
+      height: var(--nq-navbar-height);
+
+      margin-inline: auto;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 20px;
+
+      padding:
+        0 16px 0 20px;
+
+      border:
+        1px solid transparent;
+
+      border-radius:
+        20px;
+
+      background:
+        rgba(5, 8, 22, 0.16);
+
+      backdrop-filter:
+        blur(0px);
+
+      -webkit-backdrop-filter:
+        blur(0px);
+
+      box-shadow:
+        0 0 0 transparent;
+
+      transition:
+        height 380ms var(--nq-ease),
+        background 380ms var(--nq-ease),
+        border-color 380ms var(--nq-ease),
+        box-shadow 380ms var(--nq-ease),
+        backdrop-filter 380ms var(--nq-ease),
+        transform 380ms var(--nq-ease);
+
+      pointer-events: auto;
+    }
+
+
+    /* Scrolled navbar */
+
+    .nq-navbar.is-scrolled {
+
+      height: 68px;
+
+      border-color:
+        var(--nq-border);
+
+      background:
+        rgba(7, 11, 27, 0.72);
+
+      backdrop-filter:
+        blur(22px)
+        saturate(140%);
+
+      -webkit-backdrop-filter:
+        blur(22px)
+        saturate(140%);
+
+      box-shadow:
+        0 14px 45px rgba(0, 0, 0, 0.18),
+        inset 0 1px 0 rgba(255,255,255,0.035);
+    }
+
+
+    html[data-theme="light"] .nq-navbar.is-scrolled {
+
+      background:
+        rgba(255,255,255,0.78);
+
+      box-shadow:
+        0 14px 45px rgba(26, 35, 65, 0.10),
+        inset 0 1px 0 rgba(255,255,255,0.8);
+    }
+
+
+    /* =========================================================
+       09. BRAND
+       ========================================================= */
+
+    .nq-brand {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      flex:
+        0 0 auto;
+
+      position: relative;
+
+      height: 48px;
+
+      min-width: 160px;
+
+      transition:
+        transform var(--nq-transition);
+    }
+
+
+    .nq-brand:hover {
+      transform:
+        translateY(-1px);
+    }
+
+
+    .nq-brand-logo {
+
+      width: 156px;
+
+      height: auto;
+
+      max-height: 48px;
+
+      object-fit: contain;
+
+      object-position: left center;
+
+      filter:
+        drop-shadow(
+          0 0 18px rgba(36,87,255,0.13)
+        );
+
+      transition:
+        filter 350ms var(--nq-ease),
+        transform 350ms var(--nq-ease);
+    }
+
+
+    .nq-brand:hover .nq-brand-logo {
+
+      transform:
+        scale(1.015);
+
+      filter:
+        drop-shadow(
+          0 0 24px rgba(36,87,255,0.24)
+        )
+        drop-shadow(
+          0 0 12px rgba(139,92,246,0.14)
+        );
+    }
+
+
+    /* =========================================================
+       10. DESKTOP NAVIGATION
+       ========================================================= */
+
+    .nq-nav {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      flex: 1;
+
+      height: 100%;
+    }
+
+
+    .nq-nav-list {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 4px;
+
+      margin: 0;
+      padding: 0;
+
+      list-style: none;
+    }
+
+
+    .nq-nav-link {
+
+      position: relative;
+
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      min-height: 42px;
+
+      padding:
+        0 13px;
+
+      border-radius:
+        11px;
+
+      color:
+        var(--nq-text-muted);
+
+      font-size:
+        13.5px;
+
+      font-weight:
+        600;
+
+      letter-spacing:
+        -0.01em;
+
+      white-space:
+        nowrap;
+
+      transition:
+        color var(--nq-transition),
+        background var(--nq-transition),
+        transform var(--nq-transition);
+    }
+
+
+    .nq-nav-link:hover {
+
+      color:
+        var(--nq-text);
+
+      background:
+        var(--nq-surface-soft);
+
+      transform:
+        translateY(-1px);
+    }
+
+
+    .nq-nav-link.is-active {
+
+      color:
+        var(--nq-text);
+
+      background:
+        rgba(255,255,255,0.045);
+    }
+
+
+    .nq-nav-link.is-active::after {
+
+      content: "";
+
+      position: absolute;
+
+      left: 50%;
+
+      bottom: 4px;
+
+      width: 4px;
+      height: 4px;
+
+      border-radius: 50%;
+
+      background:
+        var(--nq-blue-bright);
+
+      box-shadow:
+        0 0 12px var(--nq-blue);
+      
+      transform:
+        translateX(-50%);
+    }
+
+
+    /* Chevron */
+
+    .nq-chevron {
+
+      width: 13px;
+      height: 13px;
+
+      margin-left: 5px;
+
+      opacity: 0.65;
+
+      transition:
+        transform 220ms var(--nq-ease);
+    }
+
+
+    .nq-nav-link:hover .nq-chevron {
+
+      transform:
+        translateY(2px);
+    }
+
+
+    /* =========================================================
+       11. RIGHT ACTIONS
+       ========================================================= */
+
+    .nq-actions {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: flex-end;
+
+      gap: 7px;
+
+      flex:
+        0 0 auto;
+    }
+
+
+    /* Generic icon button */
+
+    .nq-icon-btn {
+
+      position: relative;
+
+      width: 42px;
+      height: 42px;
+
+      display: inline-flex;
+
+      align-items: center;
+      justify-content: center;
+
+      flex:
+        0 0 auto;
+
+      color:
+        var(--nq-text-soft);
+
+      background:
+        transparent;
+
+      border:
+        1px solid transparent;
+
+      border-radius:
+        11px;
+
+      cursor:
+        pointer;
+
+      transition:
+        color var(--nq-transition),
+        background var(--nq-transition),
+        border-color var(--nq-transition),
+        transform var(--nq-transition);
+    }
+
+
+    .nq-icon-btn:hover {
+
+      color:
+        var(--nq-text);
+
+      background:
+        var(--nq-surface-soft);
+
+      border-color:
+        var(--nq-border);
+
+      transform:
+        translateY(-1px);
+    }
+
+
+    .nq-icon-btn:active {
+
+      transform:
+        translateY(0)
+        scale(0.96);
+    }
+
+
+    .nq-icon {
+
+      width: 18px;
+      height: 18px;
+
+      display: block;
+
+      stroke:
+        currentColor;
+
+      stroke-width:
+        1.8;
+
+      stroke-linecap:
+        round;
+
+      stroke-linejoin:
+        round;
+
+      fill:
+        none;
+    }
+
+
+    /* =========================================================
+       12. THEME TOGGLE
+       ========================================================= */
+
+    .nq-theme-icon-sun {
+      display: none;
+    }
+
+
+    html[data-theme="light"] .nq-theme-icon-sun {
+      display: block;
+    }
+
+
+    html[data-theme="light"] .nq-theme-icon-moon {
+      display: none;
+    }
+
+
+    /* =========================================================
+       13. EXPLORE BUTTON
+       ========================================================= */
+
+    .nq-explore-btn {
+
+      position: relative;
+
+      min-height: 42px;
+
+      padding:
+        0 17px;
+
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 8px;
+
+      overflow: hidden;
+
+      border:
+        1px solid rgba(102, 131, 255, 0.34);
+
+      border-radius:
+        11px;
+
+      color:
+        #ffffff;
+
+      background:
+        linear-gradient(
+          135deg,
+          #2758ff 0%,
+          #4b45e8 52%,
+          #7849ed 100%
+        );
+
+      box-shadow:
+        0 8px 24px rgba(36,87,255,0.18),
+        inset 0 1px 0 rgba(255,255,255,0.16);
+
+      font-size:
+        13px;
+
+      font-weight:
+        700;
+
+      letter-spacing:
+        -0.01em;
+
+      cursor:
+        pointer;
+
+      transition:
+        transform var(--nq-transition),
+        box-shadow var(--nq-transition);
+    }
+
+
+    .nq-explore-btn::before {
+
+      content: "";
+
+      position: absolute;
+
+      top: 0;
+      bottom: 0;
+
+      left: -80%;
+
+      width: 60%;
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          rgba(255,255,255,0.20),
+          transparent
+        );
+
+      transform:
+        skewX(-20deg);
+
+      transition:
+        left 650ms var(--nq-ease);
+    }
+
+
+    .nq-explore-btn:hover {
+
+      transform:
+        translateY(-2px);
+
+      box-shadow:
+        0 12px 30px rgba(36,87,255,0.27),
+        0 0 22px rgba(99,102,241,0.13),
+        inset 0 1px 0 rgba(255,255,255,0.18);
+    }
+
+
+    .nq-explore-btn:hover::before {
+      left: 125%;
+    }
+
+
+    .nq-explore-btn:active {
+
+      transform:
+        translateY(0)
+        scale(0.98);
+    }
+
+
+    .nq-explore-arrow {
+
+      width: 15px;
+      height: 15px;
+
+      transition:
+        transform 240ms var(--nq-ease);
+    }
+
+
+    .nq-explore-btn:hover .nq-explore-arrow {
+
+      transform:
+        translateX(3px);
+    }
+
+
+    /* =========================================================
+       14. MOBILE MENU BUTTON
+       ========================================================= */
+
+    .nq-menu-btn {
+
+      display: none;
+
+      width: 42px;
+      height: 42px;
+
+      align-items: center;
+      justify-content: center;
+
+      flex-direction: column;
+
+      gap: 5px;
+
+      border:
+        1px solid transparent;
+
+      border-radius:
+        11px;
+
+      background:
+        transparent;
+
+      color:
+        var(--nq-text-soft);
+
+      cursor:
+        pointer;
+
+      transition:
+        background var(--nq-transition),
+        border-color var(--nq-transition),
+        color var(--nq-transition);
+    }
+
+
+    .nq-menu-btn:hover {
+
+      background:
+        var(--nq-surface-soft);
+
+      border-color:
+        var(--nq-border);
+
+      color:
+        var(--nq-text);
+    }
+
+
+    .nq-menu-line {
+
+      width: 18px;
+      height: 1.5px;
+
+      border-radius: 999px;
+
+      background:
+        currentColor;
+
+      transition:
+        transform 280ms var(--nq-ease),
+        opacity 180ms ease,
+        width 280ms var(--nq-ease);
+    }
+
+
+    .nq-menu-btn.is-open .nq-menu-line:nth-child(1) {
+
+      transform:
+        translateY(6.5px)
+        rotate(45deg);
+    }
+
+
+    .nq-menu-btn.is-open .nq-menu-line:nth-child(2) {
+
+      opacity: 0;
+
+      width: 0;
+    }
+
+
+    .nq-menu-btn.is-open .nq-menu-line:nth-child(3) {
+
+      transform:
+        translateY(-6.5px)
+        rotate(-45deg);
+    }
+
+
+    /* =========================================================
+       15. MOBILE NAV PANEL
+       ========================================================= */
+
+    .nq-mobile-panel {
+
+      position: fixed;
+
+      top: 94px;
+
+      left: 20px;
+      right: 20px;
+
+      z-index: 990;
+
+      padding:
+        12px;
+
+      border:
+        1px solid var(--nq-border);
+
+      border-radius:
+        20px;
+
+      background:
+        rgba(7, 11, 27, 0.90);
+
+      backdrop-filter:
+        blur(26px)
+        saturate(145%);
+
+      -webkit-backdrop-filter:
+        blur(26px)
+        saturate(145%);
+
+      box-shadow:
+        0 24px 80px rgba(0,0,0,0.30),
+        inset 0 1px 0 rgba(255,255,255,0.035);
+
+      opacity: 0;
+
+      visibility: hidden;
+
+      transform:
+        translateY(-12px)
+        scale(0.98);
+
+      transform-origin:
+        top center;
+
+      transition:
+        opacity 240ms var(--nq-ease),
+        visibility 240ms var(--nq-ease),
+        transform 300ms var(--nq-ease);
+    }
+
+
+    html[data-theme="light"] .nq-mobile-panel {
+
+      background:
+        rgba(255,255,255,0.92);
+
+      box-shadow:
+        0 24px 80px rgba(26,35,65,0.15),
+        inset 0 1px 0 rgba(255,255,255,0.9);
+    }
+
+
+    .nq-mobile-panel.is-open {
+
+      opacity: 1;
+
+      visibility: visible;
+
+      transform:
+        translateY(0)
+        scale(1);
+    }
+
+
+    .nq-mobile-links {
+
+      display:
+        flex;
+
+      flex-direction:
+        column;
+
+      gap:
+        3px;
+
+      margin:
+        0;
+
+      padding:
+        0;
+
+      list-style:
+        none;
+    }
+
+
+    .nq-mobile-link {
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        space-between;
+
+      min-height:
+        52px;
+
+      padding:
+        0 14px;
+
+      border-radius:
+        12px;
+
+      color:
+        var(--nq-text-soft);
+
+      font-size:
+        14px;
+
+      font-weight:
+        600;
+
+      transition:
+        background var(--nq-transition),
+        color var(--nq-transition),
+        transform var(--nq-transition);
+    }
+
+
+    .nq-mobile-link:hover {
+
+      color:
+        var(--nq-text);
+
+      background:
+        var(--nq-surface-soft);
+
+      transform:
+        translateX(3px);
+    }
+
+
+    .nq-mobile-divider {
+
+      height:
+        1px;
+
+      margin:
+        8px 5px;
+
+      background:
+        var(--nq-border);
+    }
+
+
+    .nq-mobile-explore {
+
+      width:
+        100%;
+
+      min-height:
+        48px;
+
+      margin-top:
+        5px;
+    }
+
+
+    /* =========================================================
+       16. MOBILE OVERLAY
+       ========================================================= */
+
+    .nq-menu-overlay {
+
+      position: fixed;
+
+      inset: 0;
+
+      z-index: 980;
+
+      background:
+        rgba(0,0,0,0.38);
+
+      backdrop-filter:
+        blur(3px);
+
+      -webkit-backdrop-filter:
+        blur(3px);
+
+      opacity:
+        0;
+
+      visibility:
+        hidden;
+
+      pointer-events:
+        none;
+
+      transition:
+        opacity 250ms ease,
+        visibility 250ms ease;
+    }
+
+
+    .nq-menu-overlay.is-visible {
+
+      opacity:
+        1;
+
+      visibility:
+        visible;
+
+      pointer-events:
+        auto;
+    }
+
+
+    /* =========================================================
+       17. PART 1 CANVAS / FOUNDATION AREA
+       ========================================================= */
+
+    .nq-foundation {
+
+      position:
+        relative;
+
+      min-height:
+        100vh;
+
+      padding-top:
+        var(--nq-navbar-height);
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      overflow:
+        hidden;
+    }
+
+
+    .nq-foundation-orb {
+
+      position:
+        absolute;
+
+      width:
+        420px;
+
+      height:
+        420px;
+
+      border-radius:
+        50%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(36,87,255,0.08),
+          transparent 68%
+        );
+
+      filter:
+        blur(15px);
+
+      pointer-events:
+        none;
+
+      animation:
+        nqOrbFloat 10s ease-in-out infinite alternate;
+    }
+
+
+    @keyframes nqOrbFloat {
+
+      0% {
+        transform:
+          translate3d(-80px, 30px, 0)
+          scale(0.94);
+      }
+
+      100% {
+        transform:
+          translate3d(80px, -30px, 0)
+          scale(1.06);
+      }
+
+    }
+
+
+    .nq-foundation-copy {
+
+      position:
+        relative;
+
+      z-index:
+        2;
+
+      width:
+        min(680px, 100%);
+
+      padding:
+        60px 20px;
+
+      text-align:
+        center;
+
+      opacity:
+        1;
+    }
+
+
+    .nq-foundation-label {
+
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      gap:
+        8px;
+
+      margin-bottom:
+        20px;
+
+      padding:
+        8px 12px;
+
+      border:
+        1px solid var(--nq-border);
+
+      border-radius:
+        999px;
+
+      color:
+        var(--nq-text-muted);
+
+      background:
+        var(--nq-surface-soft);
+
+      font-size:
+        11px;
+
+      font-weight:
+        700;
+
+      letter-spacing:
+        0.12em;
+
+      text-transform:
+        uppercase;
+    }
+
+
+    .nq-foundation-dot {
+
+      width:
+        6px;
+
+      height:
+        6px;
+
+      border-radius:
+        50%;
+
+      background:
+        var(--nq-blue-bright);
+
+      box-shadow:
+        0 0 12px var(--nq-blue-bright);
+    }
+
+
+    .nq-foundation-title {
+
+      margin:
+        0;
+
+      color:
+        var(--nq-text);
+
+      font-family:
+        var(--nq-font-display);
+
+      font-size:
+        clamp(38px, 6vw, 72px);
+
+      line-height:
+        0.98;
+
+      letter-spacing:
+        -0.055em;
+
+      font-weight:
+        760;
+    }
+
+
+    .nq-foundation-title span {
+
+      background:
+        linear-gradient(
+          100deg,
+          #ffffff 5%,
+          #b9c7ff 40%,
+          #7c72ff 75%,
+          #b06cff 100%
+        );
+
+      -webkit-background-clip:
+        text;
+
+      background-clip:
+        text;
+
+      color:
+        transparent;
+    }
+
+
+    html[data-theme="light"] .nq-foundation-title span {
+
+      background:
+        linear-gradient(
+          100deg,
+          #11162c 5%,
+          #3159db 45%,
+          #6949d9 80%,
+          #864edc 100%
+        );
+
+      -webkit-background-clip:
+        text;
+
+      background-clip:
+        text;
+    }
+
+
+    .nq-foundation-description {
+
+      max-width:
+        580px;
+
+      margin:
+        24px auto 0;
+
+      color:
+        var(--nq-text-muted);
+
+      font-size:
+        15px;
+
+      line-height:
+        1.75;
+    }
+
+
+    .nq-foundation-line {
+
+      width:
+        min(420px, 80%);
+
+      height:
+        1px;
+
+      margin:
+        34px auto 0;
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          var(--nq-border-strong),
+          transparent
+        );
+    }
+
+
+    /* =========================================================
+       18. RESPONSIVE — TABLET
+       ========================================================= */
+
+    @media (max-width: 1080px) {
+
+      .nq-navbar {
+        gap: 10px;
+      }
+
+      .nq-brand {
+        min-width: 145px;
+      }
+
+      .nq-brand-logo {
+        width: 142px;
+      }
+
+      .nq-nav-link {
+        padding-inline: 9px;
+        font-size: 12.5px;
+      }
+
+      .nq-actions {
+        gap: 3px;
+      }
+
+      .nq-explore-btn {
+        padding-inline: 13px;
+      }
+
+    }
+
+
+    /* =========================================================
+       19. RESPONSIVE — MOBILE
+       ========================================================= */
+
+    @media (max-width: 820px) {
+
+      :root {
+        --nq-navbar-height: 70px;
+      }
+
+
+      .nq-navbar-wrap {
+        padding:
+          10px 12px;
+      }
+
+
+      .nq-navbar {
+
+        height:
+          64px;
+
+        padding:
+          0 10px 0 14px;
+
+        border-radius:
+          17px;
+      }
+
+
+      .nq-navbar.is-scrolled {
+
+        height:
+          60px;
+      }
+
+
+      .nq-brand {
+
+        min-width:
+          0;
+
+        height:
+          44px;
+      }
+
+
+      .nq-brand-logo {
+
+        width:
+          132px;
+
+        max-height:
+          42px;
+      }
+
+
+      .nq-nav {
+        display:
+          none;
+      }
+
+
+      .nq-actions {
+
+        margin-left:
+          auto;
+
+        gap:
+          2px;
+      }
+
+
+      .nq-actions .nq-explore-btn {
+        display:
+          none;
+      }
+
+
+      .nq-menu-btn {
+        display:
+          inline-flex;
+      }
+
+
+      .nq-icon-btn {
+        width:
+          40px;
+
+        height:
+          40px;
+      }
+
+
+      .nq-mobile-panel {
+
+        top:
+          82px;
+
+        left:
+          12px;
+
+        right:
+          12px;
+      }
+
+
+      .nq-foundation {
+
+        min-height:
+          100svh;
+
+        padding-top:
+          70px;
+      }
+
+
+      .nq-foundation-copy {
+        padding:
+          50px 16px;
+      }
+
+    }
+
+
+    /* =========================================================
+       20. RESPONSIVE — SMALL PHONES
+       ========================================================= */
+
+    @media (max-width: 430px) {
+
+      .nq-navbar {
+        padding-left:
+          10px;
+
+        padding-right:
+          7px;
+      }
+
+
+      .nq-brand-logo {
+        width:
+          119px;
+      }
+
+
+      .nq-brand {
+        height:
+          40px;
+      }
+
+
+      .nq-icon-btn,
+      .nq-menu-btn {
+        width:
+          38px;
+
+        height:
+          38px;
+      }
+
+
+      .nq-icon {
+        width:
+          17px;
+
+        height:
+          17px;
+      }
+
+
+      .nq-foundation-title {
+        font-size:
+          clamp(34px, 11vw, 48px);
+      }
+
+
+      .nq-foundation-description {
+        font-size:
+          14px;
+
+        line-height:
+          1.7;
+      }
+
+    }
+
+
+    /* =========================================================
+       21. REDUCED MOTION
+       ========================================================= */
+
+    @media (prefers-reduced-motion: reduce) {
+
+      html {
+        scroll-behavior:
+          auto;
+      }
+
+
+      *,
+      *::before,
+      *::after {
+
+        animation-duration:
+          0.01ms !important;
+
+        animation-iteration-count:
+          1 !important;
+
+        transition-duration:
+          0.01ms !important;
+      }
+
+    }
+
+  </style>
 </head>
+
 
 <body>
 
-<!-- =======================================================
-     GLOBAL BACKGROUND
-     ======================================================= -->
+  <!-- =========================================================
+       GLOBAL BACKGROUND
+       ========================================================= -->
 
-<div class="site-background" aria-hidden="true">
+  <div
+    class="nq-background"
+    aria-hidden="true"
+  ></div>
 
-  <div class="ambient one"></div>
-
-  <div class="ambient two"></div>
-
-  <div class="ambient three"></div>
-
-</div>
+  <div
+    class="nq-grid"
+    aria-hidden="true"
+  ></div>
 
 
-<!-- =======================================================
-     NAVBAR
-     ======================================================= -->
+  <!-- =========================================================
+       MOBILE MENU OVERLAY
+       ========================================================= -->
 
-<header class="navbar" id="navbar">
+  <div
+    class="nq-menu-overlay"
+    id="nqMenuOverlay"
+    aria-hidden="true"
+  ></div>
 
-  <div class="container">
 
-    <div class="navbar-inner">
+  <!-- =========================================================
+       NAVBAR
+       ========================================================= -->
+
+  <header class="nq-navbar-wrap">
+
+    <nav
+      class="nq-navbar"
+      id="nqNavbar"
+      aria-label="Primary navigation"
+    >
+
+      <!-- BRAND -->
 
       <a
         href="#top"
-        class="brand"
+        class="nq-brand"
         aria-label="Nuvoraq home"
       >
 
-        <span class="brand-mark"></span>
-
-        <span>Nuvoraq</span>
+        <img
+          src="nuvoraq-logo.png"
+          alt="Nuvoraq"
+          class="nq-brand-logo"
+        >
 
       </a>
 
 
-      <nav class="nav-links" aria-label="Main navigation">
+      <!-- DESKTOP NAV -->
 
-        <a
-          href="#tools"
-          class="nav-link"
-        >
-          Tools
-        </a>
+      <div class="nq-nav">
 
-        <a
-          href="#tools"
-          class="nav-link"
-        >
-          PDF
-        </a>
+        <ul class="nq-nav-list">
 
-        <a
-          href="#tools"
-          class="nav-link"
-        >
-          Image
-        </a>
-
-        <a
-          href="#tools"
-          class="nav-link"
-        >
-          Developer
-        </a>
-
-      </nav>
+          <li>
+            <a
+              href="#tools"
+              class="nq-nav-link is-active"
+            >
+              Tools
+            </a>
+          </li>
 
 
-      <div class="nav-actions">
+          <li>
+            <a
+              href="#categories"
+              class="nq-nav-link"
+            >
+              Categories
+
+              <svg
+                class="nq-chevron"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="m6 9 6 6 6-6"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+
+            </a>
+          </li>
+
+
+          <li>
+            <a
+              href="#ai-tools"
+              class="nq-nav-link"
+            >
+              AI Tools
+            </a>
+          </li>
+
+
+          <li>
+            <a
+              href="#resources"
+              class="nq-nav-link"
+            >
+              Resources
+
+              <svg
+                class="nq-chevron"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="m6 9 6 6 6-6"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+
+      <!-- RIGHT ACTIONS -->
+
+      <div class="nq-actions">
+
+        <!-- SEARCH -->
 
         <button
-          class="icon-button"
-          id="themeButton"
           type="button"
-          aria-label="Toggle theme"
+          class="nq-icon-btn"
+          id="nqSearchButton"
+          aria-label="Search Nuvoraq"
+          title="Search"
+        >
+
+          <svg
+            class="nq-icon"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <circle
+              cx="11"
+              cy="11"
+              r="6.5"
+            />
+
+            <path
+              d="m16 16 4.2 4.2"
+            />
+          </svg>
+
+        </button>
+
+
+        <!-- THEME -->
+
+        <button
+          type="button"
+          class="nq-icon-btn"
+          id="nqThemeButton"
+          aria-label="Toggle color theme"
           title="Toggle theme"
         >
-          ◐
-        </button>
 
-      </div>
+          <!-- Moon -->
 
-    </div>
+          <svg
+            class="nq-icon nq-theme-icon-moon"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
 
-  </div>
+            <path
+              d="M20.2 15.4A8.3 8.3 0 0 1 8.6 3.8 8.4 8.4 0 1 0 20.2 15.4Z"
+            />
 
-</header>
-
-
-<!-- =======================================================
-     HERO
-     ======================================================= -->
-
-<main id="top">
-
-<section class="hero">
-
-  <div class="hero-grid"></div>
+          </svg>
 
 
-  <div class="container">
+          <!-- Sun -->
 
-    <div class="hero-content">
+          <svg
+            class="nq-icon nq-theme-icon-sun"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
 
-      <div class="eyebrow reveal">
+            <circle
+              cx="12"
+              cy="12"
+              r="3.5"
+            />
 
-        <span class="eyebrow-dot"></span>
+            <path
+              d="
+                M12 2v2
+                M12 20v2
+                M4.93 4.93l1.42 1.42
+                M17.65 17.65l1.42 1.42
+                M2 12h2
+                M20 12h2
+                M4.93 19.07l1.42-1.42
+                M17.65 6.35l1.42-1.42
+              "
+            />
 
-        FREE DIGITAL TOOLKIT
-        ·
-        NO LOGIN REQUIRED
-
-      </div>
-
-
-      <h1 class="hero-title reveal">
-
-        Powerful tools.
-
-        <br>
-
-        <span class="gradient">
-          Zero friction.
-        </span>
-
-      </h1>
-
-
-      <p class="hero-description reveal">
-
-        Nuvoraq brings professional PDF, image, text,
-        developer and productivity tools into one
-        beautifully simple workspace.
-
-        Fast when you need it.
-        Powerful when it matters.
-
-      </p>
-
-
-      <div class="hero-actions reveal">
-
-        <button
-          class="primary-button"
-          id="heroMergeButton"
-          type="button"
-        >
-
-          <span>Merge PDF</span>
-
-          <span>→</span>
+          </svg>
 
         </button>
 
 
-        <a
-          href="#tools"
-          class="secondary-button"
-        >
-
-          Explore all tools
-
-          <span>↓</span>
-
-        </a>
-
-      </div>
-
-    </div>
-
-
-    <!-- ===================================================
-         3D VISUAL
-         =================================================== -->
-
-    <div
-      class="hero-visual"
-      id="heroVisual"
-      aria-hidden="true"
-    >
-
-      <div class="orbit one"></div>
-
-      <div class="orbit two"></div>
-
-      <div class="orbit three"></div>
-
-
-      <div class="float-card one">
-
-        <div class="float-icon">
-          PDF
-        </div>
-
-        <div>
-          Merge files
-        </div>
-
-      </div>
-
-
-      <div class="float-card two">
-
-        <div class="float-icon">
-          ✦
-        </div>
-
-        <div>
-          Fast processing
-        </div>
-
-      </div>
-
-
-      <div class="float-card three">
-
-        <div class="float-icon">
-          ✓
-        </div>
-
-        <div>
-          No login required
-        </div>
-
-      </div>
-
-
-      <div class="core">
-
-        <div class="core-face">
-
-          <div class="core-light"></div>
-
-          <div class="core-logo">
-            N
-          </div>
-
-          <div class="core-title">
-            Nuvoraq
-          </div>
-
-          <div class="core-sub">
-            DIGITAL TOOLKIT
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =======================================================
-     TOOL DISCOVERY
-     ======================================================= -->
-
-<section
-  class="tool-section"
-  id="tools"
->
-
-  <div class="container">
-
-    <div class="section-heading reveal">
-
-      <div>
-
-        <div class="section-kicker">
-          THE TOOLKIT
-        </div>
-
-        <h2>
-          Everything you need.
-        </h2>
-
-      </div>
-
-
-      <p>
-
-        One clean workspace for everyday
-        digital tasks — without unnecessary
-        accounts, friction or clutter.
-
-      </p>
-
-    </div>
-
-
-    <div class="tool-search reveal">
-
-      <span class="search-symbol">
-        ⌕
-      </span>
-
-      <input
-        id="toolSearch"
-        type="search"
-        placeholder="Search a tool..."
-        autocomplete="off"
-      >
-
-    </div>
-
-
-    <div
-      class="categories reveal"
-      id="categories"
-    >
-
-      <button
-        class="category active"
-        data-category="all"
-        type="button"
-      >
-        All tools
-      </button>
-
-      <button
-        class="category"
-        data-category="pdf"
-        type="button"
-      >
-        PDF
-      </button>
-
-      <button
-        class="category"
-        data-category="image"
-        type="button"
-      >
-        Image
-      </button>
-
-      <button
-        class="category"
-        data-category="text"
-        type="button"
-      >
-        Text
-      </button>
-
-      <button
-        class="category"
-        data-category="developer"
-        type="button"
-      >
-        Developer
-      </button>
-
-      <button
-        class="category"
-        data-category="utility"
-        type="button"
-      >
-        Utilities
-      </button>
-
-    </div>
-
-
-    <div
-      class="tool-grid"
-      id="toolGrid"
-    >
-
-
-      <!-- MERGE PDF -->
-
-      <article
-        class="tool-card reveal"
-        data-tool="merge pdf"
-        data-category="pdf"
-        data-action="merge"
-        tabindex="0"
-        role="button"
-        aria-label="Open Merge PDF"
-      >
-
-        <div class="tool-card-icon">
-          ⊕
-        </div>
-
-        <h3>
-          Merge PDF
-        </h3>
-
-        <p>
-          Combine multiple PDF documents
-          into one polished file.
-        </p>
-
-        <div class="tool-card-arrow">
-          →
-        </div>
-
-      </article>
-
-
-      <!-- SPLIT PDF -->
-
-      <article
-        class="tool-card reveal"
-        data-tool="split pdf"
-        data-category="pdf"
-        data-action="coming"
-        data-title="Split PDF"
-        tabindex="0"
-        role="button"
-      >
-
-        <div class="tool-card-icon">
-          ⇱
-        </div>
-
-        <h3>
-          Split PDF
-        </h3>
-
-        <p>
-          Separate pages and ranges
-          into individual PDF files.
-        </p>
-
-        <div class="tool-card-arrow">
-          →
-        </div>
-
-      </article>
-
-
-      <!-- COMPRESS PDF -->
-
-      <article
-        class="tool-card reveal"
-        data-tool="compress pdf"
-        data-category="pdf"
-        data-action="coming"
-        data-title="Compress PDF"
-        tabindex="0"
-        role="button"
-      >
-
-        <div class="tool-card-icon">
-          ◈
-        </div>
-
-        <h3>
-          Compress PDF
-        </h3>
-
-        <p>
-          Reduce document size while
-          keeping the workflow simple.
-        </p>
-
-        <div class="tool-card-arrow">
-          →
-        </div>
-
-      </article>
-
-
-      <!-- JPG TO PDF -->
-
-      <article
-        class="tool-card reveal"
-        data-tool="jpg to pdf"
-        data-category="pdf image"
-        data-action="coming"
-        data-title="JPG to PDF"
-        tabindex="0"
-        role="button"
-      >
-
-        <div class="tool-card-icon">
-          ▣
-        </div>
-
-        <h3>
-          JPG to PDF
-        </h3>
-
-        <p>
-          Turn your images into
-          professional PDF documents.
-        </p>
-
-        <div class="tool-card-arrow">
-          →
-        </div>
-
-      </article>
-
-
-      <!-- PDF TO JPG -->
-
-      <article
-        class="tool-card reveal"
-        data-tool="pdf to jpg"
-        data-category="pdf image"
-        data-action="coming"
-        data-title="PDF to JPG"
-        tabindex="0"
-        role="button"
-      >
-
-        <div class="tool-card-icon">
-          ▤
-        </div>
-
-        <h3>
-          PDF to JPG
-        </h3>
-
-        <p>
-          Convert PDF pages into
-          clean image files.
-        </p>
-
-        <div class="tool-card-arrow">
-          →
-        </div>
-
-      </article>
-
-
-      <!-- IMAGE COMPRESSOR -->
-
-      <article
-        class="tool-card reveal"
-        data-tool="image compressor"
-        data-category="image"
-        data-action="coming"
-        data-title="Image Compressor"
-        tabindex="0"
-        role="button"
-      >
-
-        <div class="tool-card-icon">
-          ◉
-        </div>
-
-        <h3>
-          Image Compressor
-        </h3>
-
-        <p>
-          Reduce image file size
-          directly in your browser.
-        </p>
-
-        <div class="tool-card-arrow">
-          →
-        </div>
-
-      </article>
-
-
-      <!-- WORD COUNTER -->
-
-      <article
-        class="tool-card reveal"
-        data-tool="word counter"
-        data-category="text"
-        data-action="coming"
-        data-title="Word Counter"
-        tabindex="0"
-        role="button"
-      >
-
-        <div class="tool-card-icon">
-          Aa
-        </div>
-
-        <h3>
-          Word Counter
-        </h3>
-
-        <p>
-          Count words, characters
-          and paragraphs instantly.
-        </p>
-
-        <div class="tool-card-arrow">
-          →
-        </div>
-
-      </article>
-
-
-      <!-- JSON FORMATTER -->
-
-      <article
-        class="tool-card reveal"
-        data-tool="json formatter"
-        data-category="developer"
-        data-action="coming"
-        data-title="JSON Formatter"
-        tabindex="0"
-        role="button"
-      >
-
-        <div class="tool-card-icon">
-          { }
-        </div>
-
-        <h3>
-          JSON Formatter
-        </h3>
-
-        <p>
-          Format and inspect JSON
-          with a clean developer workspace.
-        </p>
-
-        <div class="tool-card-arrow">
-          →
-        </div>
-
-      </article>
-
-
-      <!-- PERCENTAGE -->
-
-      <article
-        class="tool-card reveal"
-        data-tool="percentage calculator"
-        data-category="utility"
-        data-action="coming"
-        data-title="Percentage Calculator"
-        tabindex="0"
-        role="button"
-      >
-
-        <div class="tool-card-icon">
-          %
-        </div>
-
-        <h3>
-          Percentage Calculator
-        </h3>
-
-        <p>
-          Handle common percentage
-          calculations quickly.
-        </p>
-
-        <div class="tool-card-arrow">
-          →
-        </div>
-
-      </article>
-
-
-    </div>
-
-
-    <!-- TRUST STRIP -->
-
-    <div class="trust-strip reveal">
-
-      <div class="trust-item">
-
-        <strong>
-          Browser-first
-        </strong>
-
-        <span>
-          Wherever possible, files are
-          processed directly in your browser.
-        </span>
-
-      </div>
-
-
-      <div class="trust-item">
-
-        <strong>
-          No account
-        </strong>
-
-        <span>
-          Start using the tools without
-          creating an account.
-        </span>
-
-      </div>
-
-
-      <div class="trust-item">
-
-        <strong>
-          Built for speed
-        </strong>
-
-        <span>
-          Lightweight interfaces with
-          clear feedback at every step.
-        </span>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-</main>
-
-
-<!-- =======================================================
-     MERGE PDF WORKSPACE
-     ======================================================= -->
-
-<div
-  class="workspace-overlay"
-  id="mergeWorkspace"
-  aria-hidden="true"
->
-
-  <section
-    class="workspace"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="mergeTitle"
-  >
-
-    <header class="workspace-header">
-
-      <div class="workspace-title">
-
-        <div class="workspace-title-icon">
-          ⊕
-        </div>
-
-        <div>
-
-          <h2 id="mergeTitle">
-            Merge PDF
-          </h2>
-
-          <p>
-            Combine your documents into one PDF
-          </p>
-
-        </div>
-
-      </div>
-
-
-      <button
-        class="workspace-close"
-        id="closeMerge"
-        type="button"
-        aria-label="Close Merge PDF"
-      >
-        ×
-      </button>
-
-    </header>
-
-
-    <div class="workspace-body">
-
-
-      <!-- DROP AREA -->
-
-      <div
-        class="dropzone"
-        id="dropzone"
-      >
-
-        <div class="upload-orb">
-          ↑
-        </div>
-
-        <h3>
-          Drop your PDF files here
-        </h3>
-
-        <p>
-          Select two or more PDF documents.
-          You can reorder them before merging.
-        </p>
+        <!-- DESKTOP EXPLORE -->
 
         <button
-          class="primary-button"
-          id="chooseFiles"
           type="button"
+          class="nq-explore-btn"
+          id="nqExploreButton"
         >
-
-          Choose PDF files
 
           <span>
-            +
+            Explore Tools
           </span>
+
+          <svg
+            class="nq-explore-arrow"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+
+            <path
+              d="M5 12h13"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+
+            <path
+              d="m13 6 6 6-6 6"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+
+          </svg>
 
         </button>
 
-        <input
-          id="pdfInput"
-          class="hidden-input"
-          type="file"
-          accept="application/pdf,.pdf"
-          multiple
+
+        <!-- MOBILE MENU -->
+
+        <button
+          type="button"
+          class="nq-menu-btn"
+          id="nqMenuButton"
+          aria-label="Open navigation menu"
+          aria-expanded="false"
+          aria-controls="nqMobilePanel"
         >
+
+          <span class="nq-menu-line"></span>
+          <span class="nq-menu-line"></span>
+          <span class="nq-menu-line"></span>
+
+        </button>
 
       </div>
 
+    </nav>
 
-      <!-- FILE PANEL -->
+  </header>
 
-      <div
-        class="files-panel"
-        id="filesPanel"
+
+  <!-- =========================================================
+       MOBILE NAVIGATION PANEL
+       ========================================================= -->
+
+  <div
+    class="nq-mobile-panel"
+    id="nqMobilePanel"
+    aria-hidden="true"
+  >
+
+    <ul class="nq-mobile-links">
+
+      <li>
+        <a
+          href="#tools"
+          class="nq-mobile-link"
+        >
+          <span>Tools</span>
+
+          <span aria-hidden="true">→</span>
+        </a>
+      </li>
+
+
+      <li>
+        <a
+          href="#categories"
+          class="nq-mobile-link"
+        >
+          <span>Categories</span>
+
+          <span aria-hidden="true">→</span>
+        </a>
+      </li>
+
+
+      <li>
+        <a
+          href="#ai-tools"
+          class="nq-mobile-link"
+        >
+          <span>AI Tools</span>
+
+          <span aria-hidden="true">→</span>
+        </a>
+      </li>
+
+
+      <li>
+        <a
+          href="#resources"
+          class="nq-mobile-link"
+        >
+          <span>Resources</span>
+
+          <span aria-hidden="true">→</span>
+        </a>
+      </li>
+
+    </ul>
+
+
+    <div class="nq-mobile-divider"></div>
+
+
+    <button
+      type="button"
+      class="nq-explore-btn nq-mobile-explore"
+      id="nqMobileExploreButton"
+    >
+
+      <span>
+        Explore Tools
+      </span>
+
+      <svg
+        class="nq-explore-arrow"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
       >
 
-        <div class="files-header">
+        <path
+          d="M5 12h13"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+        />
 
-          <strong>
-            Your documents
-          </strong>
+        <path
+          d="m13 6 6 6-6 6"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
 
-          <span id="fileCount">
-            0 files
-          </span>
+      </svg>
+
+    </button>
+
+  </div>
+
+
+  <!-- =========================================================
+       MAIN FOUNDATION
+       PART 1 VISUAL TEST AREA
+       ========================================================= -->
+
+  <main id="top">
+
+    <section
+      class="nq-foundation"
+      id="tools"
+    >
+
+      <div
+        class="nq-foundation-orb"
+        aria-hidden="true"
+      ></div>
+
+
+      <div class="nq-foundation-copy">
+
+        <div class="nq-foundation-label">
+
+          <span
+            class="nq-foundation-dot"
+            aria-hidden="true"
+          ></span>
+
+          Nuvoraq is taking shape
 
         </div>
+
+
+        <h1 class="nq-foundation-title">
+
+          Powerful tools.
+          <br>
+
+          <span>
+            One simple workspace.
+          </span>
+
+        </h1>
+
+
+        <p class="nq-foundation-description">
+
+          A premium foundation for Nuvoraq's free online tools —
+          built to be fast, simple, private and accessible everywhere.
+
+        </p>
 
 
         <div
-          class="file-list"
-          id="fileList"
+          class="nq-foundation-line"
+          aria-hidden="true"
         ></div>
 
       </div>
 
+    </section>
 
-      <!-- PROCESSING -->
 
-      <div
-        class="processing"
-        id="processing"
-        aria-live="polite"
-      >
+    <!-- =======================================================
+         FUTURE SECTION ANCHORS
+         These are temporary and will be replaced in later parts.
+         ======================================================= -->
 
-        <span class="spinner"></span>
+    <div id="categories"></div>
+    <div id="ai-tools"></div>
+    <div id="resources"></div>
 
-        <span id="processingText">
-          Preparing your documents...
-        </span>
+  </main>
 
-      </div>
 
+  <!-- =========================================================
+       JAVASCRIPT — PART 1
+       ========================================================= -->
 
-      <!-- SUCCESS -->
+  <script>
 
-      <div
-        class="success-panel"
-        id="successPanel"
-        aria-live="polite"
-      >
+    (() => {
 
-        <div class="success-icon">
-          ✓
-        </div>
+      "use strict";
 
-        <h3>
-          Your PDF is ready
-        </h3>
 
-        <p>
-          The merged document has been prepared
-          successfully.
-        </p>
+      /* =======================================================
+         ELEMENTS
+         ======================================================= */
 
-      </div>
+      const html =
+        document.documentElement;
 
+      const navbar =
+        document.getElementById("nqNavbar");
 
-      <!-- ERROR -->
+      const themeButton =
+        document.getElementById("nqThemeButton");
 
-      <div
-        class="error-panel"
-        id="errorPanel"
-        aria-live="assertive"
-      ></div>
+      const menuButton =
+        document.getElementById("nqMenuButton");
 
+      const mobilePanel =
+        document.getElementById("nqMobilePanel");
 
-      <!-- ACTION BAR -->
+      const menuOverlay =
+        document.getElementById("nqMenuOverlay");
 
-      <div class="workspace-actions">
+      const searchButton =
+        document.getElementById("nqSearchButton");
 
-        <div class="workspace-note">
+      const exploreButton =
+        document.getElementById("nqExploreButton");
 
-          Files are processed locally in your browser
-          whenever technically possible.
+      const mobileExploreButton =
+        document.getElementById("nqMobileExploreButton");
 
-        </div>
 
+      /* =======================================================
+         SCROLL NAVBAR
+         ======================================================= */
 
-        <div class="action-group">
-
-          <button
-            class="small-button"
-            id="clearFiles"
-            type="button"
-          >
-            Clear
-          </button>
-
-          <button
-            class="small-button primary"
-            id="mergeButton"
-            type="button"
-            disabled
-          >
-            Merge PDF
-          </button>
-
-        </div>
-
-      </div>
-
-
-    </div>
-
-  </section>
-
-</div>
-
-
-<!-- =======================================================
-     COMING SOON WORKSPACE
-     ======================================================= -->
-
-<div
-  class="workspace-overlay"
-  id="comingWorkspace"
-  aria-hidden="true"
->
-
-  <section
-    class="workspace"
-    role="dialog"
-    aria-modal="true"
-  >
-
-    <header class="workspace-header">
-
-      <div class="workspace-title">
-
-        <div class="workspace-title-icon">
-          ✦
-        </div>
-
-        <div>
-
-          <h2 id="comingTitle">
-            Coming Soon
-          </h2>
-
-          <p>
-            Nuvoraq is building this workspace
-          </p>
-
-        </div>
-
-      </div>
-
-
-      <button
-        class="workspace-close"
-        id="closeComing"
-        type="button"
-        aria-label="Close"
-      >
-        ×
-      </button>
-
-    </header>
-
-
-    <div class="workspace-body">
-
-      <div class="dropzone">
-
-        <div class="upload-orb">
-          ✦
-        </div>
-
-        <h3 id="comingHeading">
-          This tool is being crafted.
-        </h3>
-
-        <p>
-          We are building every Nuvoraq workspace
-          around the same premium experience,
-          clear feedback and reliable interactions.
-        </p>
-
-        <button
-          class="secondary-button"
-          id="comingBack"
-          type="button"
-        >
-          Back to tools
-        </button>
-
-      </div>
-
-    </div>
-
-  </section>
-
-</div>
-
-
-<!-- =======================================================
-     FOOTER
-     ======================================================= -->
-
-<footer class="footer">
-
-  <div class="container">
-
-    <div class="footer-inner">
-
-      <div class="footer-brand">
-
-        <span class="footer-dot"></span>
-
-        Nuvoraq
-
-      </div>
-
-      <div>
-        Powerful tools. Zero friction.
-      </div>
-
-      <div>
-        © 2026 Nuvoraq
-      </div>
-
-    </div>
-
-  </div>
-
-</footer>
-
-
-<!-- =======================================================
-     PART 2 JAVASCRIPT WILL GO HERE
-     ======================================================= -->
-<script>
-
-/* =========================================================
-   NUVORAQ — PART 2
-   MOTION + UX + MERGE PDF ENGINE
-   ========================================================= */
-
-(() => {
-
-  "use strict";
-
-
-  /* =======================================================
-     ELEMENTS
-     ======================================================= */
-
-  const navbar =
-    document.getElementById("navbar");
-
-  const heroVisual =
-    document.getElementById("heroVisual");
-
-  const themeButton =
-    document.getElementById("themeButton");
-
-  const heroMergeButton =
-    document.getElementById("heroMergeButton");
-
-  const toolSearch =
-    document.getElementById("toolSearch");
-
-  const categories =
-    document.getElementById("categories");
-
-  const toolGrid =
-    document.getElementById("toolGrid");
-
-  const mergeWorkspace =
-    document.getElementById("mergeWorkspace");
-
-  const closeMerge =
-    document.getElementById("closeMerge");
-
-  const comingWorkspace =
-    document.getElementById("comingWorkspace");
-
-  const closeComing =
-    document.getElementById("closeComing");
-
-  const comingBack =
-    document.getElementById("comingBack");
-
-  const comingTitle =
-    document.getElementById("comingTitle");
-
-  const comingHeading =
-    document.getElementById("comingHeading");
-
-  const chooseFiles =
-    document.getElementById("chooseFiles");
-
-  const pdfInput =
-    document.getElementById("pdfInput");
-
-  const dropzone =
-    document.getElementById("dropzone");
-
-  const filesPanel =
-    document.getElementById("filesPanel");
-
-  const fileList =
-    document.getElementById("fileList");
-
-  const fileCount =
-    document.getElementById("fileCount");
-
-  const clearFilesButton =
-    document.getElementById("clearFiles");
-
-  const mergeButton =
-    document.getElementById("mergeButton");
-
-  const processing =
-    document.getElementById("processing");
-
-  const processingText =
-    document.getElementById("processingText");
-
-  const successPanel =
-    document.getElementById("successPanel");
-
-  const errorPanel =
-    document.getElementById("errorPanel");
-
-
-  /* =======================================================
-     STATE
-     ======================================================= */
-
-  let selectedFiles = [];
-
-  let isProcessing = false;
-
-  let activeCategory = "all";
-
-  let lastFocusedElement = null;
-
-  let generatedObjectUrl = null;
-
-
-  /* =======================================================
-     UTILITIES
-     ======================================================= */
-
-  function wait(ms) {
-    return new Promise(resolve => {
-      setTimeout(resolve, ms);
-    });
-  }
-
-
-  function formatBytes(bytes) {
-
-    if (!Number.isFinite(bytes)) {
-      return "Unknown size";
-    }
-
-    if (bytes < 1024) {
-      return `${bytes} B`;
-    }
-
-    if (bytes < 1024 * 1024) {
-      return `${(bytes / 1024).toFixed(1)} KB`;
-    }
-
-    if (bytes < 1024 * 1024 * 1024) {
-      return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
-    }
-
-    return `${(bytes / (1024 * 1024 * 1024)).toFixed(2)} GB`;
-  }
-
-
-  function escapeHtml(value) {
-
-    return String(value).replace(
-      /[&<>"']/g,
-      character => {
-
-        const entities = {
-          "&": "&amp;",
-          "<": "&lt;",
-          ">": "&gt;",
-          '"': "&quot;",
-          "'": "&#039;"
-        };
-
-        return entities[character];
-      }
-    );
-  }
-
-
-  function isPdf(file) {
-
-    if (!file) {
-      return false;
-    }
-
-    return (
-      file.type === "application/pdf" ||
-      file.name.toLowerCase().endsWith(".pdf")
-    );
-  }
-
-
-  function revokeGeneratedUrl() {
-
-    if (generatedObjectUrl) {
-
-      URL.revokeObjectURL(
-        generatedObjectUrl
-      );
-
-      generatedObjectUrl = null;
-    }
-  }
-
-
-  /* =======================================================
-     NAVBAR SCROLL STATE
-     ======================================================= */
-
-  function updateNavbar() {
-
-    if (!navbar) {
-      return;
-    }
-
-    if (window.scrollY > 20) {
-      navbar.classList.add("scrolled");
-    } else {
-      navbar.classList.remove("scrolled");
-    }
-  }
-
-  updateNavbar();
-
-  window.addEventListener(
-    "scroll",
-    updateNavbar,
-    {
-      passive: true
-    }
-  );
-
-
-  /* =======================================================
-     REVEAL ANIMATIONS
-     ======================================================= */
-
-  const revealItems =
-    document.querySelectorAll(".reveal");
-
-  const reducedMotion =
-    window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-
-
-  if (
-    reducedMotion ||
-    !("IntersectionObserver" in window)
-  ) {
-
-    revealItems.forEach(
-      element => {
-        element.classList.add("visible");
-      }
-    );
-
-  } else {
-
-    const revealObserver =
-      new IntersectionObserver(
-        entries => {
-
-          entries.forEach(entry => {
-
-            if (!entry.isIntersecting) {
-              return;
-            }
-
-            entry.target.classList.add(
-              "visible"
-            );
-
-            revealObserver.unobserve(
-              entry.target
-            );
-
-          });
-
-        },
-        {
-          threshold: 0.12,
-          rootMargin: "0px 0px -40px 0px"
-        }
-      );
-
-
-    revealItems.forEach(
-      element => {
-
-        revealObserver.observe(
-          element
-        );
-
-      }
-    );
-
-  }
-
-
-  /* =======================================================
-     PREMIUM 3D MOUSE PARALLAX
-     ======================================================= */
-
-  if (
-    heroVisual &&
-    !reducedMotion &&
-    window.matchMedia("(pointer:fine)").matches
-  ) {
-
-    let pointerX = 0;
-    let pointerY = 0;
-
-    let currentX = 0;
-    let currentY = 0;
-
-
-    window.addEventListener(
-      "pointermove",
-      event => {
-
-        pointerX =
-          (event.clientX / window.innerWidth - 0.5)
-          * 2;
-
-        pointerY =
-          (event.clientY / window.innerHeight - 0.5)
-          * 2;
-
-      },
-      {
-        passive: true
-      }
-    );
-
-
-    function animateHeroParallax() {
-
-      currentX +=
-        (pointerX - currentX) * 0.045;
-
-      currentY +=
-        (pointerY - currentY) * 0.045;
-
-
-      const core =
-        heroVisual.querySelector(".core");
-
-      const orbitOne =
-        heroVisual.querySelector(".orbit.one");
-
-      const orbitTwo =
-        heroVisual.querySelector(".orbit.two");
-
-      const orbitThree =
-        heroVisual.querySelector(".orbit.three");
-
-      const floatOne =
-        heroVisual.querySelector(".float-card.one");
-
-      const floatTwo =
-        heroVisual.querySelector(".float-card.two");
-
-      const floatThree =
-        heroVisual.querySelector(".float-card.three");
-
-
-      if (core) {
-
-        core.style.transform = `
-          translate(
-            calc(-50% + ${currentX * 10}px),
-            calc(-50% + ${currentY * 7}px)
-          )
-          rotateX(${12 - currentY * 5}deg)
-          rotateY(${-17 + currentX * 7}deg)
-          rotateZ(${2 + currentX * 1.5}deg)
-        `;
-      }
-
-
-      if (orbitOne) {
-
-        orbitOne.style.marginLeft =
-          `${currentX * 10}px`;
-
-        orbitOne.style.marginTop =
-          `${currentY * 7}px`;
-      }
-
-
-      if (orbitTwo) {
-
-        orbitTwo.style.marginLeft =
-          `${currentX * -14}px`;
-
-        orbitTwo.style.marginTop =
-          `${currentY * -9}px`;
-      }
-
-
-      if (orbitThree) {
-
-        orbitThree.style.marginLeft =
-          `${currentX * 18}px`;
-
-        orbitThree.style.marginTop =
-          `${currentY * 12}px`;
-      }
-
-
-      if (floatOne) {
-
-        floatOne.style.marginLeft =
-          `${currentX * 13}px`;
-
-        floatOne.style.marginTop =
-          `${currentY * 10}px`;
-      }
-
-
-      if (floatTwo) {
-
-        floatTwo.style.marginLeft =
-          `${currentX * -17}px`;
-
-        floatTwo.style.marginTop =
-          `${currentY * -9}px`;
-      }
-
-
-      if (floatThree) {
-
-        floatThree.style.marginLeft =
-          `${currentX * -9}px`;
-
-        floatThree.style.marginTop =
-          `${currentY * 15}px`;
-      }
-
-
-      requestAnimationFrame(
-        animateHeroParallax
-      );
-    }
-
-
-    requestAnimationFrame(
-      animateHeroParallax
-    );
-
-  }
-
-
-  /* =======================================================
-     THEME
-     ======================================================= */
-
-  function applyTheme(theme) {
-
-    if (theme === "light") {
-
-      document.body.classList.add(
-        "light-theme"
-      );
-
-      themeButton.textContent = "☼";
-
-    } else {
-
-      document.body.classList.remove(
-        "light-theme"
-      );
-
-      themeButton.textContent = "◐";
-
-    }
-  }
-
-
-  /*
-    The premium dark design remains the
-    default. Theme state is persisted only
-    if the browser supports localStorage.
-  */
-
-  let savedTheme = null;
-
-  try {
-
-    savedTheme =
-      localStorage.getItem(
-        "nuvoraq-theme"
-      );
-
-  } catch (error) {
-
-    savedTheme = null;
-
-  }
-
-
-  applyTheme(
-    savedTheme === "light"
-      ? "light"
-      : "dark"
-  );
-
-
-  themeButton.addEventListener(
-    "click",
-    () => {
-
-      const isLight =
-        document.body.classList.contains(
-          "light-theme"
-        );
-
-      const nextTheme =
-        isLight
-          ? "dark"
-          : "light";
-
-
-      /*
-        A dedicated light theme is deliberately
-        subtle. We create its variables through
-        CSS custom properties below.
-      */
-
-      if (nextTheme === "light") {
-
-        document.body.style.setProperty(
-          "--bg",
-          "#f4f6fb"
-        );
-
-        document.body.style.setProperty(
-          "--bg-soft",
-          "#ffffff"
-        );
-
-        document.body.style.setProperty(
-          "--surface",
-          "rgba(10,15,30,.045)"
-        );
-
-        document.body.style.setProperty(
-          "--surface-strong",
-          "rgba(10,15,30,.075)"
-        );
-
-        document.body.style.setProperty(
-          "--surface-hover",
-          "rgba(10,15,30,.095)"
-        );
-
-        document.body.style.setProperty(
-          "--line",
-          "rgba(10,15,30,.11)"
-        );
-
-        document.body.style.setProperty(
-          "--line-bright",
-          "rgba(10,15,30,.17)"
-        );
-
-        document.body.style.setProperty(
-          "--text",
-          "#111426"
-        );
-
-        document.body.style.setProperty(
-          "--text-soft",
-          "#41485e"
-        );
-
-        document.body.style.setProperty(
-          "--muted",
-          "#697287"
-        );
-
-        document.body.style.background =
-          "#f4f6fb";
-
-      } else {
-
-        document.body.style.removeProperty(
-          "--bg"
-        );
-
-        document.body.style.removeProperty(
-          "--bg-soft"
-        );
-
-        document.body.style.removeProperty(
-          "--surface"
-        );
-
-        document.body.style.removeProperty(
-          "--surface-strong"
-        );
-
-        document.body.style.removeProperty(
-          "--surface-hover"
-        );
-
-        document.body.style.removeProperty(
-          "--line"
-        );
-
-        document.body.style.removeProperty(
-          "--line-bright"
-        );
-
-        document.body.style.removeProperty(
-          "--text"
-        );
-
-        document.body.style.removeProperty(
-          "--text-soft"
-        );
-
-        document.body.style.removeProperty(
-          "--muted"
-        );
-
-        document.body.style.background = "";
-      }
-
-
-      applyTheme(nextTheme);
-
-
-      try {
-
-        localStorage.setItem(
-          "nuvoraq-theme",
-          nextTheme
-        );
-
-      } catch (error) {
-        /* Storage unavailable — continue normally */
-      }
-
-    }
-  );
-
-
-  /* =======================================================
-     TOOL SEARCH + CATEGORY FILTER
-     ======================================================= */
-
-  const toolCards =
-    Array.from(
-      toolGrid.querySelectorAll(
-        ".tool-card"
-      )
-    );
-
-
-  function updateToolVisibility() {
-
-    const query =
-      toolSearch.value
-        .trim()
-        .toLowerCase();
-
-
-    toolCards.forEach(
-      card => {
-
-        const name =
-          (
-            card.dataset.tool ||
-            ""
-          ).toLowerCase();
-
-
-        const category =
-          (
-            card.dataset.category ||
-            ""
-          ).toLowerCase();
-
-
-        const matchesSearch =
-          !query ||
-          name.includes(query);
-
-
-        const matchesCategory =
-          activeCategory === "all" ||
-          category
-            .split(" ")
-            .includes(activeCategory);
-
-
-        const shouldShow =
-          matchesSearch &&
-          matchesCategory;
-
-
-        card.style.display =
-          shouldShow
-            ? ""
-            : "none";
-
-      }
-    );
-
-  }
-
-
-  toolSearch.addEventListener(
-    "input",
-    updateToolVisibility
-  );
-
-
-  categories
-    .querySelectorAll(".category")
-    .forEach(button => {
-
-      button.addEventListener(
-        "click",
+      const updateNavbar =
         () => {
 
-          categories
-            .querySelectorAll(".category")
-            .forEach(
-              item => {
-                item.classList.remove(
-                  "active"
-                );
-              }
+          if (!navbar) {
+            return;
+          }
+
+          if (window.scrollY > 24) {
+
+            navbar.classList.add(
+              "is-scrolled"
             );
-
-
-          button.classList.add(
-            "active"
-          );
-
-
-          activeCategory =
-            button.dataset.category ||
-            "all";
-
-
-          updateToolVisibility();
-
-        }
-      );
-
-    });
-
-
-  /* =======================================================
-     TOOL CARD INTERACTION
-     ======================================================= */
-
-  function openComingSoon(title) {
-
-    lastFocusedElement =
-      document.activeElement;
-
-
-    comingTitle.textContent =
-      title || "Coming Soon";
-
-
-    comingHeading.textContent =
-      `${title || "This tool"} is being crafted.`;
-
-
-    comingWorkspace.classList.add(
-      "open"
-    );
-
-    comingWorkspace.setAttribute(
-      "aria-hidden",
-      "false"
-    );
-
-    document.body.style.overflow =
-      "hidden";
-
-
-    requestAnimationFrame(
-      () => {
-        closeComing.focus();
-      }
-    );
-
-  }
-
-
-  toolCards.forEach(
-    card => {
-
-      const activate =
-        () => {
-
-          const action =
-            card.dataset.action;
-
-
-          if (action === "merge") {
-
-            openMergeWorkspace();
 
           } else {
 
-            openComingSoon(
-              card.dataset.title ||
-              "Coming Soon"
+            navbar.classList.remove(
+              "is-scrolled"
             );
 
           }
@@ -5299,1539 +2469,455 @@ a {
         };
 
 
-      card.addEventListener(
-        "click",
-        activate
-      );
+      updateNavbar();
 
 
-      card.addEventListener(
-        "keydown",
-        event => {
-
-          if (
-            event.key === "Enter" ||
-            event.key === " "
-          ) {
-
-            event.preventDefault();
-
-            activate();
-
-          }
-
+      window.addEventListener(
+        "scroll",
+        updateNavbar,
+        {
+          passive: true
         }
       );
 
-    }
-  );
 
+      /* =======================================================
+         THEME
+         ======================================================= */
 
-  /* =======================================================
-     MERGE WORKSPACE LIFECYCLE
-     ======================================================= */
+      const getStoredTheme =
+        () => {
 
-  function openMergeWorkspace() {
+          try {
 
-    lastFocusedElement =
-      document.activeElement;
-
-
-    mergeWorkspace.classList.add(
-      "open"
-    );
-
-    mergeWorkspace.setAttribute(
-      "aria-hidden",
-      "false"
-    );
-
-    document.body.style.overflow =
-      "hidden";
-
-
-    clearError();
-
-    clearSuccess();
-
-    requestAnimationFrame(
-      () => {
-        closeMerge.focus();
-      }
-    );
-
-  }
-
-
-  function closeMergeWorkspace() {
-
-    if (isProcessing) {
-      return;
-    }
-
-
-    mergeWorkspace.classList.remove(
-      "open"
-    );
-
-    mergeWorkspace.setAttribute(
-      "aria-hidden",
-      "true"
-    );
-
-    document.body.style.overflow =
-      "";
-
-
-    if (
-      lastFocusedElement &&
-      typeof lastFocusedElement.focus === "function"
-    ) {
-
-      try {
-        lastFocusedElement.focus();
-      } catch (error) {
-        /* Focus restoration is optional */
-      }
-
-    }
-
-  }
-
-
-  function closeComingWorkspace() {
-
-    comingWorkspace.classList.remove(
-      "open"
-    );
-
-    comingWorkspace.setAttribute(
-      "aria-hidden",
-      "true"
-    );
-
-    document.body.style.overflow =
-      "";
-
-
-    if (
-      lastFocusedElement &&
-      typeof lastFocusedElement.focus === "function"
-    ) {
-
-      try {
-        lastFocusedElement.focus();
-      } catch (error) {
-        /* Focus restoration is optional */
-      }
-
-    }
-
-  }
-
-
-  heroMergeButton.addEventListener(
-    "click",
-    openMergeWorkspace
-  );
-
-
-  closeMerge.addEventListener(
-    "click",
-    closeMergeWorkspace
-  );
-
-
-  closeComing.addEventListener(
-    "click",
-    closeComingWorkspace
-  );
-
-
-  comingBack.addEventListener(
-    "click",
-    closeComingWorkspace
-  );
-
-
-  mergeWorkspace.addEventListener(
-    "click",
-    event => {
-
-      if (
-        event.target === mergeWorkspace &&
-        !isProcessing
-      ) {
-
-        closeMergeWorkspace();
-
-      }
-
-    }
-  );
-
-
-  comingWorkspace.addEventListener(
-    "click",
-    event => {
-
-      if (
-        event.target === comingWorkspace
-      ) {
-
-        closeComingWorkspace();
-
-      }
-
-    }
-  );
-
-
-  /* =======================================================
-     KEYBOARD ESCAPE
-     ======================================================= */
-
-  document.addEventListener(
-    "keydown",
-    event => {
-
-      if (
-        event.key !== "Escape"
-      ) {
-        return;
-      }
-
-
-      if (
-        mergeWorkspace.classList.contains(
-          "open"
-        ) &&
-        !isProcessing
-      ) {
-
-        closeMergeWorkspace();
-
-        return;
-      }
-
-
-      if (
-        comingWorkspace.classList.contains(
-          "open"
-        )
-      ) {
-
-        closeComingWorkspace();
-
-      }
-
-    }
-  );
-
-
-  /* =======================================================
-     PDF FILE SELECTION
-     ======================================================= */
-
-  chooseFiles.addEventListener(
-    "click",
-    () => {
-
-      if (isProcessing) {
-        return;
-      }
-
-      pdfInput.click();
-
-    }
-  );
-
-
-  pdfInput.addEventListener(
-    "change",
-    event => {
-
-      addFiles(
-        event.target.files
-      );
-
-
-      /*
-        Resetting the input allows the
-        same file to be selected again
-        after removal.
-      */
-
-      event.target.value = "";
-
-    }
-  );
-
-
-  /* =======================================================
-     ADD FILES
-     ======================================================= */
-
-  function addFiles(fileListLike) {
-
-    if (isProcessing) {
-      return;
-    }
-
-
-    const incoming =
-      Array.from(
-        fileListLike || []
-      );
-
-
-    if (!incoming.length) {
-      return;
-    }
-
-
-    clearError();
-
-    clearSuccess();
-
-
-    const validFiles =
-      incoming.filter(isPdf);
-
-
-    const invalidCount =
-      incoming.length -
-      validFiles.length;
-
-
-    if (validFiles.length) {
-
-      validFiles.forEach(
-        file => {
-
-          /*
-            Prevent accidental duplicate
-            entries from the same selection.
-          */
-
-          const duplicate =
-            selectedFiles.some(
-              existing =>
-                existing.name === file.name &&
-                existing.size === file.size &&
-                existing.lastModified === file.lastModified
+            return localStorage.getItem(
+              "nuvoraq-theme"
             );
 
+          } catch (error) {
 
-          if (!duplicate) {
-
-            selectedFiles.push(
-              file
-            );
+            return null;
 
           }
 
-        }
+        };
+
+
+      const systemPrefersLight =
+        window.matchMedia &&
+        window.matchMedia(
+          "(prefers-color-scheme: light)"
+        ).matches;
+
+
+      const storedTheme =
+        getStoredTheme();
+
+
+      const initialTheme =
+        storedTheme ||
+        (systemPrefersLight ? "light" : "dark");
+
+
+      html.setAttribute(
+        "data-theme",
+        initialTheme
       );
 
-    }
 
+      const saveTheme =
+        (theme) => {
 
-    if (invalidCount > 0) {
+          try {
 
-      showError(
-        `${invalidCount} file${invalidCount === 1 ? "" : "s"} skipped because ${invalidCount === 1 ? "it is" : "they are"} not a PDF.`
-      );
+            localStorage.setItem(
+              "nuvoraq-theme",
+              theme
+            );
 
-    }
+          } catch (error) {
 
+            /* Storage can be unavailable.
+               Theme still works for this session. */
 
-    renderFiles();
-
-  }
-
-
-  /* =======================================================
-     DRAG + DROP UPLOAD
-     ======================================================= */
-
-  [
-    "dragenter",
-    "dragover"
-  ].forEach(
-    eventName => {
-
-      dropzone.addEventListener(
-        eventName,
-        event => {
-
-          event.preventDefault();
-
-          event.stopPropagation();
-
-
-          if (isProcessing) {
-            return;
           }
 
+        };
 
-          dropzone.classList.add(
-            "dragging"
+
+      const setTheme =
+        (theme) => {
+
+          html.setAttribute(
+            "data-theme",
+            theme
           );
 
-        }
-      );
+          saveTheme(theme);
 
-    }
-  );
+        };
 
 
-  [
-    "dragleave",
-    "drop"
-  ].forEach(
-    eventName => {
-
-      dropzone.addEventListener(
-        eventName,
-        event => {
-
-          event.preventDefault();
-
-          event.stopPropagation();
-
-          dropzone.classList.remove(
-            "dragging"
-          );
-
-        }
-      );
-
-    }
-  );
-
-
-  dropzone.addEventListener(
-    "drop",
-    event => {
-
-      if (isProcessing) {
-        return;
-      }
-
-
-      addFiles(
-        event.dataTransfer.files
-      );
-
-    }
-  );
-
-
-  /* =======================================================
-     RENDER FILES
-     ======================================================= */
-
-  function renderFiles() {
-
-    fileList.innerHTML = "";
-
-
-    const count =
-      selectedFiles.length;
-
-
-    fileCount.textContent =
-      `${count} ${count === 1 ? "file" : "files"}`;
-
-
-    filesPanel.classList.toggle(
-      "visible",
-      count > 0
-    );
-
-
-    mergeButton.disabled =
-      count < 2 ||
-      isProcessing;
-
-
-    if (!count) {
-
-      return;
-
-    }
-
-
-    selectedFiles.forEach(
-      (file,index) => {
-
-        const item =
-          document.createElement(
-            "div"
-          );
-
-
-        item.className =
-          "file-item";
-
-
-        item.draggable =
-          !isProcessing;
-
-
-        item.dataset.index =
-          String(index);
-
-
-        item.innerHTML = `
-
-          <div
-            class="drag-handle"
-            title="Drag to reorder"
-            aria-hidden="true"
-          >
-            ⋮⋮
-          </div>
-
-          <div class="file-icon">
-            PDF
-          </div>
-
-          <div class="file-meta">
-
-            <div class="file-name">
-              ${escapeHtml(file.name)}
-            </div>
-
-            <div class="file-size">
-              ${formatBytes(file.size)}
-            </div>
-
-          </div>
-
-          <button
-            class="file-remove"
-            type="button"
-            aria-label="Remove ${escapeHtml(file.name)}"
-            title="Remove file"
-          >
-            ×
-          </button>
-
-        `;
-
-
-        const removeButton =
-          item.querySelector(
-            ".file-remove"
-          );
-
-
-        removeButton.addEventListener(
-          "click",
-          event => {
-
-            event.stopPropagation();
-
-            removeFile(index);
-
-          }
-        );
-
-
-        item.addEventListener(
-          "dragstart",
-          event => {
-
-            if (isProcessing) {
-              event.preventDefault();
-              return;
-            }
-
-
-            item.classList.add(
-              "dragging"
-            );
-
-
-            event.dataTransfer.effectAllowed =
-              "move";
-
-
-            event.dataTransfer.setData(
-              "text/plain",
-              String(index)
-            );
-
-          }
-        );
-
-
-        item.addEventListener(
-          "dragend",
-          () => {
-
-            item.classList.remove(
-              "dragging"
-            );
-
-          }
-        );
-
-
-        item.addEventListener(
-          "dragover",
-          event => {
-
-            if (isProcessing) {
-              return;
-            }
-
-
-            event.preventDefault();
-
-            event.dataTransfer.dropEffect =
-              "move";
-
-          }
-        );
-
-
-        item.addEventListener(
-          "drop",
-          event => {
-
-            if (isProcessing) {
-              return;
-            }
-
-
-            event.preventDefault();
-            event.stopPropagation();
-
-
-            const sourceIndex =
-              Number(
-                event.dataTransfer.getData(
-                  "text/plain"
-                )
-              );
-
-
-            const targetIndex =
-              Number(
-                item.dataset.index
-              );
-
-
-            if (
-              Number.isInteger(sourceIndex) &&
-              Number.isInteger(targetIndex) &&
-              sourceIndex !== targetIndex
-            ) {
-
-              reorderFiles(
-                sourceIndex,
-                targetIndex
-              );
-
-            }
-
-          }
-        );
-
-
-        fileList.appendChild(
-          item
-        );
-
-      }
-    );
-
-  }
-
-
-  /* =======================================================
-     REMOVE FILE
-     ======================================================= */
-
-  function removeFile(index) {
-
-    if (
-      isProcessing ||
-      index < 0 ||
-      index >= selectedFiles.length
-    ) {
-
-      return;
-    }
-
-
-    selectedFiles.splice(
-      index,
-      1
-    );
-
-
-    clearError();
-
-    clearSuccess();
-
-    renderFiles();
-
-  }
-
-
-  /* =======================================================
-     REORDER FILES
-     ======================================================= */
-
-  function reorderFiles(
-    sourceIndex,
-    targetIndex
-  ) {
-
-    if (
-      sourceIndex < 0 ||
-      targetIndex < 0 ||
-      sourceIndex >= selectedFiles.length ||
-      targetIndex >= selectedFiles.length
-    ) {
-
-      return;
-    }
-
-
-    const moved =
-      selectedFiles.splice(
-        sourceIndex,
-        1
-      )[0];
-
-
-    selectedFiles.splice(
-      targetIndex,
-      0,
-      moved
-    );
-
-
-    renderFiles();
-
-  }
-
-
-  /* =======================================================
-     CLEAR FILES
-     ======================================================= */
-
-  clearFilesButton.addEventListener(
-    "click",
-    () => {
-
-      if (isProcessing) {
-        return;
-      }
-
-
-      selectedFiles = [];
-
-      pdfInput.value = "";
-
-      clearError();
-
-      clearSuccess();
-
-      renderFiles();
-
-    }
-  );
-
-
-  /* =======================================================
-     STATUS UI
-     ======================================================= */
-
-  function showProcessing(
-    message
-  ) {
-
-    processingText.textContent =
-      message;
-
-    processing.classList.add(
-      "visible"
-    );
-
-  }
-
-
-  function hideProcessing() {
-
-    processing.classList.remove(
-      "visible"
-    );
-
-  }
-
-
-  function showSuccess() {
-
-    successPanel.classList.add(
-      "visible"
-    );
-
-  }
-
-
-  function clearSuccess() {
-
-    successPanel.classList.remove(
-      "visible"
-    );
-
-  }
-
-
-  function showError(
-    message
-  ) {
-
-    errorPanel.textContent =
-      message;
-
-    errorPanel.classList.add(
-      "visible"
-    );
-
-  }
-
-
-  function clearError() {
-
-    errorPanel.textContent =
-      "";
-
-    errorPanel.classList.remove(
-      "visible"
-    );
-
-  }
-
-
-  /* =======================================================
-     MERGE PDF
-     ======================================================= */
-
-  mergeButton.addEventListener(
-    "click",
-    mergePdfs
-  );
-
-
-  async function mergePdfs() {
-
-    /*
-      Hard protection against double clicks
-      and accidental repeated processing.
-    */
-
-    if (isProcessing) {
-      return;
-    }
-
-
-    if (selectedFiles.length < 2) {
-
-      showError(
-        "Please select at least two PDF files before merging."
-      );
-
-      return;
-
-    }
-
-
-    if (
-      typeof PDFLib === "undefined" ||
-      typeof PDFLib.PDFDocument === "undefined"
-    ) {
-
-      showError(
-        "The PDF engine could not be loaded. Please refresh the page and try again."
-      );
-
-      return;
-
-    }
-
-
-    isProcessing = true;
-
-    mergeButton.disabled = true;
-
-    clearError();
-
-    clearSuccess();
-
-    revokeGeneratedUrl();
-
-
-    try {
-
-      showProcessing(
-        "Preparing your PDF workspace..."
-      );
-
-
-      /*
-        Small visual delay makes the state
-        feel intentional rather than frozen.
-      */
-
-      await wait(180);
-
-
-      const mergedPdf =
-        await PDFLib.PDFDocument.create();
-
-
-      const total =
-        selectedFiles.length;
-
-
-      for (
-        let index = 0;
-        index < total;
-        index++
-      ) {
-
-        const file =
-          selectedFiles[index];
-
-
-        processingText.textContent =
-          `Processing document ${index + 1} of ${total}...`;
-
-
-        await wait(20);
-
-
-        const buffer =
-          await file.arrayBuffer();
-
-
-        let sourcePdf;
-
-
-        try {
-
-          sourcePdf =
-            await PDFLib.PDFDocument.load(
-              buffer,
-              {
-                ignoreEncryption: false,
-                updateMetadata: false
-              }
-            );
-
-        } catch (loadError) {
-
-          throw new Error(
-            `The file "${file.name}" could not be opened. It may be damaged or password protected.`
-          );
-
-        }
-
-
-        const pages =
-          await mergedPdf.copyPages(
-            sourcePdf,
-            sourcePdf.getPageIndices()
-          );
-
-
-        pages.forEach(
-          page => {
-            mergedPdf.addPage(
-              page
-            );
-          }
-        );
-
-      }
-
-
-      processingText.textContent =
-        "Finalizing your merged PDF...";
-
-
-      await wait(100);
-
-
-      /*
-        Metadata is deliberately simple.
-      */
-
-      mergedPdf.setTitle(
-        "Merged PDF — Nuvoraq"
-      );
-
-      mergedPdf.setProducer(
-        "Nuvoraq"
-      );
-
-
-      const mergedBytes =
-        await mergedPdf.save({
-          useObjectStreams: true
-        });
-
-
-      const blob =
-        new Blob(
-          [mergedBytes],
-          {
-            type:
-              "application/pdf"
-          }
-        );
-
-
-      generatedObjectUrl =
-        URL.createObjectURL(
-          blob
-        );
-
-
-      /*
-        We don't immediately force a download.
-        First we show a polished success state.
-      */
-
-      showSuccess();
-
-
-      hideProcessing();
-
-
-      /*
-        Create download control dynamically
-        inside success panel.
-      */
-
-      const existingDownload =
-        successPanel.querySelector(
-          ".download-generated"
-        );
-
-
-      if (existingDownload) {
-        existingDownload.remove();
-      }
-
-
-      const downloadButton =
-        document.createElement(
-          "button"
-        );
-
-
-      downloadButton.type =
-        "button";
-
-
-      downloadButton.className =
-        "primary-button download-generated";
-
-
-      downloadButton.style.marginTop =
-        "16px";
-
-
-      downloadButton.textContent =
-        "Download merged PDF";
-
-
-      downloadButton.addEventListener(
+      themeButton?.addEventListener(
         "click",
         () => {
 
-          if (!generatedObjectUrl) {
-            return;
-          }
-
-
-          const anchor =
-            document.createElement(
-              "a"
+          const currentTheme =
+            html.getAttribute(
+              "data-theme"
             );
 
+          const nextTheme =
+            currentTheme === "light"
+              ? "dark"
+              : "light";
 
-          anchor.href =
-            generatedObjectUrl;
-
-
-          anchor.download =
-            "nuvoraq-merged.pdf";
-
-
-          document.body.appendChild(
-            anchor
-          );
-
-
-          anchor.click();
-
-
-          anchor.remove();
+          setTheme(nextTheme);
 
         }
       );
 
 
-      successPanel.appendChild(
-        downloadButton
+      /* =======================================================
+         MOBILE MENU
+         ======================================================= */
+
+      const setMenuState =
+        (open) => {
+
+          if (!menuButton ||
+              !mobilePanel ||
+              !menuOverlay) {
+            return;
+          }
+
+
+          menuButton.classList.toggle(
+            "is-open",
+            open
+          );
+
+
+          mobilePanel.classList.toggle(
+            "is-open",
+            open
+          );
+
+
+          menuOverlay.classList.toggle(
+            "is-visible",
+            open
+          );
+
+
+          menuButton.setAttribute(
+            "aria-expanded",
+            String(open)
+          );
+
+
+          mobilePanel.setAttribute(
+            "aria-hidden",
+            String(!open)
+          );
+
+
+          menuOverlay.setAttribute(
+            "aria-hidden",
+            String(!open)
+          );
+
+
+          document.body.classList.toggle(
+            "menu-open",
+            open
+          );
+
+        };
+
+
+      const toggleMenu =
+        () => {
+
+          const isOpen =
+            menuButton?.classList.contains(
+              "is-open"
+            );
+
+          setMenuState(!isOpen);
+
+        };
+
+
+      menuButton?.addEventListener(
+        "click",
+        toggleMenu
       );
 
 
-    } catch (error) {
-
-      console.error(
-        "Nuvoraq Merge PDF Error:",
-        error
+      menuOverlay?.addEventListener(
+        "click",
+        () => {
+          setMenuState(false);
+        }
       );
 
 
-      hideProcessing();
+      /* Close mobile menu
+         after selecting a link */
 
-      clearSuccess();
+      document
+        .querySelectorAll(".nq-mobile-link")
+        .forEach((link) => {
 
-
-      showError(
-        error &&
-        error.message
-          ? error.message
-          : "Something went wrong while merging your PDF files. Please try again."
-      );
-
-    } finally {
-
-      isProcessing =
-        false;
-
-
-      mergeButton.disabled =
-        selectedFiles.length < 2;
-
-
-      renderFiles();
-
-    }
-
-  }
-
-
-  /* =======================================================
-     CLEANUP GENERATED FILE
-     ======================================================= */
-
-  window.addEventListener(
-    "beforeunload",
-    revokeGeneratedUrl
-  );
-
-
-  /* =======================================================
-     CLICK OUTSIDE TOOL CARDS
-     / MOBILE SAFETY
-     ======================================================= */
-
-  document.addEventListener(
-    "click",
-    event => {
-
-      /*
-        Intentionally left as a safe global
-        event boundary. No destructive actions
-        are performed here.
-      */
-
-    },
-    {
-      passive: true
-    }
-  );
-
-
-  /* =======================================================
-     SMOOTH INTERNAL NAVIGATION
-     ======================================================= */
-
-  document
-    .querySelectorAll(
-      'a[href^="#"]'
-    )
-    .forEach(
-      link => {
-
-        link.addEventListener(
-          "click",
-          event => {
-
-            const targetId =
-              link.getAttribute(
-                "href"
-              );
-
-
-            if (
-              !targetId ||
-              targetId === "#"
-            ) {
-              return;
+          link.addEventListener(
+            "click",
+            () => {
+              setMenuState(false);
             }
+          );
+
+        });
 
 
-            const target =
-              document.querySelector(
-                targetId
-              );
+      /* Close menu with Escape */
 
+      document.addEventListener(
+        "keydown",
+        (event) => {
 
-            if (!target) {
-              return;
-            }
+          if (
+            event.key === "Escape"
+          ) {
 
-
-            event.preventDefault();
-
-
-            target.scrollIntoView({
-              behavior:
-                reducedMotion
-                  ? "auto"
-                  : "smooth",
-              block:
-                "start"
-            });
+            setMenuState(false);
 
           }
-        );
 
-      }
-    );
-
-
-  /* =======================================================
-     LIGHT THEME VISUAL OVERRIDES
-     ======================================================= */
-
-  const lightThemeStyle =
-    document.createElement(
-      "style"
-    );
-
-
-  lightThemeStyle.textContent = `
-
-    body.light-theme {
-
-      color:
-        #111426;
-
-      background:
-        radial-gradient(
-          circle at 10% 0%,
-          rgba(118,87,255,.12),
-          transparent 30%
-        ),
-
-        radial-gradient(
-          circle at 90% 10%,
-          rgba(50,216,255,.09),
-          transparent 28%
-        ),
-
-        #f4f6fb;
-
-    }
-
-
-    body.light-theme
-    .navbar-inner {
-
-      background:
-        rgba(248,249,253,.78);
-
-      border-color:
-        rgba(10,15,30,.10);
-
-      box-shadow:
-        0 20px 70px rgba(10,15,30,.08);
-
-    }
-
-
-    body.light-theme
-    .navbar.scrolled
-    .navbar-inner {
-
-      background:
-        rgba(248,249,253,.92);
-
-    }
-
-
-    body.light-theme
-    .tool-card {
-
-      background:
-        linear-gradient(
-          145deg,
-          rgba(255,255,255,.92),
-          rgba(255,255,255,.65)
-        );
-
-      box-shadow:
-        0 15px 50px rgba(20,25,50,.055);
-
-    }
-
-
-    body.light-theme
-    .tool-card:hover {
-
-      box-shadow:
-        0 25px 65px rgba(20,25,50,.10);
-
-    }
-
-
-    body.light-theme
-    .tool-search input {
-
-      color:
-        #111426;
-
-      background:
-        rgba(255,255,255,.82);
-
-    }
-
-
-    body.light-theme
-    .tool-search input::placeholder {
-
-      color:
-        #858da1;
-
-    }
-
-
-    body.light-theme
-    .workspace {
-
-      background:
-        linear-gradient(
-          145deg,
-          rgba(255,255,255,.98),
-          rgba(246,248,253,.99)
-        );
-
-      box-shadow:
-        0 50px 130px rgba(15,20,40,.20);
-
-    }
-
-
-    body.light-theme
-    .workspace-header {
-
-      background:
-        rgba(255,255,255,.82);
-
-    }
-
-
-    body.light-theme
-    .dropzone {
-
-      background:
-        radial-gradient(
-          circle at center,
-          rgba(118,87,255,.075),
-          rgba(255,255,255,.7)
-        );
-
-    }
-
-
-    body.light-theme
-    .file-item {
-
-      background:
-        rgba(10,15,30,.025);
-
-    }
-
-
-    body.light-theme
-    .secondary-button,
-    body.light-theme
-    .small-button,
-    body.light-theme
-    .icon-button,
-    body.light-theme
-    .workspace-close {
-
-      color:
-        #3f4659;
-
-      background:
-        rgba(10,15,30,.035);
-
-    }
-
-
-    body.light-theme
-    .float-card {
-
-      color:
-        #394156;
-
-      background:
-        rgba(255,255,255,.78);
-
-      box-shadow:
-        0 20px 50px rgba(15,20,40,.10);
-
-    }
-
-  `;
-
-
-  document.head.appendChild(
-    lightThemeStyle
-  );
-
-
-  /* =======================================================
-     ACCESSIBILITY: KEEP FOCUS INSIDE WORKSPACE
-     ======================================================= */
-
-  function trapFocus(
-    container,
-    event
-  ) {
-
-    if (event.key !== "Tab") {
-      return;
-    }
-
-
-    const focusable =
-      container.querySelectorAll(
-        'button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        }
       );
 
 
-    if (!focusable.length) {
-      return;
-    }
+      /* =======================================================
+         SEARCH BUTTON
+         ======================================================= */
+
+      searchButton?.addEventListener(
+        "click",
+        () => {
+
+          /*
+           * Full Smart Search arrives in Part 6.
+           * For now this gives the user a clear response
+           * without pretending search already exists.
+           */
+
+          const message =
+            "Nuvoraq Search is coming in Part 6.";
+
+          window.dispatchEvent(
+            new CustomEvent(
+              "nuvoraq:search-request",
+              {
+                detail: {
+                  message
+                }
+              }
+            )
+          );
 
 
-    const first =
-      focusable[0];
+          /*
+           * Temporary visual feedback.
+           */
 
-    const last =
-      focusable[
-        focusable.length - 1
-      ];
+          searchButton.animate(
+            [
+              {
+                transform:
+                  "scale(1)"
+              },
+              {
+                transform:
+                  "scale(0.90)"
+              },
+              {
+                transform:
+                  "scale(1)"
+              }
+            ],
+            {
+              duration: 260,
+              easing:
+                "cubic-bezier(.22,1,.36,1)"
+            }
+          );
 
-
-    if (
-      event.shiftKey &&
-      document.activeElement === first
-    ) {
-
-      event.preventDefault();
-
-      last.focus();
-
-    } else if (
-      !event.shiftKey &&
-      document.activeElement === last
-    ) {
-
-      event.preventDefault();
-
-      first.focus();
-
-    }
-
-  }
+        }
+      );
 
 
-  document.addEventListener(
-    "keydown",
-    event => {
+      /* =======================================================
+         EXPLORE BUTTON
+         ======================================================= */
 
-      if (
-        mergeWorkspace.classList.contains(
-          "open"
+      const handleExplore =
+        () => {
+
+          const toolsSection =
+            document.getElementById(
+              "tools"
+            );
+
+          toolsSection?.scrollIntoView({
+            behavior:
+              window.matchMedia(
+                "(prefers-reduced-motion: reduce)"
+              ).matches
+                ? "auto"
+                : "smooth"
+          });
+
+        };
+
+
+      exploreButton?.addEventListener(
+        "click",
+        handleExplore
+      );
+
+
+      mobileExploreButton?.addEventListener(
+        "click",
+        () => {
+
+          setMenuState(false);
+
+          handleExplore();
+
+        }
+      );
+
+
+      /* =======================================================
+         PREVENT DEAD MOBILE LINKS
+         ======================================================= */
+
+      document
+        .querySelectorAll(
+          '.nq-nav-link[href^="#"], .nq-mobile-link[href^="#"]'
         )
-      ) {
+        .forEach((link) => {
 
-        trapFocus(
-          mergeWorkspace,
-          event
+          link.addEventListener(
+            "click",
+            (event) => {
+
+              const targetId =
+                link
+                  .getAttribute("href")
+                  ?.replace("#", "");
+
+              if (!targetId) {
+                return;
+              }
+
+              const target =
+                document.getElementById(
+                  targetId
+                );
+
+              if (!target) {
+                return;
+              }
+
+
+              event.preventDefault();
+
+
+              target.scrollIntoView({
+                behavior:
+                  window.matchMedia(
+                    "(prefers-reduced-motion: reduce)"
+                  ).matches
+                    ? "auto"
+                    : "smooth"
+              });
+
+            }
+          );
+
+        });
+
+
+      /* =======================================================
+         ACTIVE NAV LINK
+         ======================================================= */
+
+      const navLinks =
+        document.querySelectorAll(
+          ".nq-nav-link"
         );
 
-      } else if (
-        comingWorkspace.classList.contains(
-          "open"
-        )
-      ) {
 
-        trapFocus(
-          comingWorkspace,
-          event
-        );
+      navLinks.forEach(
+        (link) => {
 
-      }
+          link.addEventListener(
+            "click",
+            () => {
 
-    }
-  );
+              navLinks.forEach(
+                (item) => {
 
+                  item.classList.remove(
+                    "is-active"
+                  );
 
-  /* =======================================================
-     INITIAL STATE
-     ======================================================= */
-
-  renderFiles();
-
-  updateToolVisibility();
+                }
+              );
 
 
-  /*
-    Expose only a tiny diagnostic namespace.
-    This is useful during development but does
-    not interfere with the UI.
-  */
+              link.classList.add(
+                "is-active"
+              );
 
-  window.Nuvoraq =
-    Object.freeze({
+            }
+          );
 
-      version:
-        "1.0.0",
-
-      mergePdf: openMergeWorkspace
-
-    });
+        }
+      );
 
 
-})();
+      /* =======================================================
+         DEV-SAFE ERROR MONITOR
+         ======================================================= */
 
-</script>
+      window.Nuvoraq =
+        window.Nuvoraq || {};
+
+
+      window.Nuvoraq.version =
+        "0.1.0";
+
+
+      window.Nuvoraq.part =
+        "Part 1";
+
+
+      /*
+       * This doesn't display errors to users.
+       * It simply makes the current build identifiable
+       * while we develop future parts.
+       */
+
+      window.Nuvoraq.ready =
+        true;
+
+
+    })();
+
+  </script>
+
+</body>
+</html>
